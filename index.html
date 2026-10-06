@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-theme="verein">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#20317f">
+<meta name="theme-color" id="tc" content="#20317f">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -11,28 +11,65 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" href="icon.png">
 <title>Bierwaage</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Kaushan+Script&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Kaushan+Script&family=Fredoka:wght@500;600;700&family=Barlow:wght@500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
 <style>
-:root{--bg:#20317f;--bg2:#131d57;--fg:#141a3a;--muted:#55608a;--field:#f0f2fa;--soft:#e3e8fa;--shadow:rgba(6,10,40,.35);
---club:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montserrat,"Helvetica Neue",Arial,sans-serif}
+/* ---------- Die drei Designs: nur diese Bloecke aendern, um Farben anzupassen ---------- */
+html{--bg:#20317f;--bg2:#131d57;--glow:rgba(255,255,255,.16);
+--card:#fff;--cardline:transparent;--fg:#141a3a;--muted:#55608a;--field:#f0f2fa;--inline:#d5daee;--soft:#e3e8fa;--soft-ink:#20317f;
+--acc:#20317f;--acc-ink:#fff;--kegline:#20317f;--band:rgba(32,49,127,.35);--seg-bg:#fff;--seg-ink:#20317f;--err:#a3342a;--warn:#b3362b;--shadow:rgba(6,10,40,.35);
+--tvkeg:#172268;--tvkegline:#fff;--pill:#fff;--pill-ink:#20317f;--numc:#fff;--bar:#f5b93a;--panel:rgba(255,255,255,.12);--panelline:rgba(255,255,255,.24);
+--club:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montserrat,"Helvetica Neue",Arial,sans-serif;--num:var(--club)}
+html[data-theme="party"]{--bg:#3a0d6e;--bg2:#12042b;--glow:rgba(255,45,149,.28);
+--card:#241046;--cardline:rgba(255,255,255,.16);--fg:#fff;--muted:#cdbcf3;--field:#361a63;--inline:#5a3a94;--soft:#ff2d95;--soft-ink:#fff;
+--acc:#22e0ff;--acc-ink:#12042b;--kegline:#22e0ff;--band:rgba(255,255,255,.3);--seg-bg:#ffd60a;--seg-ink:#12042b;--err:#ff9db5;--warn:#ff2d55;--shadow:rgba(5,0,20,.5);
+--tvkeg:#1f0b42;--tvkegline:#22e0ff;--pill:#ff2d95;--pill-ink:#fff;--numc:#ffd60a;--bar:#ffd60a;--panel:rgba(255,255,255,.1);--panelline:rgba(255,255,255,.22);
+--club:Fredoka,"Arial Rounded MT Bold","Trebuchet MS","Helvetica Neue",Arial,sans-serif;--num:var(--club)}
+/* Veranstaltungstechnik Koch: Buehne im Dunkeln. Akzentfarbe = --acc / --pill / --bar / --seg-bg */
+html[data-theme="vtk"]{--bg:#1d2127;--bg2:#06070a;--glow:rgba(255,182,46,.1);
+--card:#15181d;--cardline:#2c323a;--fg:#f2f4f7;--muted:#9aa3ad;--field:#20252c;--inline:#343b45;--soft:#ffb62e;--soft-ink:#111;
+--acc:#ffb62e;--acc-ink:#111;--kegline:#cfd6de;--band:rgba(255,255,255,.22);--seg-bg:#ffb62e;--seg-ink:#111;--err:#ff8a80;--warn:#e5352b;--shadow:rgba(0,0,0,.6);
+--tvkeg:#0d0f12;--tvkegline:#cfd6de;--pill:#ffb62e;--pill-ink:#111;--numc:#fff;--bar:#ffb62e;--panel:rgba(255,255,255,.06);--panelline:rgba(255,255,255,.16);
+--club:Barlow,"Helvetica Neue",Arial,sans-serif;--num:"Barlow Condensed","Arial Narrow",Barlow,Arial,sans-serif}
+
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{height:100%;background:var(--bg2);-webkit-text-size-adjust:100%}
 body{margin:0;min-height:100%;font-family:var(--club);font-weight:500;color:var(--fg);
 padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
-body::before{content:"";position:fixed;inset:0;z-index:-1;
-background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.16) 0%,transparent 60%),linear-gradient(170deg,var(--bg) 0%,var(--bg2) 100%)}
+body::before{content:"";position:fixed;top:0;right:0;bottom:0;left:0;z-index:-1;
+background:radial-gradient(120% 70% at 85% -10%,var(--glow) 0%,transparent 60%),linear-gradient(170deg,var(--bg) 0%,var(--bg2) 100%)}
+[hidden]{display:none!important}
+
+/* ---------- Bewegter Hintergrund (Party: Farbwolken + Konfetti, VTK: Scheinwerfer) ---------- */
+#fx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden;pointer-events:none}
+#fx i{position:absolute;display:block}
+#fx .blob{border-radius:50%;width:80vmax;height:80vmax}
+#fx .b1{left:-30vmax;top:-34vmax;background:radial-gradient(closest-side,rgba(255,45,149,.6),rgba(255,45,149,0));animation:blobA 13s ease-in-out infinite alternate}
+#fx .b2{right:-34vmax;bottom:-36vmax;background:radial-gradient(closest-side,rgba(34,224,255,.5),rgba(34,224,255,0));animation:blobB 16s ease-in-out infinite alternate}
+#fx .b3{left:20vmax;top:10vmax;width:60vmax;height:60vmax;background:radial-gradient(closest-side,rgba(255,214,10,.28),rgba(255,214,10,0));animation:blobC 19s ease-in-out infinite alternate}
+#fx .cf{top:-6vh;width:1.3vmin;height:2.6vmin;border-radius:.3vmin;animation:fall linear infinite}
+#fx .beam{top:-12vh;width:30vw;height:135vh;margin-left:-15vw;-webkit-transform-origin:50% 0;transform-origin:50% 0;
+-webkit-clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);
+background:linear-gradient(180deg,rgba(255,182,46,.32),rgba(255,182,46,0) 80%);animation:swayA 9s ease-in-out infinite alternate}
+#fx .beam.c{background:linear-gradient(180deg,rgba(90,190,255,.27),rgba(90,190,255,0) 80%);animation-name:swayB;animation-duration:12s}
+#fx .truss{left:0;right:0;top:0;height:1.2vh;background:repeating-linear-gradient(90deg,#3a4049 0,#3a4049 1.2vh,#15181d 1.2vh,#15181d 2.4vh)}
+
+/* ---------- Handy-Ansicht ---------- */
 .wrap{max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 .brand{display:flex;align-items:center;gap:14px;color:#fff}
 .chip{position:relative;flex:none;display:grid;place-items:center;padding:0 4px}
-.chip::before{content:"";position:absolute;inset:-16px -18px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.34),rgba(255,255,255,0) 72%)}
-.chip img{position:relative;display:block;height:62px;width:auto;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 8px 14px rgba(3,6,30,.5))}
+.chip::before{content:"";position:absolute;top:-16px;bottom:-16px;left:-18px;right:-18px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.34),rgba(255,255,255,0) 72%)}
+.chip img,.chip svg{position:relative;display:block;height:62px;width:auto;max-width:150px;filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 8px 14px rgba(3,6,30,.5))}
+html[data-theme="vtk"] .chip::before,html[data-theme="party"] .chip::before{display:none}
+html[data-theme="vtk"] .chip img{filter:none}
 .club{display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-width:0}
 .club b{font-size:1.02rem;line-height:1.15;font-weight:700}
+html[data-theme="party"] .club b{font-size:1.7rem}
+html[data-theme="vtk"] .club b{font-family:var(--num);font-size:1.5rem;letter-spacing:.02em}
 .pill{padding:3px 11px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2)}
 .seg button{min-height:46px;padding:0 4px;border:0;border-radius:12px;background:transparent;color:rgba(255,255,255,.85);font:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:background-color .25s,color .25s}
-.seg button[aria-pressed="true"]{background:#fff;color:var(--bg);box-shadow:0 4px 12px rgba(2,5,30,.3)}
-.card{display:flex;flex-direction:column;gap:16px;padding:18px;border-radius:22px;background:#fff;box-shadow:0 12px 30px var(--shadow)}
+.seg button[aria-pressed="true"]{background:var(--seg-bg);color:var(--seg-ink);box-shadow:0 4px 12px rgba(2,5,30,.3)}
+.card{display:flex;flex-direction:column;gap:16px;padding:18px;border-radius:22px;background:var(--card);border:1px solid var(--cardline);box-shadow:0 12px 30px var(--shadow)}
 .in{animation:cardIn .6s cubic-bezier(.2,.9,.3,1) both}
 .row{display:flex;justify-content:space-between;align-items:center}
 .k{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -40,76 +77,286 @@ background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.16) 0%,transpa
 .dot{width:10px;height:10px;border-radius:50%;background:#23c26b;animation:pulse 1.6s infinite}
 .dot.off{background:#c9a227;animation:none}
 .main{display:flex;align-items:center;gap:22px}
-.keg{position:relative;flex:none;width:112px;height:168px;border:3px solid var(--bg);border-radius:26px;overflow:hidden;background:var(--field)}
+.keg{position:relative;flex:none;width:112px;height:168px;border:3px solid var(--kegline);border-radius:26px;overflow:hidden;background:var(--field)}
 .fill{position:absolute;left:0;right:0;bottom:0;height:0;background:linear-gradient(180deg,#f7c84f 0%,#eba623 100%)}
 .slosh{position:absolute;left:50%;top:-231px;width:240px;height:240px;margin-left:-120px;transform-origin:50% 100%;animation:slosh 3.2s ease-in-out infinite}
 .slosh i{position:absolute;left:0;width:240px;height:240px}
 .slosh .b{top:4px;border-radius:42%;background:#fff4d6;animation:spin 11s linear infinite reverse}
 .slosh .a{top:-4px;border-radius:40%;background:var(--field);animation:spin 7s linear infinite}
 .bub{position:absolute;bottom:0;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);background:rgba(255,255,255,.35);opacity:0;animation:rise linear infinite}
-.band{position:absolute;left:0;right:0;height:3px;background:rgba(32,49,127,.35)}
+.band{position:absolute;left:0;right:0;height:3px;background:var(--band)}
 .shine{position:absolute;left:10px;top:10px;bottom:10px;width:8px;border-radius:6px;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.1));animation:shine 4s ease-in-out infinite}
 .num{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}
-.lit{display:flex;align-items:baseline;gap:6px}
+.lit{display:flex;align-items:baseline;gap:6px;font-family:var(--num)}
 .lit span{font-size:3.4rem;font-weight:800;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .lit em{font-style:normal;font-size:1.5rem;font-weight:700}
+html[data-theme="party"] .lit span{color:#ffd60a;letter-spacing:0;text-shadow:.05em .05em 0 #ff2d95}
+html[data-theme="vtk"] .lit span{font-size:4rem;letter-spacing:0}
+html[data-theme="vtk"] .lit em{color:var(--acc)}
 .sub{font-size:.88rem;font-weight:600;color:var(--muted)}
-.pct{margin-top:10px;padding:4px 12px;border-radius:999px;background:var(--soft);color:var(--bg);font-size:1.12rem;font-weight:800;font-variant-numeric:tabular-nums}
+.pct{margin-top:10px;padding:4px 12px;border-radius:999px;background:var(--soft);color:var(--soft-ink);font-size:1.12rem;font-weight:800;font-variant-numeric:tabular-nums}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .stat{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:14px;background:var(--field)}
 .stat b{font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums}
 .stat small{font-size:.75rem;font-weight:600;color:var(--muted)}
-.warn{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;background:#a3342a;color:#fff;font-weight:700;animation:warn 1.8s ease-in-out infinite}
+.warn{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:18px;background:var(--warn);color:#fff;font-weight:700;animation:warn 1.8s ease-in-out infinite}
 .note{padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:700}
-[hidden]{display:none!important}
-.splash{position:fixed;inset:0;z-index:10;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;color:#fff;
+.setup{gap:12px}
+.setup h2{margin:0;font-size:1.15rem;font-weight:700}
+.setup p{margin:0;font-size:.9rem;line-height:1.4;color:var(--muted)}
+.setup label{display:flex;flex-direction:column;gap:6px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.setup input{min-height:48px;padding:0 12px;border-radius:12px;border:1.5px solid var(--inline);background:var(--field);color:var(--fg);font:inherit;font-size:1rem;font-weight:600;letter-spacing:0;text-transform:none}
+.setup input:focus{outline:2px solid var(--acc);outline-offset:1px}
+.btn{min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--acc);background:var(--acc);color:var(--acc-ink);font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
+.msg{font-size:.88rem;font-weight:600;color:var(--err)}
+.foot{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.foot button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font:inherit;font-size:.86rem;font-weight:700;cursor:pointer}
+#app{display:flex;flex-direction:column;gap:16px}
+
+/* ---------- Startbild des Vereins ---------- */
+.splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:10;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;color:#fff;
+font-family:"AvantGarde Bk BT","Century Gothic",Montserrat,Arial,sans-serif;
 background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.18) 0%,transparent 60%),linear-gradient(170deg,#20317f 0%,#0f1745 100%);transition:opacity .55s ease,visibility .55s}
 .splash.out{opacity:0;visibility:hidden}
-.mark{position:relative;display:grid;place-items:center;width:min(50vw,200px)}
+.mark{position:relative;display:grid;place-items:center;width:200px;max-width:50vw}
 .mark img{position:relative;width:100%;height:auto;display:block;animation:pop 1.3s cubic-bezier(.2,1.15,.3,1) both}
-.glow{position:absolute;inset:-40%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.42),rgba(255,255,255,0) 70%);animation:glow 1.4s ease-out both}
-.ring{position:absolute;inset:-12%;border-radius:50%;border:2px solid rgba(255,255,255,.6);opacity:0;animation:ring 1.6s ease-out .6s both}
+.glow{position:absolute;top:-40%;right:-40%;bottom:-40%;left:-40%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.42),rgba(255,255,255,0) 70%);animation:glow 1.4s ease-out both}
+.ring{position:absolute;top:-12%;right:-12%;bottom:-12%;left:-12%;border-radius:50%;border:2px solid rgba(255,255,255,.6);opacity:0;animation:ring 1.6s ease-out .6s both}
 .ring.r2{animation-delay:.95s}
 .sname{text-align:center;font-weight:700;font-size:1.2rem;line-height:1.25;max-width:18em;animation:txt .9s ease 1.05s both}
 .script{margin-top:-10px;text-align:center;font-family:"Kaushan Script","Brush Script MT","Segoe Script",cursive;font-size:2.2rem;line-height:1.15;padding:0 6px 6px;text-shadow:0 4px 18px rgba(2,5,30,.55);animation:write 1.6s cubic-bezier(.5,0,.3,1) 1.8s both}
+
+/* ---------- Design-Auswahl ---------- */
+.dsgn{position:fixed;top:0;right:0;bottom:0;left:0;z-index:20;overflow:auto;display:flex;padding:1.6em 1em;text-align:center;color:#fff;font-size:15px;
+font-family:Montserrat,"Helvetica Neue",Arial,sans-serif;background:linear-gradient(170deg,#1b2035 0%,#0b0d18 100%)}
+.dsin{margin:auto;max-width:100%}
+.dsgn h1{margin:.6em 0 .25em;font-size:1.9em;font-weight:800}
+.dsgn p{margin:0 auto 1.1em;max-width:30em;min-height:2.7em;font-size:1em;line-height:1.35;color:rgba(255,255,255,.75)}
+.pks{display:flex;flex-wrap:wrap;justify-content:center}
+.pk{position:relative;width:17em;max-width:100%;margin:.5em;padding:0 0 1em;border:0;border-radius:1.3em;overflow:hidden;background:#262c45;color:#fff;font:inherit;text-align:center;cursor:pointer;
+box-shadow:0 .6em 1.6em rgba(0,0,0,.4);transition:transform .2s}
+.pk:hover,.pk:focus{transform:scale(1.04);outline:.2em solid #fff;outline-offset:.15em}
+.pk .pv{display:flex;align-items:center;justify-content:center;height:7em;margin-bottom:.8em}
+.pk .pv i{position:relative;display:block;width:2.7em;height:4.1em;margin-right:.9em;border:.22em solid #fff;border-radius:.8em;overflow:hidden}
+.pk .pv i u{position:absolute;left:0;right:0;bottom:0;height:68%;background:linear-gradient(180deg,#f7c84f,#eba623);border-top:.3em solid #fff4d6}
+.pk .pv b{font-size:2.3em;font-weight:800}
+.pk strong{display:block;font-size:1.2em;font-weight:700}
+.pk small{display:block;margin-top:.25em;padding:0 .8em;font-size:.86em;color:rgba(255,255,255,.72)}
+.pk em{position:absolute;left:0;bottom:0;height:.35em;width:0;background:#fff}
+.pk.cur em{transition:width 1s linear}
+.pk[data-t="verein"] .pv{background:linear-gradient(160deg,#2a3f9c,#131d57)}
+.pk[data-t="verein"] .pv i{background:#172268}
+.pk[data-t="party"] .pv{background:radial-gradient(circle at 15% 20%,#ff2d95 0,transparent 55%),radial-gradient(circle at 90% 90%,#22e0ff 0,transparent 55%),#2a0b52}
+.pk[data-t="party"] .pv i{border-color:#22e0ff;background:#1f0b42}
+.pk[data-t="party"] .pv b{font-family:Fredoka,"Arial Rounded MT Bold",sans-serif;color:#ffd60a;text-shadow:.05em .05em 0 #ff2d95}
+.pk[data-t="vtk"] .pv{background:linear-gradient(200deg,rgba(255,182,46,.5) 0,transparent 42%),linear-gradient(160deg,rgba(90,190,255,.35) 0,transparent 38%),#090a0d}
+.pk[data-t="vtk"] .pv i{border-color:#cfd6de;background:#0d0f12}
+.pk[data-t="vtk"] .pv b{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-size:2.7em}
+
+/* ---------- TV-Ansicht: feste Buehne 160 x 90 Einheiten, 1em = 1 Einheit ---------- */
+#tv{display:none}
+body.tv{padding:0;overflow:hidden}
+body.tv .wrap{display:none}
+body.tv #tv{display:block;position:fixed;top:0;left:0;width:100%;height:100%;overflow:hidden;color:#fff;font-size:12px}
+.tvin{position:absolute;left:50%;top:50%;width:160em;height:90em;margin:-45em 0 0 -80em;-webkit-transition:-webkit-transform 3s;transition:transform 3s}
+.tvin>*{position:absolute}
+.tvhead{left:8em;top:4.5em;white-space:nowrap}
+.tvhead img,.tvhead svg{display:inline-block;vertical-align:middle;height:12em;width:auto;max-width:44em;margin-right:3em;-webkit-filter:drop-shadow(0 .6em 1em rgba(3,6,30,.5));filter:drop-shadow(0 .6em 1em rgba(3,6,30,.5))}
+html[data-theme="verein"] .tvhead img{-webkit-filter:drop-shadow(0 0 .15em #fff) drop-shadow(0 .6em 1em rgba(3,6,30,.5));filter:drop-shadow(0 0 .15em #fff) drop-shadow(0 .6em 1em rgba(3,6,30,.5))}
+.tvclub{display:inline-block;vertical-align:middle}
+.tvclub b{display:block;font-size:3.5em;font-weight:700;line-height:1.2}
+html[data-theme="party"] .tvclub b{font-size:6em;line-height:1.05}
+html[data-theme="vtk"] .tvclub b{font-family:var(--num);font-size:5.4em;line-height:1.05;letter-spacing:.02em}
+.tvclub span{display:inline-block;margin-top:.45em;padding:.2em .9em;border-radius:99em;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);font-size:2.3em;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.tvtime{right:8em;top:3.6em}
+.tvtime b{display:block;font-family:var(--num);font-size:7em;font-weight:700;line-height:1;text-align:right;font-variant-numeric:tabular-nums}
+.tvlive{right:8em;top:12.6em;white-space:nowrap}
+.tvlive .dot{display:inline-block;vertical-align:middle;width:1.7em;height:1.7em;margin-right:1em}
+.tvlive span{display:inline-block;vertical-align:middle;font-size:2.6em;font-weight:700}
+.tvkeg{left:8em;top:21em;width:32em;height:55.5em;border:.7em solid var(--tvkegline);border-radius:7em;overflow:hidden;background:var(--tvkeg);box-shadow:0 1.5em 3.5em rgba(3,6,30,.45)}
+.tvkeg .slosh{left:50%;top:-66em;width:69em;height:69em;margin-left:-34.5em;animation:tvslosh 3.2s ease-in-out infinite}
+.tvkeg .slosh i{width:69em;height:69em}
+.tvkeg .slosh .b{top:1.2em}
+.tvkeg .slosh .a{top:-1.2em;background:var(--tvkeg)}
+.tvkeg .bub{border-width:.3em}
+.tvkeg .band{height:.7em;background:rgba(255,255,255,.28)}
+.tvkeg .shine{left:2.4em;top:3.2em;bottom:3.2em;width:2em;border-radius:1.6em}
+html[data-theme="party"] .tvkeg{animation:bop 1.1s ease-in-out infinite;box-shadow:0 0 3em rgba(34,224,255,.55),0 1.5em 3.5em rgba(3,6,30,.45)}
+.tvhero{left:46em;top:20.2em;white-space:nowrap}
+.tvlit{display:inline-block;line-height:1;font-family:var(--num);color:var(--numc)}
+.tvlit span{font-size:18em;font-weight:800;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tvlit em{font-style:normal;font-size:7.5em;font-weight:700;margin-left:.12em}
+html[data-theme="party"] .tvlit span{letter-spacing:0;text-shadow:.045em .045em 0 #ff2d95,.09em .09em 0 rgba(34,224,255,.9)}
+html[data-theme="vtk"] .tvlit span{font-size:21em;letter-spacing:0}
+html[data-theme="vtk"] .tvlit em{color:var(--acc)}
+.tvsub{margin-top:1.4em}
+.tvsub>span{display:inline-block;vertical-align:middle;font-size:3.6em;font-weight:600;color:rgba(255,255,255,.8)}
+.tvsub>b{display:inline-block;vertical-align:middle;margin-left:.5em;padding:.1em .6em;border-radius:99em;background:var(--pill);color:var(--pill-ink);font-size:3.6em;font-weight:800;font-variant-numeric:tabular-nums}
+.tvtile{top:21em;width:16.4em;height:26em;padding:2.4em 1.8em 0;border-radius:2.6em;background:var(--panel);border:1px solid var(--panelline);overflow:hidden}
+.tvtile.t1{left:100em}.tvtile.t2{left:117.8em}.tvtile.t3{left:135.6em}
+.tvtile b{display:block;font-family:var(--num);font-size:7.4em;font-weight:800;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tvtile span{display:block;margin-top:.5em;font-size:2.2em;font-weight:700;line-height:1.22}
+.tvtile small{display:block;margin-top:.45em;font-size:1.9em;font-weight:600;color:rgba(255,255,255,.68)}
+.tvtile.pop{animation:pop2 .7s cubic-bezier(.2,1.4,.4,1)}
+.tvchart{left:46em;top:50em;width:106em;height:26.5em;border-radius:2.6em;background:var(--panel);border:1px solid var(--panelline)}
+.tvchart>*{position:absolute}
+.ct{left:3em;top:2.3em}.ce{right:3em;top:2.3em}
+.ct b,.ce b{font-size:2.5em;font-weight:700;line-height:1}
+.ce b{color:rgba(255,255,255,.85)}
+.plot{left:8.5em;top:8.6em;width:94em;height:11.6em}
+.plot>*{position:absolute}
+.gl{left:0;right:0;height:1px;background:var(--panelline)}
+.gl span{position:absolute;right:100%;top:-.55em;margin-right:.7em;font-size:1.8em;font-weight:600;line-height:1.1;color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
+.bars{left:0;top:0;width:100%;height:100%}
+.bar{position:absolute;bottom:0;height:100%;width:5.5556%}
+.bar i{position:absolute;left:22%;width:56%;bottom:0;height:0;border-radius:.6em .6em 0 0;background:var(--bar);transition:height 1.1s cubic-bezier(.2,.9,.3,1)}
+.bar b{position:absolute;left:-50%;width:200%;bottom:0;display:none;padding-bottom:.3em;text-align:center;font-size:2em;font-weight:700;line-height:1;transition:bottom 1.1s cubic-bezier(.2,.9,.3,1)}
+.bar.lab b{display:block}
+.bar span{position:absolute;left:-100%;width:300%;top:100%;padding-top:.5em;text-align:center;font-size:1.8em;font-weight:600;line-height:1;color:rgba(255,255,255,.7)}
+.bar.now i{animation:barNow 1.6s ease-in-out infinite}
+html[data-theme="party"] .bar i{background:linear-gradient(180deg,#ffd60a,#ff2d95)}
+html[data-theme="vtk"] .bar i{border-radius:.15em;background:repeating-linear-gradient(0deg,var(--bar) 0,var(--bar) .85em,transparent .85em,transparent 1.2em)}
+.cempty{left:8.5em;top:12.4em;width:94em;text-align:center}
+.cempty span{font-size:2.4em;font-weight:600;color:rgba(255,255,255,.72)}
+.tvmsgw{left:8em;top:79.4em;white-space:nowrap}
+.tvmsg{display:inline-block;height:2.25em;line-height:2.25em;padding:0 .95em;border-radius:.6em;font-size:3.2em;font-weight:700;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28)}
+.tvmsg.low{background:var(--warn);border-color:var(--warn);animation:tvwarn 1.8s ease-in-out infinite}
+/* Warnung der letzten 10 Bier: waechst von unten ueber Statistik und Zahlen */
+.tvgrow{display:none;left:46em;width:106em;bottom:3.4em;height:9em;z-index:3;border-radius:2.6em;overflow:hidden;text-align:center;background:var(--warn);color:#fff;
+box-shadow:0 1em 4em rgba(0,0,0,.5);transition:height .9s cubic-bezier(.2,.9,.3,1);animation:growPulse 2.4s ease-in-out infinite}
+.tvgrow.on{display:block}
+.tvgrow div{position:absolute;left:0;right:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);white-space:nowrap}
+.tvgrow b{display:block;font-family:var(--num);font-weight:800;line-height:1}
+.tvgrow span{display:block;font-weight:700;line-height:1.15}
+.tvgrow small{display:block;margin-top:.5em;font-weight:600;line-height:1.1;opacity:.9}
+.tvbtn{right:8em;top:80.4em;z-index:5;white-space:nowrap;visibility:hidden;opacity:0;transition:opacity .4s,visibility .4s}
+.tvbtn.show{visibility:visible;opacity:1}
+.tvbtn button{margin-left:.8em;padding:.55em 1.2em;border-radius:99em;border:1px solid rgba(255,255,255,.4);background:rgba(20,22,40,.82);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.tvbtn button:hover,.tvbtn button:focus{background:#fff;color:#141a3a;outline:2px solid #fff;outline-offset:2px}
+.tvin.stale .tvkeg,.tvin.stale .tvhero,.tvin.stale .t1{opacity:.4}
+
 @keyframes cardIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(35,194,107,.6)}70%{box-shadow:0 0 0 10px rgba(35,194,107,0)}100%{box-shadow:0 0 0 0 rgba(35,194,107,0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes slosh{0%,100%{transform:translateX(-4px) rotate(-2.5deg)}50%{transform:translateX(4px) rotate(2.5deg)}}
+@keyframes tvslosh{0%,100%{transform:translateX(-1.2em) rotate(-2.5deg)}50%{transform:translateX(1.2em) rotate(2.5deg)}}
 @keyframes rise{0%{bottom:0;opacity:0;transform:translateX(0)}10%{opacity:1}30%{transform:translateX(3px)}55%{transform:translateX(-3px)}80%{transform:translateX(2px);opacity:.9}100%{bottom:94%;opacity:0;transform:translateX(0)}}
 @keyframes shine{0%,100%{opacity:.25}50%{opacity:.5}}
 @keyframes warn{0%,100%{box-shadow:0 12px 30px var(--shadow),0 0 0 0 rgba(163,52,42,.6)}50%{box-shadow:0 12px 30px var(--shadow),0 0 0 8px rgba(163,52,42,0)}}
+@keyframes tvwarn{0%,100%{box-shadow:0 0 0 0 rgba(255,80,60,.7)}50%{box-shadow:0 0 0 .45em rgba(255,80,60,0)}}
+@keyframes growPulse{0%,100%{box-shadow:0 1em 4em rgba(0,0,0,.5),0 0 0 0 rgba(255,80,60,.75)}50%{box-shadow:0 1em 4em rgba(0,0,0,.5),0 0 0 1.6em rgba(255,80,60,0)}}
+@keyframes barNow{0%,100%{opacity:1}50%{opacity:.55}}
+@keyframes pop2{0%{transform:scale(1)}40%{transform:scale(1.09)}100%{transform:scale(1)}}
+@keyframes bop{0%,100%{transform:translateY(0) rotate(-.6deg)}50%{transform:translateY(-.7em) rotate(.6deg)}}
+@keyframes blobA{from{transform:translate(0,0) scale(1)}to{transform:translate(22vmax,14vmax) scale(1.25)}}
+@keyframes blobB{from{transform:translate(0,0) scale(1.1)}to{transform:translate(-24vmax,-12vmax) scale(.9)}}
+@keyframes blobC{from{transform:translate(-18vmax,6vmax)}to{transform:translate(20vmax,-8vmax)}}
+@keyframes fall{from{transform:translate3d(0,0,0) rotate(0)}to{transform:translate3d(7vw,112vh,0) rotate(720deg)}}
+@keyframes swayA{from{transform:rotate(-16deg)}to{transform:rotate(12deg)}}
+@keyframes swayB{from{transform:rotate(14deg)}to{transform:rotate(-11deg)}}
 @keyframes pop{0%{opacity:0;transform:scale(.35) rotate(-14deg)}55%{opacity:1;transform:scale(1.08) rotate(2deg)}100%{opacity:1;transform:none}}
 @keyframes glow{0%{opacity:0;transform:scale(.5)}60%{opacity:1}100%{opacity:.8;transform:scale(1)}}
 @keyframes ring{0%{opacity:.75;transform:scale(.8)}100%{opacity:0;transform:scale(1.6)}}
 @keyframes txt{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes write{from{clip-path:inset(-10% 100% -10% 0);opacity:.4;transform:translateY(6px)}to{clip-path:inset(-10% -4% -10% 0);opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important}}
-.setup{gap:12px}
-.setup h2{margin:0;font-size:1.15rem;font-weight:700}
-.setup p{margin:0;font-size:.9rem;line-height:1.4;color:var(--muted)}
-.setup label{display:flex;flex-direction:column;gap:6px;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.setup input{min-height:48px;padding:0 12px;border-radius:12px;border:1.5px solid #d5daee;background:var(--field);color:var(--fg);font:inherit;font-size:1rem;font-weight:600;letter-spacing:0;text-transform:none}
-.setup input:focus{outline:2px solid var(--bg);outline-offset:1px}
-.btn{min-height:48px;padding:0 20px;border-radius:999px;border:1.5px solid var(--bg);background:var(--bg);color:#fff;font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
-.msg{font-size:.88rem;font-weight:600;color:#a3342a}
-.foot{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.foot button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:#fff;font:inherit;font-size:.86rem;font-weight:700;cursor:pointer}
-[hidden]{display:none!important}
-#app{display:flex;flex-direction:column;gap:16px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* ---------- Handy: Knoepfe, Produkt wiegen, Einstellungen ---------- */
+.hbtn{flex:none;margin-left:auto;width:46px;height:46px;padding:0;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;cursor:pointer}
+.hbtn svg{width:24px;height:24px}
+.zp{align-self:flex-start;min-height:34px;padding:0 14px;border-radius:999px;border:1.5px solid var(--acc);background:var(--soft);color:var(--soft-ink);font:inherit;font-size:.82rem;font-weight:700;cursor:pointer}
+.zp.off{background:transparent}
+.prow{display:flex;align-items:center;gap:12px;margin-top:10px}
+.prow .pct{margin-top:0}
+.wbtn{flex:none;width:46px;height:46px;padding:0;border-radius:50%;border:0;background:var(--acc);color:var(--acc-ink);display:grid;place-items:center;cursor:pointer}
+.wbtn svg{width:26px;height:26px}
+.gas{position:relative;flex:none;width:112px;height:196px}
+.gas .cap{position:absolute;left:41px;top:0;width:30px;height:48px;border-radius:12px 12px 4px 4px;background:#3a4055}
+.gas .cap::after{content:"";position:absolute;left:6px;top:8px;width:4px;height:26px;border-radius:2px;background:#6b738f}
+.gas .wire{position:absolute;left:24px;top:38px;width:64px;height:4px;border-radius:2px;background:#b9bfcc}
+.gas .lug{position:absolute;top:20px;width:17px;height:38px;border-radius:4px;background:#a31a1a}
+.gas .lug::after{content:"";position:absolute;left:5px;top:8px;width:7px;height:14px;border-radius:3px;background:#fff}
+.gas .lug.l{left:14px;transform:rotate(-16deg)}
+.gas .lug.r{right:14px;transform:rotate(16deg)}
+.gas .foot{position:absolute;left:10px;bottom:0;width:92px;height:26px;border-radius:6px;background:#a31a1a}
+.gas .foot::before,.gas .foot::after{content:"";position:absolute;bottom:4px;width:16px;height:7px;border-radius:3px;background:#fff}
+.gas .foot::before{left:16px}.gas .foot::after{right:16px}
+.gbody{position:absolute;left:0;top:46px;width:112px;height:138px;border:5px solid #a31a1a;border-radius:36px;overflow:hidden;background:#f7eae8}
+.gbody .fill{background:linear-gradient(180deg,#ea4a44 0%,#c81f1f 100%)}
+.gbody .slosh .a{background:#f7eae8}
+.gbody .slosh .b{background:#f68f86}
+.gbody .seam{position:absolute;left:0;right:0;top:44%;height:3px;background:rgba(120,20,20,.35)}
+.gbody .lbl{position:absolute;left:28px;top:12px;width:46px;height:12px;border-radius:3px;background:#fff}
+.gbody .lbl::after{content:"";position:absolute;left:5px;top:2px;width:8px;height:8px;background:#dc2a2a;transform:rotate(45deg)}
+.isvg{display:block;width:100%;max-width:300px;height:auto;margin:0 auto}
+.isvg .ndl{transform-origin:100px 108px;transition:transform .8s cubic-bezier(.3,1.7,.5,1)}
+.isvg .plt{transition:transform .8s cubic-bezier(.3,1.7,.5,1)}
+.iw{display:flex;justify-content:center;align-items:baseline;gap:8px;font-family:var(--num)}
+.iw span{font-size:3.6rem;font-weight:800;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.iw em{font-style:normal;font-size:1.6rem;font-weight:700}
+.zp.wide{align-self:stretch;min-height:44px;font-size:.95rem}
+.ov{position:fixed;top:0;right:0;bottom:0;left:0;z-index:15;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,12,40,.62)}
+.sheet{width:100%;max-width:460px;max-height:92%;overflow:auto;padding:14px 16px calc(22px + env(safe-area-inset-bottom,0px));border-radius:22px 22px 0 0;background:#fff;color:#141a3a;
+font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montserrat,"Helvetica Neue",Arial,sans-serif;animation:cardIn .3s ease both}
+@media (min-width:520px){.ov{align-items:center}.sheet{border-radius:22px}}
+.sh{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sh h2{flex:1;min-width:0;margin:0;font-size:1.15rem;font-weight:700}
+.sh button{flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:#f0f2fa;color:#20317f;font:inherit;font-size:1.5rem;font-weight:700;line-height:1;cursor:pointer}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;min-height:50px;margin:0 0 8px;padding:6px 14px;border:0;border-radius:14px;background:#f0f2fa;color:#141a3a;font:inherit;font-size:1rem;font-weight:600;text-align:left;cursor:pointer}
+.srow span{flex:none;color:#55608a;font-size:.92rem;text-align:right}
+.srow span.red{color:#a3342a}
+.sp{margin:0 0 12px;font-size:.98rem;line-height:1.45}
+.sp.m{color:#55608a;font-size:.86rem}
+.sbig{margin:0 0 12px;padding:12px 14px;border-radius:14px;background:#f0f2fa;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#55608a}
+.sbig b{display:block;margin-top:2px;font-size:1.9rem;font-weight:800;letter-spacing:0;text-transform:none;color:#141a3a;font-variant-numeric:tabular-nums}
+.slab{display:block;margin:0 0 6px;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#55608a}
+.sin{display:block;width:100%;min-height:54px;margin:0 0 12px;padding:0 14px;border-radius:14px;border:1.5px solid #d5daee;background:#f0f2fa;color:#141a3a;font:inherit;font-size:1.35rem;font-weight:700}
+.sin:focus{outline:2px solid #20317f;outline-offset:1px}
+.schk{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:.98rem;font-weight:600}
+.schk input{width:24px;height:24px;accent-color:#20317f}
+.sbtn{display:block;width:100%;min-height:50px;margin:0 0 8px;border-radius:999px;border:0;background:#20317f;color:#fff;font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
+.sbtn.sec{background:#e3e8fa;color:#20317f}
+.sheet button:disabled,.sheet input:disabled{opacity:.5;cursor:default}
+.serr,.sok,.swait{margin:0 0 10px;padding:10px 12px;border-radius:12px;font-weight:600;font-size:.92rem}
+.serr{background:#fbe9e7;color:#a3342a}
+.sok{background:#e6f6ec;color:#16733f}
+.swait{background:#e3e8fa;color:#20317f}
+.lvl{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+.lvl button{flex:none;width:54px;height:50px;padding:0;border-radius:14px;border:0;background:#20317f;color:#fff;font:inherit;font-size:1.6rem;font-weight:700;cursor:pointer}
+.lvl div{flex:1;display:flex;align-items:flex-end;gap:4px;height:50px}
+.lvl div i{flex:1;border-radius:3px;background:#b4bcdc}
+.lvl div i.on{background:#20317f}
+.tog{flex:none;min-width:72px;min-height:36px;padding:0 14px;border-radius:999px;border:0;background:#b4bcdc;color:#141a3a;font:inherit;font-size:.92rem;font-weight:700;cursor:pointer}
+.tog.on{background:#23a55c;color:#fff}
+.pick2{display:flex;align-items:center;gap:16px;width:100%;margin:0 0 10px;padding:14px;border:0;border-radius:18px;background:#f0f2fa;color:#141a3a;font:inherit;text-align:left;cursor:pointer}
+.pick2 svg{flex:none;width:56px;height:64px}
+.pick2 b{display:block;font-size:1.15rem;font-weight:700}
+.pick2 small{display:block;margin-top:2px;font-size:.88rem;color:#55608a}
+.gl7{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 12px}
+.gl7 button{min-height:48px;border-radius:14px;border:0;background:#f0f2fa;color:#141a3a;font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
+.gl7 button.on{background:#20317f;color:#fff}
 </style>
 </head>
 <body>
-<div class="splash" id="splash" aria-hidden="true">
+<div id="fx" aria-hidden="true"></div>
+
+<div class="dsgn" id="dsgn" hidden><div class="dsin">
+  <h1>Design wählen</h1>
+  <p id="dsgnp">Die Auswahl gilt für dieses Gerät. Du kannst sie später über „Design“ ändern.</p>
+  <div class="pks">
+    <button type="button" class="pk" data-t="verein"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Sportverein</strong><small>Blau-weiß mit Vereinswappen</small><em></em></button>
+    <button type="button" class="pk" data-t="party"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Party</strong><small>Bunt und lebhaft, ohne Logo</small><em></em></button>
+    <button type="button" class="pk" data-t="vtk"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Veranstaltungstechnik Koch</strong><small>Bühne im Dunkeln mit Scheinwerfern</small><em></em></button>
+  </div>
+</div></div>
+
+<div class="splash" id="splash" aria-hidden="true" hidden>
   <div class="mark"><span class="glow"></span><span class="ring"></span><span class="ring r2"></span><img src="logo.png" alt=""></div>
   <div class="sname">Sportverein Blau Weiß Etteln 1923 e.V.</div>
   <div class="script">Mein Verein seit 1923</div>
 </div>
+
 <div class="wrap">
-  <header class="brand">
-    <span class="chip"><img src="logo.png" alt="Wappen SV Blau Weiß Etteln"></span>
-    <div class="club"><b>Sportverein Blau Weiß Etteln 1923 e.V.</b><span class="pill">Bierwaage</span></div>
-  </header>
+  <header class="brand"><div class="brand" id="brand" style="flex:1;min-width:0"></div><button type="button" class="hbtn" id="gear" aria-label="Einstellungen" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.5 7.5 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.5 7.5 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4z" transform="translate(-1 0)"/></svg></button></header>
   <section class="card setup in" id="setup" hidden>
     <h2>Mit der Waage verbinden</h2>
     <p>Trag die Adresse der Datenbank und den Code ein, die auch in der Waage stehen. Beides bleibt auf diesem Gerät gespeichert.</p>
@@ -119,7 +366,7 @@ background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.18) 0%,transpa
     <button type="button" class="btn" id="sgo">Verbinden</button>
   </section>
   <div id="app">
-  <div class="seg in" style="animation-delay:.05s">
+  <div class="seg in" id="segw" style="animation-delay:.05s">
     <button type="button" id="k0" aria-pressed="false" onclick="pick(0)">20-L-Fass</button>
     <button type="button" id="k1" aria-pressed="false" onclick="pick(1)">30-L-Fass</button>
     <button type="button" id="k2" aria-pressed="false" onclick="pick(2)">50-L-Fass</button>
@@ -127,7 +374,7 @@ background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.18) 0%,transpa
   <div class="note" id="nodata" hidden>Von der Waage sind noch keine Daten da. Ist sie eingeschaltet, im WLAN und sind Adresse und Code im Programm eingetragen?</div>
   <div class="note" id="gasnote" hidden></div>
   <div class="note" id="nocal" hidden>Die Waage ist noch nicht kalibriert. Bitte am Display unter „Einstellungen“ kalibrieren.</div>
-  <section class="card in" style="animation-delay:.15s">
+  <section class="card in" id="vkeg" style="animation-delay:.15s">
     <div class="row"><span class="k">Im Fass</span><span class="live"><span class="dot off" id="dot"></span><span id="livet">Verbinde …</span></span></div>
     <div class="main">
       <div class="keg" aria-hidden="true">
@@ -146,9 +393,10 @@ background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.18) 0%,transpa
         <div class="shine"></div>
       </div>
       <div class="num">
+        <button type="button" class="zp" id="zpill" hidden>mit Zapfkopf</button>
         <div class="lit"><span id="lit">0,0</span><em>L</em></div>
         <div class="sub">von <span id="cap">30</span> Litern</div>
-        <div class="pct" id="pct">0 %</div>
+        <div class="prow"><div class="pct" id="pct">0 %</div><button type="button" class="wbtn" id="weigh" aria-label="Produkt wiegen" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2.5" width="20" height="3" rx="1.2" fill="currentColor"/><rect x="10.5" y="5" width="3" height="4" fill="currentColor"/><rect x="3.5" y="8" width="17" height="13.5" rx="4" fill="currentColor"/><circle cx="12" cy="15" r="4.2" fill="#fff"/><path d="M12 15l2.6-3" stroke="#a3342a" stroke-width="1.6" stroke-linecap="round"/></svg></button></div>
       </div>
     </div>
     <div class="stats">
@@ -156,28 +404,164 @@ background:radial-gradient(120% 70% at 85% -10%,rgba(255,255,255,.18) 0%,transpa
       <div class="stat"><span class="k">Gewicht</span><b><span id="gross">0,0</span> kg</b><small>Fass leer: <span id="tare">0,0</span> kg<br><span id="zk"></span></small></div>
     </div>
   </section>
+  <section class="card" id="vgas" hidden>
+    <div class="row"><span class="k">Gasflasche</span><span class="live"><span class="dot off" id="gdot"></span><span id="glivet">Verbinde …</span></span></div>
+    <div class="main">
+      <div class="gas" aria-hidden="true"><i class="lug l"></i><i class="lug r"></i><i class="cap"></i><i class="wire"></i><i class="foot"></i>
+        <div class="gbody"><div class="fill" id="gfill"><i class="bub" style="left:12px;width:4px;height:4px;animation-duration:2.6s"></i><i class="bub" style="left:34px;width:3px;height:3px;animation-duration:3.4s;animation-delay:.8s"></i><i class="bub" style="left:52px;width:5px;height:5px;animation-duration:2.9s;animation-delay:1.6s"></i><i class="bub" style="left:70px;width:3px;height:3px;animation-duration:3.8s;animation-delay:.4s"></i><i class="bub" style="left:86px;width:4px;height:4px;animation-duration:3.1s;animation-delay:2.1s"></i><div class="slosh"><i class="b"></i><i class="a"></i></div></div><i class="seam"></i><i class="lbl"></i><div class="shine"></div></div>
+      </div>
+      <div class="num">
+        <div class="k">Füllung</div>
+        <div class="lit"><span id="gkg">0,0</span><em>kg</em></div>
+        <div class="pct" id="gpct" style="margin-top:6px">0 %</div>
+        <button type="button" class="zp" id="gt1" style="margin-top:10px">leer: 0,0 kg</button>
+        <button type="button" class="zp" id="gt2">voll: 0,0 kg</button>
+      </div>
+    </div>
+    <div class="stat"><span class="k">Gesamtgewicht</span><b><span id="ggross">0,0</span> kg</b><small id="gnone" hidden>Keine Flasche auf der Waage</small></div>
+    <button type="button" class="btn" id="gback">Zurück zum Fass</button>
+  </section>
+  <section class="card" id="vitem" hidden>
+    <div class="row"><span class="k">Artikel wiegen</span><span class="live"><span class="dot off" id="idot"></span><span id="ilivet">Verbinde …</span></span></div>
+    <svg class="isvg" viewBox="0 0 200 150" aria-hidden="true">
+      <g class="plt" id="iplt"><rect id="ibox" x="86" y="30" width="28" height="18" rx="4" fill="#f2b12e" stroke="#c98a14" stroke-width="2"/><rect x="22" y="48" width="156" height="10" rx="4" fill="#20317f"/><rect x="91" y="58" width="18" height="24" fill="#3f4e91"/></g>
+      <rect x="34" y="72" width="132" height="70" rx="18" fill="#20317f"/><rect x="46" y="140" width="24" height="8" rx="2" fill="#20317f"/><rect x="130" y="140" width="24" height="8" rx="2" fill="#20317f"/>
+      <circle cx="100" cy="108" r="30" fill="#fff"/>
+      <g stroke="#b4bcdc" stroke-width="2" stroke-linecap="round" id="iticks"></g>
+      <g class="ndl" id="indl"><path d="M100 108V84" stroke="#a3342a" stroke-width="3.5" stroke-linecap="round"/></g>
+      <circle cx="100" cy="108" r="4.5" fill="#141a3a"/>
+    </svg>
+    <div class="iw"><span id="ikg">0,00</span><em>kg</em></div>
+    <button type="button" class="zp wide" id="itare">Tara setzen</button>
+    <div class="stat" id="igw" hidden><span class="k">Mit Behälter</span><b><span id="igross">0,00</span> kg</b></div>
+    <button type="button" class="btn" id="iback">Zurück zum Fass</button>
+  </section>
   <div class="warn" id="warn" hidden>Fass fast leer – Nachschub bestellen!</div>
   <div class="foot">
     <button type="button" id="share">Zugang teilen</button>
     <button type="button" id="change">Verbindung ändern</button>
+    <button type="button" id="tvon">TV-Ansicht</button>
   </div>
   </div>
 </div>
+
+<div class="ov" id="ov" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="ovt">
+    <div class="sh"><button type="button" id="ovback" aria-label="Zurück" hidden>‹</button><h2 id="ovt"></h2><button type="button" id="ovx" aria-label="Schließen">×</button></div>
+    <div class="serr" id="overr" hidden></div>
+    <div class="sok" id="ovok" hidden></div>
+    <div id="ovc"></div>
+    <div class="swait" id="ovwait" hidden>Warte auf die Waage …</div>
+  </div>
+</div>
+
+<div id="tv" aria-hidden="true">
+ <div class="tvin" id="tvin">
+  <div class="tvhead" id="tvhead"></div>
+  <div class="tvtime"><b id="tvtime">--:--</b></div>
+  <div class="tvlive"><i class="dot off" id="tvdot"></i><span id="tvlivet">Verbinde …</span></div>
+  <div class="tvkeg">
+   <div class="fill" id="tvfill">
+    <i class="bub" style="left:3.5em;width:1.3em;height:1.3em;animation-duration:2.6s"></i>
+    <i class="bub" style="left:8.5em;width:1em;height:1em;animation-duration:3.4s;animation-delay:.8s"></i>
+    <i class="bub" style="left:13em;width:1.6em;height:1.6em;animation-duration:2.9s;animation-delay:1.6s"></i>
+    <i class="bub" style="left:18em;width:1em;height:1em;animation-duration:3.8s;animation-delay:.4s"></i>
+    <i class="bub" style="left:22em;width:1.3em;height:1.3em;animation-duration:3.1s;animation-delay:2.1s"></i>
+    <i class="bub" style="left:6em;width:1em;height:1em;animation-duration:4.2s;animation-delay:2.6s"></i>
+    <i class="bub" style="left:15.5em;width:1.3em;height:1.3em;animation-duration:2.7s;animation-delay:3.1s"></i>
+    <i class="bub" style="left:26em;width:1em;height:1em;animation-duration:3.6s;animation-delay:1.2s"></i>
+    <div class="slosh"><i class="b"></i><i class="a"></i></div>
+   </div>
+   <div class="band" style="top:30%"></div><div class="band" style="top:68%"></div>
+   <div class="shine"></div>
+  </div>
+  <div class="tvhero">
+   <div class="tvlit" id="tvlitw"><span id="tvlit">0,0</span><em>L</em></div>
+   <div class="tvsub"><span>von <i id="tvcap" style="font-style:normal">30</i> Litern</span><b id="tvpct">0 %</b></div>
+  </div>
+  <div class="tvtile t1"><b id="tvgl">0</b><span>Bier noch<br>im Fass</span><small>à <i id="tvgs" style="font-style:normal">0,5</i> L</small></div>
+  <div class="tvtile t2" id="tvt2"><b id="tvtot">0</b><span>Bier<br>gezapft</span><small id="tvsince"></small></div>
+  <div class="tvtile t3"><b id="tvhour">0</b><span>Bier in der<br>letzten Stunde</span></div>
+  <div class="tvchart">
+   <div class="ct"><b>Gezapfte Biere je 10 Minuten</b></div>
+   <div class="ce"><b id="tveta"></b></div>
+   <div class="plot">
+    <div class="gl" style="top:0"><span id="tvy2">4</span></div>
+    <div class="gl" style="top:50%"><span id="tvy1">2</span></div>
+    <div class="gl" style="top:100%"><span>0</span></div>
+    <div class="bars" id="tvbars"></div>
+   </div>
+   <div class="cempty" id="tvcempty"><span>Noch nichts gezapft. Die Statistik füllt sich mit dem ersten Bier.</span></div>
+  </div>
+  <div class="tvmsgw"><div class="tvmsg" id="tvmsg" hidden></div></div>
+  <div class="tvgrow" id="tvgrow"><div><b id="tvg1"></b><span id="tvg2"></span><small id="tvg3"></small></div></div>
+  <div class="tvbtn" id="tvbtnw"><span id="tvbtn"><button type="button" id="tvfull">Vollbild</button><button type="button" id="tvdsg">Design</button><button type="button" id="tvoff">Handy-Ansicht</button></span></div>
+ </div>
+</div>
+
 <script>
-var $=function(i){return document.getElementById(i)},shown=0,target=0,cap=30,glass=.5,raf=0;
+var $=function(i){return document.getElementById(i)},Q=location.search||'';
+var demo=/[?&]demo=1(&|$)/.test(Q),T0=Date.now();
+// In der Vorfuehrung (?demo=1) laeuft die Zeit 60-mal schneller, damit man die Statistik wandern sieht
+function now(){return demo?T0+(Date.now()-T0)*60:Date.now()}
 function fmt(v,d){return v.toFixed(d).replace('.',',')}
+function hhmm(t){var d=new Date(t),z=function(n){return(n<10?'0':'')+n};return z(d.getHours())+':'+z(d.getMinutes())}
+var shown=0,target=0,cap=30,glass=.5,raf=0,warnOK=false,liveOK=false,S=null,NEW=false;
+
+// ---------- Anzeige der aktuellen Werte ----------
 function paint(){var p=Math.max(0,Math.min(100,shown/cap*100));
-$('lit').textContent=fmt(shown,1);$('pct').textContent=Math.round(p)+' %';
-$('fill').style.height=p.toFixed(2)+'%';$('gl').textContent=Math.floor((shown+.02)/glass)}
+$('lit').textContent=$('tvlit').textContent=fmt(shown,1);$('pct').textContent=$('tvpct').textContent=Math.round(p)+' %';
+$('fill').style.height=$('tvfill').style.height=p.toFixed(2)+'%';$('gl').textContent=$('tvgl').textContent=Math.floor((shown+.02)/glass);
+grow()}
 function tick(){var d=target-shown;if(Math.abs(d)<.02){shown=target;paint();raf=0;return}
 shown+=d*.08;paint();raf=requestAnimationFrame(tick)}
-function show(j){cap=j.capacity_l;glass=j.glass_l;target=j.liters;
-$('cap').textContent=cap;$('gs').textContent=fmt(glass,Math.round(glass*100)%10?2:1);$('gross').textContent=fmt(j.gross_kg,1);$('tare').textContent=fmt(j.tare_kg,1);$('zk').textContent=j.coupler?'+ Zapfkopf '+fmt(j.coupler_kg,2)+' kg':'ohne Zapfkopf';
+function show(j){cap=j.capacity_l;glass=j.glass_l||.5;target=j.liters;
+$('cap').textContent=$('tvcap').textContent=cap;$('gs').textContent=$('tvgs').textContent=fmt(glass,Math.round(glass*100)%10?2:1);
+$('gross').textContent=fmt(j.gross_kg,1);$('tare').textContent=fmt(j.tare_kg,1);$('zk').textContent=j.coupler?'+ Zapfkopf '+fmt(j.coupler_kg,2)+' kg':'ohne Zapfkopf';
 if(j.keg>=0)for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',j.keg==i);
-$('nocal').hidden=j.calibrated;$('gasnote').hidden=!j.gas;if(j.gas)$('gasnote').textContent='Die Waage wiegt gerade eine Gasflasche: '+fmt(j.gas_kg||0,1)+' kg Füllung. Die Fass-Anzeige gilt solange nicht.';$('warn').hidden=!(j.calibrated&&j.sensor&&!j.empty&&!j.gas&&j.percent<=j.low_percent);
+$('nocal').hidden=j.calibrated;$('gasnote').hidden=!j.gas||NEW;if(j.gas)$('gasnote').textContent='Die Waage wiegt gerade eine Gasflasche: '+fmt(j.gas_kg||0,1)+' kg Füllung. Die Fass-Anzeige gilt solange nicht.';
+$('warn').hidden=!(j.calibrated&&j.sensor&&!j.empty&&!j.gas&&j.mode!==2&&j.percent<=j.low_percent);
+modeView(j);
 state(!j.sensor?'Waage nicht verbunden':(j.empty?'Kein Fass auf der Waage':'Live'),!!j.sensor);
 if(!raf)raf=requestAnimationFrame(tick)}
-var KEY='bierwaage.sync',cfg=null,pend=-1,pendT=0,timer=0;
+function state(t,ok){$('dot').className=$('tvdot').className=$('gdot').className=$('idot').className=ok?'dot':'dot off';$('livet').textContent=$('tvlivet').textContent=$('glivet').textContent=$('ilivet').textContent=t}
+
+// ---------- Handy: Fass, Gasflasche oder Artikel, je nachdem was die Waage gerade tut ----------
+// Die neuen Knoepfe gibt es erst, wenn das Programm der Waage sie versteht (fw 5 oder neuer).
+function modeView(j){NEW=j.fw>=5;var m=NEW?(j.mode||0):0;
+$('gear').hidden=$('weigh').hidden=$('zpill').hidden=!NEW;
+$('segw').hidden=$('vkeg').hidden=m!==0;$('vgas').hidden=m!==1;$('vitem').hidden=m!==2;
+if(NEW){$('zpill').textContent=j.coupler?'mit Zapfkopf':'ohne Zapfkopf';$('zpill').className=j.coupler?'zp':'zp off'}
+if(m===1){var gp=Math.max(0,Math.min(100,j.gas_kg/(j.gas_cap||1)*100));
+$('gkg').textContent=fmt(j.gas_kg,1);$('gpct').textContent=Math.round(gp)+' %';$('gfill').style.height=gp.toFixed(1)+'%';
+$('gt1').textContent='leer: '+fmt(j.gas_tare,1)+' kg';$('gt2').textContent='voll: '+fmt(j.gas_cap,1)+' kg';
+$('ggross').textContent=fmt(j.w,1);$('gnone').hidden=j.w>=1}
+if(m===2){var f=Math.sqrt(Math.max(0,Math.min(300,j.w))/300),bw=28+70*f,bh=18+34*f,b=$('ibox'),v=Math.abs(j.item_kg)<100?2:1;
+$('ikg').textContent=fmt(Math.abs(j.item_kg)<.005?0:j.item_kg,v);
+$('indl').style.transform='rotate('+(-135+270*f).toFixed(1)+'deg)';$('iplt').style.transform='translateY('+(12*f).toFixed(1)+'px)';
+b.setAttribute('width',bw.toFixed(1));b.setAttribute('height',bh.toFixed(1));b.setAttribute('x',(100-bw/2).toFixed(1));b.setAttribute('y',(48-bh).toFixed(1));
+b.style.display=j.w>.05?'':'none';
+$('itare').textContent=j.item_tare?'Tara '+fmt(j.item_tare,2)+' kg löschen':'Tara setzen';$('itare').className=j.item_tare?'zp wide':'zp wide off';
+$('igw').hidden=!j.item_tare;$('igross').textContent=fmt(j.w,2)}}
+(function(){var h='',i,a;for(i=0;i<=10;i++){a=(-135+27*i)*Math.PI/180;h+='<path d="M'+(100+23*Math.sin(a)).toFixed(1)+' '+(108-23*Math.cos(a)).toFixed(1)+'L'+(100+27*Math.sin(a)).toFixed(1)+' '+(108-27*Math.cos(a)).toFixed(1)+'"'+(i%5?'':' stroke="#141a3a"')+'/>'}$('iticks').innerHTML=h})();
+// Hinweiszeile der TV-Ansicht: Text, rot blinkend (low), Werte abgedunkelt (stale)
+function tvm(t,low,stale){var m=$('tvmsg');m.textContent=t;m.hidden=!t;m.className=low?'tvmsg low':'tvmsg';$('tvin').className=stale?'tvin stale':'tvin'}
+
+// ---------- Warnung der letzten 10 Bier: je leerer das Fass, desto groesser ----------
+var growKey='';
+function grow(){var g=$('tvgrow'),n=Math.floor((shown+.02)/glass);
+if(!warnOK||n>10){if(growKey){growKey='';g.className='tvgrow';g.style.height=''}return}
+if(growKey===''+n)return;growKey=''+n;
+var k=(10-n)/10,h=9+57*Math.pow(k,1.15),a=$('tvg1'),b=$('tvg2'),c=$('tvg3'),big=h>=20;
+if(n===0){a.textContent='Fass leer!';a.style.fontSize='15em';b.textContent='Bitte Fass wechseln';b.style.fontSize='5.4em';c.textContent=''}
+else if(!big){a.textContent='';b.textContent='Noch '+n+' Bier im Fass!';b.style.fontSize=(h*.46)+'em';c.textContent=''}
+else{a.textContent=n;a.style.fontSize=(h*.5)+'em';b.textContent='Bier noch im Fass!';b.style.fontSize=Math.max(3.6,h*.11)+'em';
+c.textContent=h>=34?(n<=3?'Jetzt das neue Fass anschlagen':'Neues Fass bereitstellen'):'';c.style.fontSize=Math.max(2.6,h*.065)+'em'}
+a.hidden=!a.textContent;c.hidden=!c.textContent;
+g.style.height=h+'em';g.style.animationDuration=(2.4-1.3*k).toFixed(2)+'s';g.className='tvgrow on'}
+
+// ---------- Zugang ----------
+var KEY='bierwaage.sync',cfg=null,pend=-1,pendT=0,timer=0,waiting=null,tickFn=null,pin=null;
 try{cfg=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
 if(!(cfg&&typeof cfg.u==='string'&&typeof cfg.c==='string'))cfg=null;
 function enc(c){return '#sync='+encodeURIComponent(btoa(JSON.stringify({u:c.u,c:c.c})))}
@@ -185,28 +569,46 @@ function enc(c){return '#sync='+encodeURIComponent(btoa(JSON.stringify({u:c.u,c:
 (function(){var m=/[#&]sync=([^&]+)/.exec(location.hash||'');if(!m)return;
 try{var c=JSON.parse(atob(decodeURIComponent(m[1])));if(c&&typeof c.u==='string'&&typeof c.c==='string'){cfg={u:c.u,c:c.c};keep()}}catch(e){}})();
 function keep(){try{localStorage.setItem(KEY,JSON.stringify(cfg))}catch(e){}}
+if(demo)cfg=null;
 function base(c){c=c||cfg;return c.u.replace(/\/+$/,'')+'/bierwaage/'+encodeURIComponent(c.c)}
-function hhmm(t){var d=new Date(t),z=function(n){return(n<10?'0':'')+n};return z(d.getHours())+':'+z(d.getMinutes())}
 function get(c,name){return fetch(base(c)+'/'+name+'.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
-function state(t,ok){$('dot').className=ok?'dot':'dot off';$('livet').textContent=t}
 function fail(e){var s=e&&e.message;state(s==='401'||s==='403'?'Zugriff verweigert':'Keine Verbindung',false)}
 function got(j){
-if(!j||typeof j.liters!=='number'){$('nodata').hidden=false;state('Keine Daten',false);return}
-$('nodata').hidden=true;
+if(!j||typeof j.liters!=='number'){$('nodata').hidden=false;state('Keine Daten',false);warnOK=liveOK=false;grow();tvm('Von der Waage sind noch keine Daten da.',false,true);stats();return}
+$('nodata').hidden=true;S=j;
+if(waiting&&j.ack_id===waiting.id){var wq=waiting;waiting=null;if(!demo)fetch(base()+'/cmd.json',{method:'DELETE'}).catch(function(){});if(j.ack==='ok')wq.res(j);else wq.rej(j.ack)}
 if(pend>=0){if(j.keg===pend||Date.now()-pendT>12000)pend=-1;else j.keg=-1}
-show(j);
+show(j);if(tickFn)tickFn(j);
 if(pend>=0)for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',i===pend);
-var age=Date.now()-(j.ts||0);
-if(age>150000){state('Waage offline seit '+hhmm(j.ts||Date.now()),false);$('warn').hidden=true}
-else if(pend>=0)state('Stelle um …',true)}
-function load(){if(!cfg||document.hidden)return;get(cfg,'status').then(got).catch(fail)}
+var age=Date.now()-(j.ts||0),old=age>150000;
+if(old){state('Waage offline seit '+hhmm(j.ts||Date.now()),false);$('warn').hidden=true}
+else if(pend>=0)state('Stelle um …',true);
+else if(demo)state('Vorführung',true);
+liveOK=!old&&!!j.calibrated&&!!j.sensor&&!j.gas&&j.mode!==2;warnOK=liveOK&&!j.empty;
+if(liveOK){if(j.empty)lifted(now());else sample(j,now())}
+grow();
+if(old)tvm('Waage offline seit '+hhmm(j.ts||Date.now())+' – letzte bekannte Werte',false,true);
+else if(!j.calibrated)tvm('Die Waage ist noch nicht kalibriert.',false,true);
+else if(j.gas)tvm('Gasflasche auf der Waage: '+fmt(j.gas_kg||0,1)+' kg Füllung',false,true);
+else if(j.mode===2)tvm('Die Waage wiegt gerade einen Artikel: '+fmt(j.item_kg||0,2)+' kg',false,true);
+else if(!j.sensor)tvm('Wägezelle nicht verbunden',false,true);
+else if(j.empty)tvm('Kein Fass auf der Waage',false,false);
+else if(!$('warn').hidden&&Math.floor((j.liters+.02)/glass)>10)tvm('Fass fast leer – Nachschub bestellen!',true,false);
+else tvm('',false,false);
+stats()}
+function load(){if(document.hidden)return;if(demo){got(demoStatus());return}if(!cfg)return;get(cfg,'status').then(got).catch(fail)}
+// Abfrage-Takt: zuegig, solange ein Dialog offen ist, eine Antwort aussteht oder ein Produkt gewogen wird
+function fastUI(){return !$('ov').hidden||!!waiting||!!(S&&S.mode)}
+function loop(){clearTimeout(timer);timer=0;if(!(cfg||demo))return;load();
+if(waiting&&Date.now()-waiting.t>20000){var w=waiting;waiting=null;w.rej('timeout')}
+timer=setTimeout(loop,fastUI()?1000:(demo?2000:3000))}
 function pick(k){if(!cfg)return;pend=k;pendT=Date.now();
 for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',i===k);state('Stelle um …',true);
-fetch(base()+'/cmd.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:Date.now(),keg:k})})
+fetch(base()+'/cmd.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:'k'+Date.now().toString(36),c:'keg',v:k,keg:k})})
 .then(function(r){if(!r.ok)throw new Error(r.status)}).catch(function(e){pend=-1;fail(e)})}
-function view(){var on=!!cfg;$('setup').hidden=on;$('app').hidden=!on;
-if(on){try{if(location.hash!==enc(cfg))history.replaceState(null,'',location.pathname+location.search+enc(cfg))}catch(e){}
-if(!timer)timer=setInterval(load,3000);load()}
+function view(){var on=!!cfg||demo;$('setup').hidden=on;$('app').hidden=!on;$('share').hidden=$('change').hidden=demo;tvApply();
+if(on){try{if(cfg&&location.hash!==enc(cfg))history.replaceState(null,'',location.pathname+location.search+enc(cfg))}catch(e){}
+if(!timer)loadHist();loop()}
 else{$('su').value='';$('sc').value=''}}
 function smsg(t){$('smsg').textContent=t;$('smsg').hidden=!t}
 $('sgo').onclick=function(){var u=$('su').value.trim(),c=$('sc').value.trim();
@@ -216,15 +618,317 @@ smsg('');var t={u:u,c:c};$('sgo').disabled=true;
 get(t,'status').then(function(){cfg=t;keep();view()}).catch(function(e){var s=e&&e.message;
 smsg(s==='401'||s==='403'?'Die Datenbank hat den Zugriff verweigert. Prüfe die Regeln in Firebase.':'Keine Verbindung möglich. Prüfe die Adresse und das Internet.')})
 .then(function(){$('sgo').disabled=false})};
-$('change').onclick=function(){cfg=null;try{localStorage.removeItem(KEY);history.replaceState(null,'',location.pathname+location.search)}catch(e){}view()};
+$('change').onclick=function(){cfg=null;S=null;hist={};dirty={};med=[];lastM=null;lastKeg=-1;clearTimeout(timer);timer=0;try{localStorage.removeItem(KEY);history.replaceState(null,'',location.pathname+location.search)}catch(e){}view()};
 $('share').onclick=function(){var url=location.href.split('#')[0]+enc(cfg),b=$('share'),o=b.textContent;
 function done(t){b.textContent=t;setTimeout(function(){b.textContent=o},2500)}
 if(navigator.share){navigator.share({title:'Bierwaage',url:url}).catch(function(){})}
 else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){done('Link kopiert')},function(){done('Kopieren nicht möglich')})}
 else done('Teilen nicht möglich')};
-document.addEventListener('visibilitychange',function(){if(!document.hidden)load()});
-view();
-setTimeout(function(){$('splash').classList.add('out')},3600);
+
+
+// ---------- Fernbedienung: Befehl an die Waage, Antwort kommt mit dem naechsten Stand zurueck ----------
+// Befehle fuer die Einstellungen tragen die PIN. Sie steht nur kurz in der Datenbank: nach der Antwort wird der Befehl geloescht.
+function send(c,o,needPin){o=o||{};if(demo)return demoSend(c,o,needPin);
+var id='c'+Date.now().toString(36)+Math.floor(Math.random()*1296).toString(36),b={id:id,c:c},k;
+for(k in o)b[k]=o[k];if(needPin)b.pin=pin||'';
+return new Promise(function(res,rej){if(!cfg){rej('net');return}
+fetch(base()+'/cmd.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})
+.then(function(r){if(!r.ok)throw 0;waiting={id:id,res:res,rej:rej,t:Date.now()};loop()}).catch(function(){rej('net')})})}
+function errText(e){return({pin:'Die PIN ist falsch.',lock:'Zu viele falsche PINs. Die Waage nimmt 5 Minuten lang keine PIN vom Handy an.',
+cal:'Die Waage ist noch nicht kalibriert. Bitte zuerst „Kalibrieren“.',sensor:'Die Waage bekommt keine Messwerte. Bitte das Kabel zur Wägezelle prüfen.',
+low:'Das gemessene Gewicht passt nicht. Es wurde nichts gespeichert.',val:'Dieser Wert ist nicht möglich.',
+unk:'Die Waage kennt diesen Befehl nicht. Bitte das Programm der Waage aktualisieren.',
+timeout:'Die Waage antwortet nicht. Ist sie eingeschaltet und online? Am Display darf gerade kein Dialog offen sein.',
+net:'Keine Verbindung zur Datenbank. Bitte das Internet prüfen.'})[e]||'Das hat nicht geklappt.'}
+// Dialog-Rahmen
+var backFn=null;
+function sheet(title,html,back){$('ovt').textContent=title;$('ovc').innerHTML=html;$('ov').hidden=false;backFn=back||null;$('ovback').hidden=!back;
+tickFn=null;note('','');busy(false);loop()}
+function closeSheet(){if($('ov').hidden)return;$('ov').hidden=true;$('ovc').innerHTML='';tickFn=null;backFn=null;pin=null}
+function note(err,ok){$('overr').textContent=err;$('overr').hidden=!err;$('ovok').textContent=ok;$('ovok').hidden=!ok}
+function busy(on){var e=$('ovc').querySelectorAll('button,input'),i;for(i=0;i<e.length;i++)e[i].disabled=on;$('ovwait').hidden=!on}
+// Befehl schicken und warten; danach weiter mit then(Stand). Fehler erscheinen im Dialog.
+function run(c,o,needPin,then){note('','');busy(true);send(c,o,needPin).then(function(j){busy(false);then(j)},function(e){busy(false);note(errText(e),'');
+if(needPin&&(e==='pin'||e==='lock'))pinDialog(errText(e))})}
+function num(id){var v=parseFloat(String($(id).value).replace(',','.'));return isFinite(v)?v:NaN}
+function on(id,fn){$(id).onclick=fn}
+$('ovx').onclick=closeSheet;
+$('ovback').onclick=function(){if(backFn)backFn()};
+$('ov').onclick=function(e){if(e.target===$('ov')&&$('ovwait').hidden)closeSheet()};
+
+// ---------- Zapfkopf, Produkt wiegen ----------
+function quick(c,o){send(c,o,false).then(function(){},function(e){state(e==='timeout'?'Waage antwortet nicht':'Keine Verbindung',false)})}
+on('zpill',function(){if(S)quick('coupler',{v:S.coupler?0:1})});
+on('gback',function(){quick('mode',{v:0})});
+on('iback',function(){quick('mode',{v:0})});
+on('itare',function(){if(S)quick('itare',{v:S.item_tare?0:1})});
+on('gt1',function(){gasT=null;gasFlow(1)});
+on('gt2',function(){gasT=null;gasFlow(2)});
+var SVG_GAS='<svg viewBox="0 0 56 64" aria-hidden="true"><rect x="22" y="0" width="12" height="18" rx="5" fill="#3a4055"/><path d="M10 22l6-12 5 2-4 12zM46 22l-6-12-5 2 4 12z" fill="#a31a1a"/><rect x="11" y="52" width="34" height="10" rx="3" fill="#a31a1a"/><rect x="8" y="16" width="40" height="42" rx="13" fill="#dc2a2a"/><rect x="14" y="26" width="3" height="22" rx="1.5" fill="#f68f86"/></svg>';
+var SVG_SCALE='<svg viewBox="0 0 56 64" aria-hidden="true"><rect x="4" y="8" width="48" height="6" rx="2.5" fill="#20317f"/><rect x="24" y="14" width="8" height="10" fill="#20317f"/><rect x="8" y="22" width="40" height="36" rx="10" fill="#20317f"/><circle cx="28" cy="40" r="12" fill="#fff"/><path d="M28 40l7-9" stroke="#a3342a" stroke-width="3" stroke-linecap="round"/><circle cx="28" cy="40" r="2.5" fill="#141a3a"/></svg>';
+function weighPick(){sheet('Produkt wiegen','<button type="button" class="pick2" id="wp1">'+SVG_GAS+'<span><b>Gasflasche</b><small>Füllung in kg und in Prozent</small></span></button>'
++'<button type="button" class="pick2" id="wp2">'+SVG_SCALE+'<span><b>Artikel</b><small>Gewicht wie auf einer normalen Waage</small></span></button>');
+on('wp1',function(){gasT=null;gasFlow(1)});on('wp2',function(){run('mode',{v:2},false,closeSheet)})}
+on('weigh',weighPick);
+var gasT=null;
+// Erst das Leergewicht, dann die Fuellmenge der vollen Flasche; danach schaltet die Waage auf "Gasflasche"
+function gasFlow(step){var j=S||{},v=step===1?(gasT!=null?gasT:j.gas_tare):j.gas_cap,
+q=step===1?'Wie viel wiegt die Flasche, wenn sie leer ist?':'Wie viel Füllung hat die Flasche, wenn sie voll ist?';
+sheet('Gasflasche '+step+' / 2','<p class="sp">'+q+'</p><label class="slab" for="gin">Kilogramm</label><input class="sin" id="gin" type="text" inputmode="decimal" autocomplete="off" value="'+(v?gfmt(v):'')+'">'
++'<button type="button" class="sbtn" id="ggo">'+(step===1?'Weiter':'Flasche wiegen')+'</button>',step===2?function(){gasFlow(1)}:null);
+on('ggo',function(){var x=num('gin');
+if(step===1){if(!(x>=0&&x<=150)){note('Bitte das Leergewicht in Kilogramm eintragen (0 bis 150).','');return}gasT=x;gasFlow(2)}
+else{if(!(x>=.1&&x<=150)){note('Die Füllmenge muss größer als 0 sein (bis 150 kg).','');return}
+run('mode',{v:1,v2:gasT!=null?gasT:(j.gas_tare||0),v3:x},false,function(){gasT=null;closeSheet()})}});
+$('gin').onkeydown=function(e){if(e.keyCode===13)$('ggo').click()};
+try{$('gin').focus();$('gin').select()}catch(e){}}
+
+// ---------- Einstellungen (mit PIN) ----------
+on('gear',function(){pinDialog('')});
+function pinDialog(err){sheet('Einstellungen','<p class="sp">Die Einstellungen sind mit der PIN der Waage geschützt.</p><label class="slab" for="pinin">PIN (4 Ziffern)</label>'
++'<input class="sin" id="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><button type="button" class="sbtn" id="pingo">Öffnen</button>');
+if(err)note(err,'');
+var go=function(){var v=$('pinin').value;if(!/^\d{4}$/.test(v)){note('Die PIN hat genau 4 Ziffern.','');return}
+pin=v;note('','');busy(true);send('auth',{},true).then(function(){busy(false);setHome('')},function(e){pin=null;pinDialog(errText(e))})};
+on('pingo',go);$('pinin').onkeydown=function(e){if(e.keyCode===13)go()};try{$('pinin').focus()}catch(e){}}
+function gfmt(g){return fmt(g,Math.round(g*100)%10?2:1)}
+function row(id,label,val,red){return '<button type="button" class="srow" id="'+id+'">'+label+(val?'<span'+(red?' class="red"':'')+'>'+val+'</span>':'')+'</button>'}
+function setHome(ok){var j=S||{},h='';
+h+=row('s0','Leergewicht 20 L',fmt(j.t20||0,1)+' kg')+row('s1','Leergewicht 30 L',fmt(j.t30||0,1)+' kg')+row('s2','Leergewicht 50 L',fmt(j.t50||0,1)+' kg');
+h+=row('s3','Zapfkopf-Gewicht',fmt(j.coupler_kg||0,2)+' kg')+row('s4','Nullpunkt setzen','')+row('s5','Kalibrieren',j.calibrated?'':'nötig!',true);
+h+=row('s6','Ton',j.beep?'an, Stufe '+j.vol:'aus')+row('s7','Glasgröße',gfmt(j.glass_l||.5)+' L')+row('s8','Helligkeit',(j.bright||10)*10+' %');
+h+=row('s9','PIN ändern','')+row('s10','Bild korrigieren','')+row('s11','Anzeige drehen','');
+h+='<p class="sp m">WLAN wechseln und Touch einrichten geht nur direkt am Display der Waage.</p>';
+sheet('Einstellungen',h);if(ok)note('',ok);
+on('s0',function(){tareFlow(0)});on('s1',function(){tareFlow(1)});on('s2',function(){tareFlow(2)});on('s3',function(){zapfFlow(1)});
+on('s4',zeroFlow);on('s5',function(){calFlow(1)});on('s6',soundView);on('s7',glassView);on('s8',brightView);on('s9',pinFlow);
+on('s10',function(){run('cmode',{},true,function(){note('','Die Anzeige zeigt jetzt die nächste Bildvariante.')})});
+on('s11',function(){run('rot',{},true,function(){note('','Die Anzeige ist gedreht.')})})}
+function home(){setHome('')}
+function live(){return '<div class="sbig">Jetzt auf der Waage<b id="lw">'+(S?fmt(S.w,2):'–')+' kg</b></div>'}
+function liveTick(){tickFn=function(j){var e=$('lw');if(e)e.textContent=fmt(j.w,2)+' kg'}}
+function tareFlow(k){var L=[20,30,50][k];
+sheet('Leergewicht '+L+' L','<p class="sp">Stell das leere '+L+'-L-Fass auf die Waage.</p>'+live()
++'<label class="schk"><input type="checkbox" id="tz"> Der Zapfkopf ist angeschlossen</label><p class="sp m">Mit Haken wird das Gewicht des Zapfkopfs abgezogen.</p>'
++'<button type="button" class="sbtn" id="tgo">Leergewicht speichern</button>',home);liveTick();
+on('tgo',function(){run('tare',{v:k,v2:$('tz').checked?1:0},true,function(j){setHome('Leergewicht '+L+' L: '+fmt(j['t'+L],2)+' kg gespeichert.')})})}
+function zapfFlow(step){
+sheet('Zapfkopf '+step+' / 2','<p class="sp">'+(step===1?'Stell ein Fass ohne Zapfkopf auf die Waage.':'Schließ jetzt Zapfkopf und Schläuche an.')+'</p>'+live()
++'<button type="button" class="sbtn" id="zgo">'+(step===1?'Weiter':'Messen und speichern')+'</button>',home);liveTick();
+on('zgo',function(){run(step===1?'zapf1':'zapf2',{},true,function(j){if(step===1)zapfFlow(2);else setHome('Zapfkopf-Gewicht: '+fmt(j.coupler_kg,2)+' kg gespeichert.')})})}
+function zeroFlow(){sheet('Nullpunkt setzen','<p class="sp">Ist die Plattform ganz leer?</p>'+live()+'<button type="button" class="sbtn" id="zgo">Nullpunkt setzen</button>',home);liveTick();
+on('zgo',function(){run('zero',{},true,function(){setHome('Der Nullpunkt ist gespeichert.')})})}
+function calFlow(step){var j=S||{};
+if(step===1){sheet('Kalibrieren 1 / 2','<p class="sp">Mach die Plattform ganz leer.</p><button type="button" class="sbtn" id="cgo">Weiter</button>',home);
+on('cgo',function(){run('zero',{},true,function(){calFlow(2)})});return}
+sheet('Kalibrieren 2 / 2','<p class="sp">Leg ein Gewicht, das du genau kennst, mittig auf die Waage. Je schwerer, desto genauer (am besten 15 bis 30 kg).</p>'
++'<label class="slab" for="cin">Gewicht in Kilogramm</label><input class="sin" id="cin" type="text" inputmode="decimal" autocomplete="off" value="'+gfmt(j.cal_kg||10)+'">'
++'<button type="button" class="sbtn" id="cgo">Kalibrieren</button>',home);
+on('cgo',function(){var x=num('cin');if(!(x>=.5&&x<=300)){note('Bitte das Gewicht in Kilogramm eintragen (0,5 bis 300).','');return}
+run('cal',{v:x},true,function(){setHome('Die Kalibrierung ist gespeichert.')})})}
+function bars(n){var h='',i;for(i=1;i<=10;i++)h+='<i'+(i<=n?' class="on"':'')+' style="height:'+(22+i*7.8)+'%"></i>';return h}
+function soundView(){var j=S||{},v=j.vol||6,b=!!j.beep;
+sheet('Ton','<div class="srow" style="cursor:default">Piepton bei '+fmt(j.beep_l||2.5,1)+' L Rest im Fass<button type="button" class="tog'+(b?' on':'')+'" id="bt">'+(b?'An':'Aus')+'</button></div>'
++'<label class="slab">Lautstärke: Stufe <span id="vn">'+v+'</span></label><div class="lvl"><button type="button" id="vm" aria-label="leiser">−</button><div id="vb">'+bars(v)+'</div><button type="button" id="vp" aria-label="lauter">+</button></div>'
++'<button type="button" class="sbtn sec" id="vt">Test: jetzt piepen</button>',home);
+on('bt',function(){run('beep',{v:b?0:1},true,soundView)});
+function vol(d){var n=Math.max(1,Math.min(10,v+d));if(n!==v)run('vol',{v:n},true,soundView)}
+on('vm',function(){vol(-1)});on('vp',function(){vol(1)});
+on('vt',function(){run('beeptest',{},true,function(){note('','Die Waage hat gepiept.')})})}
+function brightView(){var j=S||{},v=j.bright||10;
+sheet('Helligkeit','<label class="slab">Bildschirm: <span>'+v*10+' %</span></label><div class="lvl"><button type="button" id="vm" aria-label="dunkler">−</button><div>'+bars(v)+'</div><button type="button" id="vp" aria-label="heller">+</button></div>',home);
+function br(d){var n=Math.max(1,Math.min(10,v+d));if(n!==v)run('bright',{v:n},true,brightView)}
+on('vm',function(){br(-1)});on('vp',function(){br(1)})}
+function glassView(){var j=S||{},g=[.2,.25,.3,.33,.4,.5,1],h='<p class="sp">Mit dieser Größe rechnet die Waage „noch ca. … Gläser“.</p><div class="gl7">',i;
+for(i=0;i<g.length;i++)h+='<button type="button" data-g="'+g[i]+'"'+(Math.abs((j.glass_l||.5)-g[i])<.005?' class="on"':'')+'>'+gfmt(g[i])+' L</button>';
+sheet('Glasgröße',h+'</div>',home);
+var b=$('ovc').querySelectorAll('.gl7 button');for(i=0;i<b.length;i++)b[i].onclick=function(){run('glass',{v:+this.getAttribute('data-g')},true,glassView)}}
+function pinFlow(){sheet('PIN ändern','<label class="slab" for="p1">Neue PIN (4 Ziffern)</label><input class="sin" id="p1" type="password" inputmode="numeric" maxlength="4" autocomplete="off">'
++'<label class="slab" for="p2">Neue PIN wiederholen</label><input class="sin" id="p2" type="password" inputmode="numeric" maxlength="4" autocomplete="off">'
++'<button type="button" class="sbtn" id="pgo">PIN speichern</button>',home);
+on('pgo',function(){var a=$('p1').value,b=$('p2').value;if(!/^\d{4}$/.test(a)){note('Die PIN hat genau 4 Ziffern.','');return}
+if(a!==b){note('Die beiden Eingaben sind verschieden.','');return}
+run('pin',{s:a},true,function(){pin=a;setHome('Die neue PIN gilt ab sofort, am Handy und am Display.')})})}
+
+// ---------- Zapf-Statistik ----------
+// Alle 10 Minuten ein Eintrag {l: Liter am Ende, k: Fassgroesse}. Gezapft = um wie viel der Fuellstand unter den bisher
+// tiefsten Wert gefallen ist. Ein neues Fass (Liter steigen deutlich, andere Groesse oder e) beginnt neu. Dazu, falls im
+// selben Abschnitt passiert: e = Fass war abgenommen, p = letzter Stand davor, a = bis dahin in diesem Abschnitt
+// gezapfte Liter, h = erster ruhiger Stand eines neuen Fasses (oder beim Start der Aufzeichnung).
+// Die Eintraege liegen in der Datenbank unter .../hist/b<Nummer>, damit die Statistik ein Neuladen uebersteht.
+var BUCKET=600000,NB=18,hist={},dirty={},med=[],eFlag=false,hMode=0,lastKeg=-1,lastM=null,lastTotal=-1;
+function bk(t){return Math.floor(t/BUCKET)}
+function sample(j,t){if(j.keg<0)return;
+if(j.keg!==lastKeg){med=[];if(lastKeg>=0)hMode=2;lastKeg=j.keg}
+med.push(j.liters);if(med.length>5)med.shift();
+var s=med.slice().sort(function(a,b){return a-b}),m=Math.round(s[s.length>>1]*10)/10,k=bk(t),r=hist[k];
+if(!r){if(!hist[k-1]&&!hMode)hMode=1;r=hist[k]={l:m,k:j.keg};dirty[k]=1}
+if(r.l!==m||r.k!==j.keg){r.l=m;r.k=j.keg;dirty[k]=1}
+if(eFlag){r.e=1;eFlag=false;hMode=2;dirty[k]=1}
+if(hMode&&med.length>=4){if(hMode===2||r.h==null){r.h=m;dirty[k]=1}hMode=0}
+lastM=m}
+// Fass wird abgenommen: den letzten Stand festhalten, damit das bis dahin Gezapfte nicht verloren geht
+function lifted(t){if(!eFlag&&lastM!==null&&lastKeg>=0){var k=bk(t),r=hist[k]||(hist[k]={l:lastM,k:lastKeg});
+r.a=Math.round(calc(t).bars[NB-1]*100)/100;r.p=lastM;r.h=null;dirty[k]=1}
+eFlag=true;med=[]}
+function calc(t){var kn=bk(t),ks=[],x,i,r,min=null,pk=null,tap={},tot=0,first=0,bars=[],h=0;
+for(x in hist)if(+x>kn-72&&+x<=kn)ks.push(+x);
+ks.sort(function(a,b){return a-b});
+for(i=0;i<ks.length;i++){r=hist[ks[i]];if(!first)first=ks[i];
+x=0;if(r.a>0){x=r.a;if(min!==null&&r.p<min)min=r.p}
+else if(min!==null&&r.k===pk&&r.p!=null&&r.p<min){x=min-r.p;min=r.p}
+if(min===null||r.k!==pk||r.e||r.l>min+1.5)min=r.h>r.l?r.h:r.l;
+if(r.l<min){x+=min-r.l;min=r.l}
+if(x>0){tap[ks[i]]=x;tot+=x}
+pk=r.k}
+for(i=0;i<NB;i++)bars.push(tap[kn-NB+1+i]||0);
+for(i=0;i<6;i++)h+=tap[kn-i]||0;
+return{bars:bars,total:tot,first:first?first*BUCKET:0,hour:h,win:t-Math.max((kn-5)*BUCKET,first?first*BUCKET:t),kn:kn}}
+var cnt={};
+function count(id,to){var c=cnt[id]||(cnt[id]={v:0,t:-1,r:0});if(c.t===to)return;c.t=to;
+function st(){var d=c.t-c.v;if(Math.abs(d)<.5){c.v=c.t;c.r=0}else{c.v+=d*.14;c.r=requestAnimationFrame(st)}$(id).textContent=Math.round(c.v)}
+if(document.hidden){c.v=to;$(id).textContent=to}else if(!c.r)c.r=requestAnimationFrame(st)}
+(function(){var h='',i;for(i=0;i<NB;i++)h+='<div class="bar" style="left:'+(i*100/NB).toFixed(4)+'%"><i></i><b></b><span></span></div>';$('tvbars').innerHTML=h})();
+function stats(){var t=now(),s=calc(t),g=glass||.5,i,mx=0,v=[],im=-1,st=[4,6,8,10,12,16,20,24,30,40,50,60,80,100,150,200],ym=200,bars=$('tvbars').children;
+for(i=0;i<NB;i++){v[i]=s.bars[i]/g;if(v[i]>mx)mx=v[i];if(Math.round(v[i])>0&&(im<0||v[i]>=v[im]))im=i}
+for(i=0;i<st.length;i++)if(st[i]>=mx){ym=st[i];break}
+$('tvy2').textContent=ym;$('tvy1').textContent=ym/2;
+for(i=0;i<NB;i++){var b=bars[i],n=Math.round(v[i]),h=v[i]>0?Math.max(3,Math.min(100,v[i]/ym*100)):0,bt=(s.kn-NB+1+i)*BUCKET,lab=n>0&&(i===im||i===NB-1);
+b.childNodes[0].style.height=h+'%';b.childNodes[1].style.bottom=h+'%';b.childNodes[1].textContent=n;
+b.childNodes[2].textContent=new Date(bt).getMinutes()%30===0?hhmm(bt):'';
+b.className='bar'+(i===NB-1?' now':'')+(lab?' lab':'');b.title=hhmm(bt)+' Uhr: '+n+' Bier'}
+$('tvcempty').hidden=mx>0;
+var total=Math.round(s.total/g);count('tvtot',total);count('tvhour',Math.round(s.hour/g));
+$('tvsince').textContent=s.first?'seit '+hhmm(s.first)+' Uhr':'';
+if(lastTotal>=0&&total>lastTotal){var e=$('tvt2');e.className='tvtile t2';void e.offsetWidth;e.className='tvtile t2 pop'}
+lastTotal=total;
+var eta='';if(warnOK&&s.win>=900000&&s.hour>.3&&target>.2){var ms=target/(s.hour/s.win);if(ms<864e5)eta='Fass leer ca. '+hhmm(t+ms)+' Uhr'}
+$('tveta').textContent=eta;fitNums()}
+function flush(){if(demo||!cfg)return;for(var x in dirty)(function(k){var r=hist[k];delete dirty[k];if(!r)return;
+fetch(base()+'/hist/b'+k+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)})
+.then(function(q){if(!q.ok)throw 0}).catch(function(){dirty[k]=1})})(x)}
+function loadHist(){if(demo){demoHist();return}if(!cfg)return;
+fetch(base()+'/hist.json?orderBy=%22%24key%22&startAt=%22b'+(bk(Date.now())-72)+'%22',{cache:'no-store'})
+.then(function(r){return r.ok?r.json():null}).then(function(o){if(!o||typeof o!=='object')return;
+for(var key in o){var k=+String(key).slice(1),r=o[key];if(!k||!r||typeof r.l!=='number')continue;
+if(!hist[k])hist[k]={l:r.l,k:r.k};if(r.e)hist[k].e=1;if(typeof r.h==='number'&&hist[k].h==null)hist[k].h=r.h;if(typeof r.p==='number'&&hist[k].p==null)hist[k].p=r.p;if(r.a>0&&!(hist[k].a>=r.a))hist[k].a=r.a}
+stats()}).catch(function(){})}
+// Eintraege, die aelter als zwei Tage sind, aus der Datenbank entfernen
+function tidy(){if(demo||!cfg)return;var cut='b'+(bk(Date.now())-288);
+fetch(base()+'/hist.json?shallow=true',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(o){var p={},n=0;
+for(var key in o||{})if(/^b\d+$/.test(key)&&key.length<=cut.length&&(key.length<cut.length||key<cut)&&n<400){p[key]=null;n++}
+if(n)fetch(base()+'/hist.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){})}).catch(function(){})}
+setInterval(flush,20000);setInterval(loadHist,600000);setTimeout(tidy,30000);
+
+// ---------- Vorfuehrung ohne Waage: Adresse mit ?demo=1 ----------
+var DM={l:12,ph:0,n:0};
+function demoHist(){var kn=bk(now()),L=DM.l,old=false,i,r;
+for(i=1;i<=NB+3;i++){r={l:Math.round(L*10)/10,k:1};hist[kn-i]=r;L+=.5*Math.round(1+Math.random()*6);
+if(!old&&L>=30){r.e=1;old=true;L=1.5}}}
+var DS={mode:0,gt:5,gc:11,it:0,vol:6,beep:true,bright:10,glass:.5,t:[7,9.6,12.5],zk:.6,pin:'1923',coupler:true,n:0};
+function demoW(){return DS.mode===1?DS.gt+DS.gc*.64:[0,2.35,2.35,3.15,3.15,86.5,86.5,.42][Math.floor(DS.n/3)%8]}
+function demoStatus(){var e=false,w;
+if(DS.mode){DS.n++}
+else if(DM.ph===0){DM.l=Math.max(0,DM.l-.5);if(DM.l<=0){DM.ph=1;DM.n=0}}
+else if(DM.ph===1){if(++DM.n>4){DM.ph=2;DM.n=0}}
+else{e=true;if(++DM.n>3){DM.ph=0;DM.l=30}}
+w=DS.mode?demoW():(e?0:DS.t[1]+(DS.coupler?DS.zk:0)+DM.l*1.01);
+return{keg:1,capacity_l:30,liters:e?0:DM.l,percent:Math.round((e?0:DM.l)/30*100),gross_kg:w,tare_kg:DS.t[1],glass_l:DS.glass,low_percent:15,
+coupler:DS.coupler,coupler_kg:DS.zk,calibrated:true,sensor:true,empty:e,ts:Date.now(),
+fw:5,mode:DS.mode,w:w,gas:DS.mode===1,gas_kg:DS.mode===1?Math.max(0,w-DS.gt):0,gas_tare:DS.gt,gas_cap:DS.gc,item_kg:DS.mode===2?w-DS.it:0,item_tare:DS.mode===2?DS.it:0,
+t20:DS.t[0],t30:DS.t[1],t50:DS.t[2],bright:DS.bright,beep:DS.beep,vol:DS.vol,beep_l:2.5,cal_kg:10}}
+// In der Vorfuehrung antwortet eine nachgebildete Waage (PIN 1923)
+function demoSend(c,o,needPin){return new Promise(function(res,rej){setTimeout(function(){
+if(needPin&&pin!==DS.pin){rej('pin');return}
+if(c==='mode'){DS.mode=o.v;DS.it=0;DS.n=0;if(o.v===1){DS.gt=o.v2;DS.gc=o.v3}}
+else if(c==='itare')DS.it=o.v?demoW():0;
+else if(c==='coupler')DS.coupler=!!o.v;
+else if(c==='vol')DS.vol=o.v;else if(c==='beep')DS.beep=!!o.v;else if(c==='bright')DS.bright=o.v;else if(c==='glass')DS.glass=o.v;
+else if(c==='tare')DS.t[o.v]=9.62;else if(c==='zapf2')DS.zk=.58;else if(c==='pin')DS.pin=o.s;
+var j=demoStatus();got(j);res(j)},600)})}
+
+// ---------- Designs ----------
+var TKEY='bierwaage.design',theme='verein',tvTheme='verein',pickT=0;
+var MUG='<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M8 18h26v30a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5z" fill="#ffc531"/><path d="M34 24h5a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6h-5" fill="none" stroke="#fff" stroke-width="4"/><path d="M6 18a6 6 0 0 1 4-10 7 7 0 0 1 12-3 6 6 0 0 1 10 3 5 5 0 0 1 4 10z" fill="#fff"/><path d="M15 27v17M21 27v17M27 27v17" stroke="#fff" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round"/></svg>';
+// Fuer das Design "vtk": liegt neben dieser Datei ein Bild vtk-logo.png, wird es als Logo gezeigt
+var THEMES={verein:{title:'Sportverein Blau Weiß Etteln 1923 e.V.',pill:'Bierwaage',logo:'<img src="logo.png" alt="Wappen SV Blau Weiß Etteln">',tc:'#20317f'},
+party:{title:'Bierwaage',pill:'Prost!',logo:MUG,tc:'#3a0d6e'},
+vtk:{title:'Veranstaltungstechnik Koch',pill:'Bierwaage',logo:'<img src="vtk-logo.png" alt="" onerror="this.parentNode.removeChild(this)">',tc:'#06070a'}};
+function setTheme(t){theme=THEMES[t]?t:'verein';var T=THEMES[theme],h='',i;
+document.documentElement.setAttribute('data-theme',theme);$('tc').setAttribute('content',T.tc);
+$('brand').innerHTML='<span class="chip">'+T.logo+'</span><div class="club"><b>'+T.title+'</b><span class="pill">'+T.pill+'</span></div>';
+$('tvhead').innerHTML=T.logo+'<div class="tvclub"><b>'+T.title+'</b><span>'+T.pill+'</span></div>';
+if(theme==='party'){var col=['#ff2d95','#22e0ff','#ffd60a','#9dff3c','#fff'];h='<i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>';
+for(i=0;i<16;i++)h+='<i class="cf" style="left:'+(3+i*6.1)+'%;background:'+col[i%5]+';animation-duration:'+(6+(i*7)%5)+'s;animation-delay:-'+((i*13)%9)+'s"></i>'}
+else if(theme==='vtk'){h='<i class="truss"></i>';for(i=0;i<5;i++)h+='<i class="beam'+(i%2?' c':'')+'" style="left:'+(10+i*20)+'%;animation-delay:-'+(i*2.3)+'s"></i>'}
+$('fx').innerHTML=h;setTimeout(tvFit,60)}
+function openPick(auto){var saved=null,ps=document.querySelectorAll('.pk'),i,cur=null,left=8;
+try{saved=localStorage.getItem(TKEY)}catch(e){}
+for(i=0;i<ps.length;i++){ps[i].className='pk';ps[i].lastChild.style.width='0';if(ps[i].getAttribute('data-t')===saved)cur=ps[i]}
+$('dsgn').hidden=false;dsFit();clearInterval(pickT);
+$('dsgnp').textContent='Die Auswahl gilt für dieses Gerät. Du kannst sie später über „Design“ ändern.';
+try{(cur||ps[0]).focus()}catch(e){}
+if(auto&&cur){cur.className='pk cur';
+var say=function(){$('dsgnp').textContent='Startet in '+left+' Sekunden mit dem zuletzt gewählten Design. Tippe auf ein anderes, um zu wechseln.';cur.lastChild.style.width=((8-left+1)/8*100)+'%'};
+setTimeout(say,30);pickT=setInterval(function(){if(--left<=0){choose(saved)}else say()},1000)}}
+function choose(t){clearInterval(pickT);try{localStorage.setItem(TKEY,t)}catch(e){}
+var first=!$('dsgn').hidden;tvTheme=THEMES[t]?t:'verein';setTheme(tvOn()?tvTheme:'verein');$('dsgn').hidden=true;tvPoke();
+if(theme==='verein'&&first)splash()}
+function splash(){var s=$('splash');s.className='splash';s.hidden=false;setTimeout(function(){s.className='splash out'},3600);setTimeout(function(){s.hidden=true},4300)}
+(function(){var ps=document.querySelectorAll('.pk'),i;for(i=0;i<ps.length;i++)ps[i].onclick=function(){choose(this.getAttribute('data-t'))};
+$('dsgn').addEventListener('keydown',function(e){var k=e.keyCode,a=document.activeElement,n=-1,j;
+for(j=0;j<ps.length;j++)if(ps[j]===a)n=j;
+if(k===37||k===38)n=(n<=0?ps.length:n)-1;else if(k===39||k===40)n=(n+1)%ps.length;else return;
+e.preventDefault();ps[n].focus()})})();
+function dsFit(){$('dsgn').style.fontSize=Math.max(15,Math.min(window.innerWidth/70,window.innerHeight/36))+'px'}
+$('tvdsg').onclick=function(){openPick(false)};
+
+// ---------- TV-Ansicht ----------
+// vmode: 'tv' / 'normal' = von Hand gewaehlt, sonst entscheidet die Geraete-Erkennung. ?tv=1 in der Adresse erzwingt sie.
+var VKEY='bierwaage.view',vmode=null,shiftN=0,btnT=0,U=12,fitKey='';
+try{vmode=localStorage.getItem(VKEY)}catch(e){}
+if(/[?&]tv=1(&|$)/.test(Q))vmode='tv';
+var isTV=/SMART-?TV|Tizen|Web0S|webOS|NetCast|HbbTV|BRAVIA|Android ?TV|Google ?TV|\bAFT[A-Z0-9]+\b|CrKey|AppleTV|VIERA|Roku|\bTV\b/i.test(navigator.userAgent||'');
+function tvWanted(){return(!!cfg||demo)&&(vmode==='tv'||(vmode!=='normal'&&isTV))}
+function tvOn(){return document.body.className==='tv'}
+function tvFit(){U=Math.min(window.innerWidth/160,window.innerHeight/90);$('tv').style.fontSize=U+'px';
+$('tvbtn').style.fontSize=Math.max(13,2.1*U)+'px';$('tvon').hidden=window.innerWidth<900;dsFit();fitKey='';fitNums()}
+// Zahlen, die in der gewaehlten Schrift zu breit wuerden, verkleinern
+function fitNums(){if(!tvOn())return;var key=$('tvlit').textContent.length+'|'+$('tvgl').textContent.length+'|'+$('tvtot').textContent.length+'|'+$('tvhour').textContent.length+'|'+theme;
+if(key===fitKey)return;fitKey=key;var w=$('tvlitw'),ids=['tvgl','tvtot','tvhour'],i,e;
+w.style.fontSize='';if(w.offsetWidth>52*U)w.style.fontSize=(52*U/w.offsetWidth).toFixed(3)+'em';
+for(i=0;i<3;i++){e=$(ids[i]);e.style.fontSize='';if(e.scrollWidth>e.clientWidth+1)e.style.fontSize=(7.4*e.clientWidth/e.scrollWidth).toFixed(3)+'em'}}
+function tvClock(){$('tvtime').textContent=hhmm(now())}
+function tvWake(){try{if(navigator.wakeLock&&tvOn()&&!document.hidden)navigator.wakeLock.request('screen').catch(function(){})}catch(e){}}
+// Das Handy bleibt immer im Vereins-Design; die drei Designs gibt es nur in der TV-Ansicht
+function tvApply(){var on=tvWanted();document.body.className=on?'tv':'';if(theme!==(on?tvTheme:'verein'))setTheme(on?tvTheme:'verein');if(on)closeSheet();tvFit();tvClock();tvWake();tvPoke()}
+function tvSet(m){vmode=m;try{localStorage.setItem(VKEY,m)}catch(e){}
+if(m==='normal'){try{if(/[?&]tv=1(&|$)/.test(location.search))history.replaceState(null,'',location.pathname+location.search.replace(/([?&])tv=1(&|$)/,'$1').replace(/[?&]$/,'')+location.hash)}catch(e){}tvFull(false)}
+tvApply()}
+function tvFull(on){var d=document,e=d.documentElement;try{
+if(on){(e.requestFullscreen||e.webkitRequestFullscreen).call(e)}
+else if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}}catch(x){}}
+// Die Knoepfe der TV-Ansicht erscheinen bei Maus, Beruehrung oder Tastendruck und verschwinden nach 7 Sekunden
+function tvPoke(e){if(!tvOn())return;var w=$('tvbtnw'),was=w.className!=='tvbtn';w.className='tvbtn show';clearTimeout(btnT);
+btnT=setTimeout(function(){w.className='tvbtn';try{if(w.contains(document.activeElement))document.activeElement.blur()}catch(x){}},7000);
+if(e&&e.type==='keydown'&&!was&&$('dsgn').hidden){try{$('tvfull').hidden?$('tvdsg').focus():$('tvfull').focus()}catch(x){}}}
+['mousemove','mousedown','touchstart','keydown'].forEach(function(n){document.addEventListener(n,tvPoke)});
+$('tvon').onclick=function(){tvSet('tv');if(tvOn())openPick(true)};
+$('tvoff').onclick=function(){tvSet('normal')};
+$('tvfull').onclick=function(){tvFull(!(document.fullscreenElement||document.webkitFullscreenElement))};
+if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))$('tvfull').hidden=true;
+window.addEventListener('resize',tvFit);
+setInterval(tvClock,demo?500:5000);
+// Schutz vor Einbrennen: das Bild wandert jede Minute um ein paar Pixel
+setInterval(function(){var o=[[0,0],[.5,.3],[0,.6],[-.5,.3],[0,0],[.5,-.3],[0,-.6],[-.5,-.3]][++shiftN%8],t='translate('+o[0]+'em,'+o[1]+'em)',s=$('tvin').style;s.webkitTransform=t;s.transform=t},60000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden){loop();tvWake()}else flush()});
+try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){fitKey='';fitNums()})}catch(e){}
+
+// ---------- Start ----------
+(function(){var m=/[?&]design=(verein|party|vtk)(&|$)/.exec(Q),saved=null;
+try{saved=localStorage.getItem(TKEY)}catch(e){}
+tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');setTheme('verein');view();stats();
+if(tvOn()){if(!m)openPick(true)}else splash()})();
 </script>
 </body>
 </html>
