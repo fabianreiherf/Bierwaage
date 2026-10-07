@@ -334,6 +334,29 @@ font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montser
 .gl7{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 12px}
 .gl7 button{min-height:48px;border-radius:14px;border:0;background:#f0f2fa;color:#141a3a;font:inherit;font-size:1rem;font-weight:700;cursor:pointer}
 .gl7 button.on{background:#20317f;color:#fff}
+
+/* ---------- Etappe 1: Zugang und Personen ---------- */
+.gate{gap:12px;text-align:center}
+.gate h2{margin:0;font-size:1.2rem;font-weight:700}
+.gate p{margin:0;font-size:.95rem;line-height:1.45;color:var(--muted)}
+.gate .gcode{font-size:2.6rem;font-weight:800;letter-spacing:.12em;line-height:1.2;padding:10px 0;font-variant-numeric:tabular-nums}
+.gate .gsub{font-size:.84rem}
+.who{text-align:center;font-size:.86rem;color:rgba(255,255,255,.82)}
+.who b{color:#fff;font-weight:700}
+.who button{margin-left:8px;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.14);color:#fff;font:inherit;font-size:.82rem;font-weight:700;cursor:pointer}
+.seg button:disabled{cursor:default}
+.zp:disabled{cursor:default;opacity:1}
+.srow.prow{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;min-height:58px}
+.prow b{font-weight:700;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prow span{font-size:.82rem;text-align:left}
+.sbtn.warn{background:#a3342a}
+.s3{display:flex;gap:6px;margin:0 0 6px}
+.s3 button{flex:1;min-height:46px;padding:0 6px;border:0;border-radius:12px;background:#f0f2fa;color:#141a3a;font:inherit;font-size:.95rem;font-weight:700;cursor:pointer}
+.s3 button.on{background:#20317f;color:#fff}
+.qr{width:210px;max-width:70%;margin:0 auto 12px;padding:6px;border-radius:14px;background:#fff;border:1.5px solid #d5daee}
+.qr svg{display:block;width:100%;height:auto}
+.sin.lnk{font-size:.82rem;font-weight:600;min-height:46px}
+span.red{color:#a3342a}
 </style>
 </head>
 <body>
@@ -357,13 +380,12 @@ font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montser
 
 <div class="wrap">
   <header class="brand"><div class="brand" id="brand" style="flex:1;min-width:0"></div><button type="button" class="hbtn" id="gear" aria-label="Einstellungen" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.5 7.5 0 0 0-1.7 1l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.5 7.5 0 0 0 1.7-1l2.4 1 2-3.4zM13 15.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4z" transform="translate(-1 0)"/></svg></button></header>
-  <section class="card setup in" id="setup" hidden>
-    <h2>Mit der Waage verbinden</h2>
-    <p>Trag die Adresse der Datenbank und den Code ein, die auch in der Waage stehen. Beides bleibt auf diesem Gerät gespeichert.</p>
-    <label>Adresse der Datenbank<input id="su" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://…firebasedatabase.app"></label>
-    <label>Code<input id="sc" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="z. B. etteln-fass-7391"></label>
-    <div class="msg" id="smsg" hidden></div>
-    <button type="button" class="btn" id="sgo">Verbinden</button>
+  <section class="card gate in" id="gate" hidden>
+    <h2 id="gat"></h2>
+    <p id="gap"></p>
+    <div class="gcode" id="gacode" hidden></div>
+    <p class="gsub" id="gasub" hidden></p>
+    <button type="button" class="btn" id="gabtn" hidden></button>
   </section>
   <div id="app">
   <div class="seg in" id="segw" style="animation-delay:.05s">
@@ -371,7 +393,7 @@ font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montser
     <button type="button" id="k1" aria-pressed="false" onclick="pick(1)">30-L-Fass</button>
     <button type="button" id="k2" aria-pressed="false" onclick="pick(2)">50-L-Fass</button>
   </div>
-  <div class="note" id="nodata" hidden>Von der Waage sind noch keine Daten da. Ist sie eingeschaltet, im WLAN und sind Adresse und Code im Programm eingetragen?</div>
+  <div class="note" id="nodata" hidden>Von der Waage sind noch keine Daten da. Ist sie eingeschaltet, im WLAN und sind Adresse, Code, Schlüssel und Waagen-Wort im Programm eingetragen?</div>
   <div class="note" id="gasnote" hidden></div>
   <div class="note" id="nocal" hidden>Die Waage ist noch nicht kalibriert. Bitte am Display unter „Einstellungen“ kalibrieren.</div>
   <section class="card in" id="vkeg" style="animation-delay:.15s">
@@ -437,9 +459,9 @@ font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montser
     <button type="button" class="btn" id="iback">Zurück zum Fass</button>
   </section>
   <div class="warn" id="warn" hidden>Fass fast leer – Nachschub bestellen!</div>
+  <div class="who" id="who" hidden></div>
   <div class="foot">
-    <button type="button" id="share">Zugang teilen</button>
-    <button type="button" id="change">Verbindung ändern</button>
+    <button type="button" id="pers" hidden>Personen</button>
     <button type="button" id="tvon">TV-Ansicht</button>
   </div>
   </div>
@@ -499,6 +521,7 @@ font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montser
  </div>
 </div>
 
+<script src="konfig.js"></script>
 <script>
 var $=function(i){return document.getElementById(i)},Q=location.search||'';
 var demo=/[?&]demo=1(&|$)/.test(Q),T0=Date.now();
@@ -529,7 +552,7 @@ function state(t,ok){$('dot').className=$('tvdot').className=$('gdot').className
 // ---------- Handy: Fass, Gasflasche oder Artikel, je nachdem was die Waage gerade tut ----------
 // Die neuen Knoepfe gibt es erst, wenn das Programm der Waage sie versteht (fw 5 oder neuer).
 function modeView(j){NEW=j.fw>=5;var m=NEW?(j.mode||0):0;
-$('gear').hidden=$('weigh').hidden=$('zpill').hidden=!NEW;
+$('zpill').hidden=!NEW;$('gear').hidden=!NEW||!can(3);$('weigh').hidden=!NEW||!can(2);
 $('segw').hidden=$('vkeg').hidden=m!==0;$('vgas').hidden=m!==1;$('vitem').hidden=m!==2;
 if(NEW){$('zpill').textContent=j.coupler?'mit Zapfkopf':'ohne Zapfkopf';$('zpill').className=j.coupler?'zp':'zp off'}
 if(m===1){var gp=Math.max(0,Math.min(100,j.gas_kg/(j.gas_cap||1)*100));
@@ -561,22 +584,80 @@ a.hidden=!a.textContent;c.hidden=!c.textContent;
 g.style.height=h+'em';g.style.animationDuration=(2.4-1.3*k).toFixed(2)+'s';g.className='tvgrow on'}
 
 // ---------- Zugang ----------
-var KEY='bierwaage.sync',cfg=null,pend=-1,pendT=0,timer=0,waiting=null,tickFn=null,pin=null;
-try{cfg=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
-if(!(cfg&&typeof cfg.u==='string'&&typeof cfg.c==='string'))cfg=null;
-function enc(c){return '#sync='+encodeURIComponent(btoa(JSON.stringify({u:c.u,c:c.c})))}
-// Einrichtungs-Link: die Zugangsdaten stehen hinter dem # und gehen nicht an den Server
-(function(){var m=/[#&]sync=([^&]+)/.exec(location.hash||'');if(!m)return;
-try{var c=JSON.parse(atob(decodeURIComponent(m[1])));if(c&&typeof c.u==='string'&&typeof c.c==='string'){cfg={u:c.u,c:c.c};keep()}}catch(e){}})();
-function keep(){try{localStorage.setItem(KEY,JSON.stringify(cfg))}catch(e){}}
-if(demo)cfg=null;
-function base(c){c=c||cfg;return c.u.replace(/\/+$/,'')+'/bierwaage/'+encodeURIComponent(c.c)}
-function get(c,name){return fetch(base(c)+'/'+name+'.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
-function fail(e){var s=e&&e.message;state(s==='401'||s==='403'?'Zugriff verweigert':'Keine Verbindung',false)}
+// Die Zugangsdaten stehen in der Datei konfig.js neben dieser Seite. Jedes Geraet meldet sich unsichtbar bei Firebase an
+// (ohne Namen, ohne Passwort) und bekommt eine eigene Kennung. Was es darf, legt der Admin unter "Personen" fest.
+var KONF=window.BW_KONFIG||null,cfg=null,pend=-1,pendT=0,timer=0,waiting=null,tickFn=null,pin=null;
+var IDT=(KONF&&KONF.idt)||'https://identitytoolkit.googleapis.com/v1/accounts:signUp',STS=(KONF&&KONF.sts)||'https://securetoken.googleapis.com/v1/token';
+function konfOk(){return !!KONF&&/^https:\/\/[^\s\/]+|^http:\/\/(127\.0\.0\.1|localhost)[:\/]/.test(KONF.url||'')&&!/DEIN-PROJEKT/.test(KONF.url)&&!/^HIER-/.test(KONF.key||'')&&KONF.code!=='dein-code'
+&&typeof KONF.key==='string'&&KONF.key.length>=20&&typeof KONF.code==='string'&&KONF.code.length>=4&&!/[.#$\[\]\/\s]/.test(KONF.code)}
+function base(){return KONF.url.replace(/\/+$/,'')+'/bierwaage/'+encodeURIComponent(KONF.code)}
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function rnd(n,abc){var a=[],s='',i;try{a=new Uint8Array(n);(window.crypto||window.msCrypto).getRandomValues(a)}catch(e){a=[];for(i=0;i<n;i++)a.push(Math.floor(Math.random()*256))}
+for(i=0;i<n;i++)s+=abc.charAt(a[i]%abc.length);return s}
+
+// ---------- Anmeldung des Geraets ----------
+var AKEY='bierwaage.geraet',AU={uid:null,rt:null,tok:null,exp:0,at:0},auP=null,noStore=false;
+try{var _a=JSON.parse(localStorage.getItem(AKEY)||'null');if(_a&&typeof _a.rt==='string'&&typeof _a.uid==='string'){AU.uid=_a.uid;AU.rt=_a.rt}}catch(e){noStore=true}
+function auKeep(){try{localStorage.setItem(AKEY,JSON.stringify({uid:AU.uid,rt:AU.rt}))}catch(e){noStore=true}}
+function auPost(u,body,type){return fetch(u+'?key='+encodeURIComponent(KONF.key),{method:'POST',headers:{'Content-Type':type},body:body}).then(function(r){
+return r.json().then(function(j){return j},function(){return null}).then(function(j){if(!r.ok||!j)throw new Error('auth:'+((j&&j.error&&j.error.message)||r.status));return j})})}
+function signUp(){return auPost(IDT,'{"returnSecureToken":true}','application/json').then(function(j){AU.tok=j.idToken;AU.rt=j.refreshToken;AU.uid=j.localId;AU.exp=Date.now()+(+j.expiresIn||3600)*1000})}
+// Liefert eine gueltige Anmeldung; sie gilt eine Stunde und wird rechtzeitig erneuert
+function token(force){if(!force&&AU.tok&&Date.now()<AU.exp-300000)return Promise.resolve(AU.tok);
+if(auP)return auP;
+var p=AU.rt?auPost(STS,'grant_type=refresh_token&refresh_token='+encodeURIComponent(AU.rt),'application/x-www-form-urlencoded').then(function(j){
+AU.tok=j.id_token;if(j.refresh_token)AU.rt=j.refresh_token;if(j.user_id)AU.uid=j.user_id;AU.exp=Date.now()+(+j.expires_in||3600)*1000},
+function(e){if(/TOKEN_EXPIRED|USER_NOT_FOUND|USER_DISABLED|INVALID_REFRESH_TOKEN|INVALID_GRANT/.test(e.message)){AU.rt=AU.tok=null;return signUp()}throw e}):signUp();
+auP=p.then(function(){AU.at=Date.now();auKeep();auP=null;return AU.tok},function(e){auP=null;throw e});return auP}
+// Anfragen an die Datenbank. Meldet sie "abgelaufen", wird einmal mit frischer Anmeldung wiederholt.
+function dbu(p,q){return base()+(p?'/'+p:'')+'.json?'+(q?q+'&':'')+'auth='+encodeURIComponent(AU.tok)}
+function dbf(p,opt,q){opt=opt||{cache:'no-store'};
+return token().then(function(){return fetch(dbu(p,q),opt)}).then(function(r){
+if(r.status!==401||Date.now()-AU.at<60000)return r;
+return token(true).then(function(){return fetch(dbu(p,q),opt)})})}
+// Fehler als Text: '401' = die Datenbank erlaubt das diesem Geraet nicht
+function dok(r){if(!r.ok)throw new Error(r.status===403?401:r.status);return r}
+function dget(p,q){return dbf(p,null,q).then(dok).then(function(r){return r.json()})}
+function dput(p,v,m){return dbf(p,{method:m||'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(v)}).then(dok).then(function(r){return r.json()})}
+function ddel(p){return dbf(p,{method:'DELETE'}).then(dok)}
+
+// ---------- Wer bin ich, was darf ich ----------
+// ME: {owner, pid, name, role (1 Zuschauer, 2 Helfer, 3 Admin), view (1 Handy, 2 TV, 3 beides), multi}; SIM: Vorschau "wie diese Person"
+var ME=null,SIM=null,RN=['','Zuschauer','Helfer','Admin'],VN=['','Handy','TV','Handy und TV'];
+function can(n){var m=SIM||ME;return demo||(!!m&&m.role>=n)}
+function viewOf(){var m=SIM||ME;return demo||!m?3:m.view}
+// Persoenlicher Link (#k=Person.Schluessel) oder Admin-Link (#setup=Wort). Er bleibt in der Adresse stehen,
+// damit er auch gilt, wenn die Seite auf den Home-Bildschirm gelegt wird.
+var LINK=(function(){var h=location.hash||'',m=/[#&]setup=([A-Za-z0-9_-]{8,64})/.exec(h);if(m)return{w:m[1]};
+m=/[#&]k=([a-z0-9]{2,20})\.([A-Za-z0-9]{16,40})/.exec(h);return m?{p:m[1],k:m[2]}:null})();
+function devName(){var u=navigator.userAgent||'';return isTV?'Fernseher':/iPhone/.test(u)?'iPhone':/iPad/.test(u)?'iPad':/Android/.test(u)?'Android-Gerät':/Windows/.test(u)?'Windows-PC':/Macintosh/.test(u)?'Mac':'Gerät'}
+function memberCheck(first){var uid=AU.uid,dev=null,L=first&&LINK&&LINK.p?LINK:null,badLink=false;
+return dget('dev/'+uid).then(function(d){dev=d&&typeof d.p==='string'?d:null;
+if(!L||(dev&&dev.p===L.p&&dev.k===L.k))return;
+// Link einloesen: dieses Geraet gehoert ab jetzt zu der Person aus dem Link
+return dput('dev/'+uid,{p:L.p,k:L.k,t:{'.sv':'timestamp'},a:devName()})
+.then(function(){dev={p:L.p,k:L.k}},function(e){if(e.message!=='401')throw e;badLink=true})})
+.then(function(){if(!dev)return{gate:'pair',note:badLink?'link':(first&&LINK&&LINK.w?'setup':'')};
+// Die eigene Person ist nur mit dem aktuellen Schluessel lesbar; "nicht erlaubt" heisst: der Link wurde erneuert
+return dget('users/'+dev.p).then(null,function(e){if(e.message!=='401')throw e;return null}).then(function(u){
+if(!u||u.k!==dev.k)return ddel('dev/'+uid).catch(function(){}).then(function(){return{gate:'pair',note:badLink?'link':'gone'}});
+if(u.x===true)return{gate:'blocked'};
+var me={owner:false,pid:dev.p,name:u.n,role:u.r,view:u.v,multi:u.m===true};
+if(me.multi)return{me:me};
+// nur ein Geraet gleichzeitig: wer den Link neu oeffnet, uebernimmt
+return dget('one/'+dev.p).then(function(o){if(o===uid)return{me:me};
+if(o==null||L)return dput('one/'+dev.p,uid).then(function(){return{me:me}});
+return{gate:'moved',pid:dev.p}})})})}
+function whoami(first){var uid;
+return token().then(function(){uid=AU.uid;
+if(first&&LINK&&LINK.w)return dput('owners/'+uid,LINK.w).then(function(){},function(e){if(e.message!=='401')throw e})})
+.then(function(){return dget('owners/'+uid)})
+.then(function(o){if(o!=null)return{me:{owner:true,name:'Admin',role:3,view:3,multi:true}};return memberCheck(first)})}
+function fail(e){var s=e&&e.message;if(s==='401'||s==='403'){state('Zugriff verweigert',false);if(Date.now()-whoT>4000)recheck()}else state('Keine Verbindung',false)}
 function got(j){
 if(!j||typeof j.liters!=='number'){$('nodata').hidden=false;state('Keine Daten',false);warnOK=liveOK=false;grow();tvm('Von der Waage sind noch keine Daten da.',false,true);stats();return}
 $('nodata').hidden=true;S=j;
-if(waiting&&j.ack_id===waiting.id){var wq=waiting;waiting=null;if(!demo)fetch(base()+'/cmd.json',{method:'DELETE'}).catch(function(){});if(j.ack==='ok')wq.res(j);else wq.rej(j.ack)}
+if(waiting&&j.ack_id===waiting.id){var wq=waiting;waiting=null;if(!demo)ddel('cmd').catch(function(){});if(j.ack==='ok')wq.res(j);else wq.rej(j.ack)}
 if(pend>=0){if(j.keg===pend||Date.now()-pendT>12000)pend=-1;else j.keg=-1}
 show(j);if(tickFn)tickFn(j);
 if(pend>=0)for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',i===pend);
@@ -596,60 +677,98 @@ else if(j.empty)tvm('Kein Fass auf der Waage',false,false);
 else if(!$('warn').hidden&&Math.floor((j.liters+.02)/glass)>10)tvm('Fass fast leer – Nachschub bestellen!',true,false);
 else tvm('',false,false);
 stats()}
-function load(){if(document.hidden)return;if(demo){got(demoStatus());return}if(!cfg)return;get(cfg,'status').then(got).catch(fail)}
+function load(){if(document.hidden)return;if(demo){got(demoStatus());return}if(!cfg)return;dget('status').then(function(j){if(cfg)got(j)}).catch(fail)}
 // Abfrage-Takt: zuegig, solange ein Dialog offen ist, eine Antwort aussteht oder ein Produkt gewogen wird
 function fastUI(){return !$('ov').hidden||!!waiting||!!(S&&S.mode)}
 function loop(){clearTimeout(timer);timer=0;if(!(cfg||demo))return;load();
 if(waiting&&Date.now()-waiting.t>20000){var w=waiting;waiting=null;w.rej('timeout')}
 timer=setTimeout(loop,fastUI()?1000:(demo?2000:3000))}
-function pick(k){if(!cfg)return;pend=k;pendT=Date.now();
+function pick(k){if(!cfg||!can(2))return;pend=k;pendT=Date.now();
 for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',i===k);state('Stelle um …',true);
-fetch(base()+'/cmd.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:'k'+Date.now().toString(36),c:'keg',v:k,keg:k})})
-.then(function(r){if(!r.ok)throw new Error(r.status)}).catch(function(e){pend=-1;fail(e)})}
-function view(){var on=!!cfg||demo;$('setup').hidden=on;$('app').hidden=!on;$('share').hidden=$('change').hidden=demo;tvApply();
-if(on){try{if(cfg&&location.hash!==enc(cfg))history.replaceState(null,'',location.pathname+location.search+enc(cfg))}catch(e){}
-if(!timer)loadHist();loop()}
-else{$('su').value='';$('sc').value=''}}
-function smsg(t){$('smsg').textContent=t;$('smsg').hidden=!t}
-$('sgo').onclick=function(){var u=$('su').value.trim(),c=$('sc').value.trim();
-if(!/^https:\/\/[^\s\/]+/.test(u)){smsg('Die Adresse muss mit https:// beginnen.');return}
-if(c.length<4||/[.#$\[\]\/\s]/.test(c)){smsg('Der Code braucht mindestens 4 Zeichen, ohne Leerzeichen und ohne . # $ [ ] /');return}
-smsg('');var t={u:u,c:c};$('sgo').disabled=true;
-get(t,'status').then(function(){cfg=t;keep();view()}).catch(function(e){var s=e&&e.message;
-smsg(s==='401'||s==='403'?'Die Datenbank hat den Zugriff verweigert. Prüfe die Regeln in Firebase.':'Keine Verbindung möglich. Prüfe die Adresse und das Internet.')})
-.then(function(){$('sgo').disabled=false})};
-$('change').onclick=function(){cfg=null;S=null;hist={};dirty={};med=[];lastM=null;lastKeg=-1;clearTimeout(timer);timer=0;try{localStorage.removeItem(KEY);history.replaceState(null,'',location.pathname+location.search)}catch(e){}view()};
-$('share').onclick=function(){var url=location.href.split('#')[0]+enc(cfg),b=$('share'),o=b.textContent;
-function done(t){b.textContent=t;setTimeout(function(){b.textContent=o},2500)}
-if(navigator.share){navigator.share({title:'Bierwaage',url:url}).catch(function(){})}
-else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){done('Link kopiert')},function(){done('Kopieren nicht möglich')})}
-else done('Teilen nicht möglich')};
+dput('cmd',{id:'k'+Date.now().toString(36),c:'keg',v:k,keg:k,lvl:1}).catch(function(e){pend=-1;fail(e)})}
+function lockUI(){var ro=!can(2),i,ids=['k0','k1','k2','zpill','gt1','gt2','itare'];for(i=0;i<ids.length;i++)$(ids[i]).disabled=ro;$('gback').hidden=$('iback').hidden=ro}
+function foot(){var m=SIM||ME,w=$('who');
+if(demo||!m){w.hidden=true;$('pers').hidden=true;return}
+w.hidden=false;
+w.innerHTML=SIM?'Vorschau als <b>'+esc(SIM.name)+'</b> ('+RN[SIM.role]+', '+VN[SIM.view]+') <button type="button" id="simoff">Beenden</button>'
+:(ME.owner?'Du bist <b>Admin</b>':'Angemeldet als <b>'+esc(ME.name)+'</b> · '+RN[ME.role]);
+if(SIM)$('simoff').onclick=simEnd;
+$('pers').hidden=!!SIM||ME.role<3}
+function simEnd(){SIM=null;regate()}
+function regate(){foot();lockUI();if(S)modeView(S);tvApply()}
+function view(){var on=!!cfg||demo;$('gate').hidden=on||!gateKind;$('app').hidden=!on;foot();lockUI();tvApply();
+if(on){if(!timer)loadHist();loop()}}
+
+// ---------- Hinweis-Karte: noch kein Zugang ----------
+var gateKind='',gateArg=null,pairCode='',pairAt=0,pairUid='',whoT=0,whoBusy=false,firstDone=false,pickOK=true;
+function gateFit(){var w=document.querySelector('.wrap'),k=1;w.style.webkitTransform=w.style.transform='';w.style.transformOrigin='50% 0';
+if(gateKind&&!demo)k=Math.min(window.innerWidth/520,(window.innerHeight-24)/((w.offsetHeight||480)+24),2.4);
+if(k>1.2)w.style.webkitTransform=w.style.transform='scale('+k.toFixed(2)+')'}
+function pairStart(){if(!AU.uid)return;if(!pairCode)pairCode=rnd(6,'ABCDEFGHJKLMNPQRSTUVWXYZ23456789');
+if(pairUid===AU.uid&&Date.now()-pairAt<600000)return;
+dput('join/'+AU.uid,{c:pairCode,t:{'.sv':'timestamp'},a:devName()}).then(function(){pairUid=AU.uid;pairAt=Date.now()},function(){})}
+function gateShow(r){var k=r?r.gate:'',T,sub='',btn='',code='';gateKind=k;gateArg=r;$('gate').hidden=!k||demo;
+if(!k){gateFit();return}
+if(k==='load')T=['Verbinde …','Einen Moment.'];
+else if(k==='konf')T=['Einrichtung fehlt','Die Datei konfig.js fehlt noch oder ist nicht vollständig ausgefüllt. Sie gehört neben die Datei index.html und enthält die Adresse der Datenbank, den Web-API-Schlüssel und den Code.'];
+else if(k==='net'){T=['Keine Verbindung','Bitte das Internet prüfen. Es geht von selbst weiter, sobald die Verbindung wieder da ist.'];btn='Erneut versuchen'}
+else if(k==='auth'){var e=r.err||'';T=['Anmeldung nicht möglich',/API key/i.test(e)?'Der Web-API-Schlüssel in der Datei konfig.js stimmt nicht.'
+:/ADMIN_ONLY_OPERATION|OPERATION_NOT_ALLOWED/.test(e)?'In Firebase ist die anonyme Anmeldung noch nicht eingeschaltet (Authentication → Anmeldemethode → Anonym).'
+:/CONFIGURATION_NOT_FOUND/.test(e)?'In Firebase ist „Authentication“ noch nicht eingerichtet.'
+:'Firebase hat die Anmeldung abgelehnt.'];sub='Meldung von Firebase: '+e;btn='Erneut versuchen'}
+else if(k==='blocked')T=['Zugang gesperrt','Der Admin hat diesen Zugang gesperrt.'];
+else if(k==='moved'){T=['Auf einem anderen Gerät geöffnet','Dieser Zugang gilt immer nur für ein Gerät gleichzeitig. Er wurde zuletzt auf einem anderen Gerät geöffnet.'];btn='Hier weiter benutzen'}
+else{T=['Dieses Gerät ist noch nicht freigeschaltet',(r.note==='link'?'Dieser Link gilt nicht mehr. Bitte den Admin um einen neuen. ':r.note==='gone'?'Der bisherige Zugang gilt nicht mehr. ':r.note==='setup'?'Der Admin-Link stimmt nicht. Bitte prüfen, ob er vollständig ist. ':'')
++'Hast du einen persönlichen Link bekommen? Dann öffne ihn auf diesem Gerät. Sonst nenne dem Admin diesen Code:'];
+pairStart();code=pairCode.slice(0,3)+' '+pairCode.slice(3);
+sub='Der Admin tippt in der App auf „Personen“, wählt die Person und dann „Gerät per Code verbinden“. Danach geht es hier von selbst weiter.'
++(noStore?' Achtung: Dieser Browser merkt sich nichts (privater Modus?). Das Gerät müsste dann jedes Mal neu freigeschaltet werden.':'')}
+$('gat').textContent=T[0];$('gap').textContent=T[1];$('gacode').textContent=code;$('gacode').hidden=!code;
+$('gasub').textContent=sub;$('gasub').hidden=!sub;$('gabtn').textContent=btn;$('gabtn').hidden=!btn;$('app').hidden=true;gateFit()}
+$('gabtn').onclick=function(){if(gateKind==='moved'&&gateArg&&gateArg.pid){$('gabtn').disabled=true;
+dput('one/'+gateArg.pid,AU.uid).then(function(){},function(){}).then(function(){$('gabtn').disabled=false;whoT=0;recheck()})}
+else{whoT=0;recheck()}};
+function stopApp(){cfg=null;S=null;clearTimeout(timer);timer=0;waiting=null;closeSheet()}
+function access(r){firstDone=true;
+if(r.me){var was=!!cfg;ME=r.me;cfg=1;gateShow(null);
+if(!was){view();if(tvOn()&&pickOK){pickOK=false;openPick(true)}}else regate()}
+else{ME=null;SIM=null;if(cfg)stopApp();gateShow(r);view()}}
+// Zugang pruefen: beim Start, danach jede Minute; ohne Zugang alle paar Sekunden (damit es nach dem Freischalten gleich losgeht)
+function recheck(){if(demo||whoBusy||!konfOk())return;whoT=Date.now();whoBusy=true;
+whoami(!firstDone).then(function(r){whoBusy=false;access(r)},function(e){whoBusy=false;var s=(e&&e.message)||'';
+if(/^auth:/.test(s)){ME=null;SIM=null;if(cfg)stopApp();gateShow({gate:'auth',err:s.slice(5)});view()}
+else if(!cfg){gateShow({gate:'net'});view()}})}
+setInterval(function(){if(demo||document.hidden||!konfOk())return;
+if(Date.now()-whoT>=(cfg?60000:gateKind==='pair'||gateKind==='load'?4000:10000))recheck()},1000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&Date.now()-whoT>5000)recheck()});
+window.addEventListener('resize',gateFit);
+function boot(){if(!konfOk()){gateShow({gate:'konf'});view();return}gateShow({gate:'load'});view();recheck()}
 
 
 // ---------- Fernbedienung: Befehl an die Waage, Antwort kommt mit dem naechsten Stand zurueck ----------
-// Befehle fuer die Einstellungen tragen die PIN. Sie steht nur kurz in der Datenbank: nach der Antwort wird der Befehl geloescht.
+// Stufe (lvl) 1 = bedienen, 2 = Einstellungen. Stufe 2 nimmt die Datenbank nur von Admins an; die Waage (ab fw 6) fragt dann keine PIN mehr.
+// Eine aeltere Waage (fw 5) verlangt weiter die PIN; sie wird dann mitgeschickt.
 function send(c,o,needPin){o=o||{};if(demo)return demoSend(c,o,needPin);
 var id='c'+Date.now().toString(36)+Math.floor(Math.random()*1296).toString(36),b={id:id,c:c},k;
-for(k in o)b[k]=o[k];if(needPin)b.pin=pin||'';
+for(k in o)b[k]=o[k];b.lvl=needPin?2:1;if(needPin&&pin)b.pin=pin;
 return new Promise(function(res,rej){if(!cfg){rej('net');return}
-fetch(base()+'/cmd.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})
-.then(function(r){if(!r.ok)throw 0;waiting={id:id,res:res,rej:rej,t:Date.now()};loop()}).catch(function(){rej('net')})})}
+dput('cmd',b).then(function(){waiting={id:id,res:res,rej:rej,t:Date.now()};loop()},function(e){rej(e&&e.message==='401'?'deny':'net')})})}
 function errText(e){return({pin:'Die PIN ist falsch.',lock:'Zu viele falsche PINs. Die Waage nimmt 5 Minuten lang keine PIN vom Handy an.',
 cal:'Die Waage ist noch nicht kalibriert. Bitte zuerst „Kalibrieren“.',sensor:'Die Waage bekommt keine Messwerte. Bitte das Kabel zur Wägezelle prüfen.',
 low:'Das gemessene Gewicht passt nicht. Es wurde nichts gespeichert.',val:'Dieser Wert ist nicht möglich.',
 unk:'Die Waage kennt diesen Befehl nicht. Bitte das Programm der Waage aktualisieren.',
 timeout:'Die Waage antwortet nicht. Ist sie eingeschaltet und online? Am Display darf gerade kein Dialog offen sein.',
-net:'Keine Verbindung zur Datenbank. Bitte das Internet prüfen.'})[e]||'Das hat nicht geklappt.'}
+net:'Keine Verbindung zur Datenbank. Bitte das Internet prüfen.',deny:'Dafür hast du keine Berechtigung.'})[e]||'Das hat nicht geklappt.'}
 // Dialog-Rahmen
-var backFn=null;
-function sheet(title,html,back){$('ovt').textContent=title;$('ovc').innerHTML=html;$('ov').hidden=false;backFn=back||null;$('ovback').hidden=!back;
+var backFn=null,gen=0;
+function sheet(title,html,back){gen++;$('ovt').textContent=title;$('ovc').innerHTML=html;$('ov').hidden=false;backFn=back||null;$('ovback').hidden=!back;
 tickFn=null;note('','');busy(false);loop()}
-function closeSheet(){if($('ov').hidden)return;$('ov').hidden=true;$('ovc').innerHTML='';tickFn=null;backFn=null;pin=null}
+function closeSheet(){if($('ov').hidden)return;gen++;$('ov').hidden=true;$('ovc').innerHTML='';tickFn=null;backFn=null;pin=null}
 function note(err,ok){$('overr').textContent=err;$('overr').hidden=!err;$('ovok').textContent=ok;$('ovok').hidden=!ok}
 function busy(on){var e=$('ovc').querySelectorAll('button,input'),i;for(i=0;i<e.length;i++)e[i].disabled=on;$('ovwait').hidden=!on}
 // Befehl schicken und warten; danach weiter mit then(Stand). Fehler erscheinen im Dialog.
-function run(c,o,needPin,then){note('','');busy(true);send(c,o,needPin).then(function(j){busy(false);then(j)},function(e){busy(false);note(errText(e),'');
-if(needPin&&(e==='pin'||e==='lock'))pinDialog(errText(e))})}
+function run(c,o,needPin,then){note('','');busy(true);var g=gen;send(c,o,needPin).then(function(j){if(g!==gen)return;busy(false);then(j)},function(e){if(g!==gen)return;busy(false);note(errText(e),'');
+if(needPin&&(e==='pin'||e==='lock'))pinDialog(e==='pin'&&!pin?'Die Waage verlangt gerade noch die PIN. Kurz nach dem Umstellen der Regeln kann das bis zu 5 Minuten dauern.':errText(e))})}
 function num(id){var v=parseFloat(String($(id).value).replace(',','.'));return isFinite(v)?v:NaN}
 function on(id,fn){$(id).onclick=fn}
 $('ovx').onclick=closeSheet;
@@ -684,7 +803,8 @@ $('gin').onkeydown=function(e){if(e.keyCode===13)$('ggo').click()};
 try{$('gin').focus();$('gin').select()}catch(e){}}
 
 // ---------- Einstellungen (mit PIN) ----------
-on('gear',function(){pinDialog('')});
+// Admins brauchen am Handy keine PIN (ab fw 6 der Waage). In der Vorfuehrung und bei aelterer Waage bleibt die PIN-Abfrage.
+on('gear',function(){if(!demo&&S&&S.fw>=6)setHome('');else pinDialog('')});
 function pinDialog(err){sheet('Einstellungen','<p class="sp">Die Einstellungen sind mit der PIN der Waage geschützt.</p><label class="slab" for="pinin">PIN (4 Ziffern)</label>'
 +'<input class="sin" id="pinin" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><button type="button" class="sbtn" id="pingo">Öffnen</button>');
 if(err)note(err,'');
@@ -748,7 +868,172 @@ function pinFlow(){sheet('PIN ändern','<label class="slab" for="p1">Neue PIN (4
 +'<button type="button" class="sbtn" id="pgo">PIN speichern</button>',home);
 on('pgo',function(){var a=$('p1').value,b=$('p2').value;if(!/^\d{4}$/.test(a)){note('Die PIN hat genau 4 Ziffern.','');return}
 if(a!==b){note('Die beiden Eingaben sind verschieden.','');return}
-run('pin',{s:a},true,function(){pin=a;setHome('Die neue PIN gilt ab sofort, am Handy und am Display.')})})}
+run('pin',{s:a},true,function(){pin=a;setHome('Die neue PIN ist gespeichert. Sie gilt am Display der Waage.')})})}
+
+// ---------- Personen (nur Admin) ----------
+// users/<Person>: n Name, r Rolle, v Ansicht, m mehrere Geraete, k Schluessel des Links, x gesperrt
+// dev/<Geraet>: p Person, k Schluessel; one/<Person>: das eine aktive Geraet; join/<Geraet>: Code zum Koppeln
+var PP=null;
+function ppErr(e){busy(false);note(e&&e.message==='401'?'Dafür hast du keine Berechtigung.':'Keine Verbindung zur Datenbank. Bitte noch einmal versuchen.','')}
+function ppDevs(pid){var a=[],k;for(k in PP.d)if(PP.d[k]&&PP.d[k].p===pid)a.push(k);return a}
+function ppActive(pid){var u=PP.u[pid],a=ppDevs(pid),n=0,i;for(i=0;i<a.length;i++)if(PP.d[a[i]].k===u.k&&(u.m||PP.o[pid]===a[i]))n++;return n}
+function ppLoad(){return Promise.all([dget('users'),dget('dev'),dget('one')]).then(function(a){
+PP={u:a[0]||{},d:a[1]||{},o:a[2]||{}};
+// aufraeumen: Geraete und Plaetze von Personen, die es nicht mehr gibt; dazu Kopplungs-Codes, die aelter als ein Tag sind
+var del={},n=0,k;
+dget('join','orderBy=%22t%22&endAt='+(Date.now()-864e5)+'&limitToFirst=100').then(function(j){var d={},m=0,x;for(x in j||{}){d['join/'+x]=null;m++}if(m)dput('',d,'PATCH').catch(function(){})},function(){});
+for(k in PP.o)if(!PP.u[k]){del['one/'+k]=null;delete PP.o[k];n++}
+for(k in PP.d)if(!PP.d[k]||!PP.u[PP.d[k].p]||PP.u[PP.d[k].p].k!==PP.d[k].k){del['dev/'+k]=null;delete PP.d[k];n++}
+if(n)dput('',del,'PATCH').catch(function(){});
+return PP})}
+function ppSub(pid){var u=PP.u[pid],n=ppActive(pid);
+return u.x===true?'gesperrt':RN[u.r]+' · '+VN[u.v]+' · '+(n?n+(n===1?' Gerät':' Geräte'):'noch kein Gerät')}
+function ppLink(pid){return location.href.split('#')[0].split('?')[0]+'#k='+pid+'.'+PP.u[pid].k}
+function ask(title,text,btn,fn,back){sheet(title,'<p class="sp">'+text+'</p><button type="button" class="sbtn warn" id="ay">'+btn+'</button><button type="button" class="sbtn sec" id="an">Abbrechen</button>',back);
+on('ay',fn);on('an',back)}
+function persList(ok){sheet('Personen','<p class="sp m">Lade …</p>');busy(true);var g=gen;
+ppLoad().then(function(){if(g!==gen)return;var ids=[],k,i,h;for(k in PP.u)ids.push(k);
+ids.sort(function(a,b){return String(PP.u[a].n).toLowerCase()<String(PP.u[b].n).toLowerCase()?-1:1});
+h='<div class="srow" style="cursor:default"><b>Du</b><span>'+(ME&&ME.owner?'Admin · dieses Gerät':esc(ME?ME.name:'')+' · Admin')+'</span></div>';
+for(i=0;i<ids.length;i++)h+='<button type="button" class="srow prow" data-p="'+esc(ids[i])+'"><b>'+esc(PP.u[ids[i]].n)+'</b><span'+(PP.u[ids[i]].x===true?' class="red"':'')+'>'+ppSub(ids[i])+'</span></button>';
+if(!ids.length)h+='<p class="sp m">Noch keine Personen. Leg die erste an und schick ihr den Link.</p>';
+h+='<button type="button" class="sbtn" id="padd">Person anlegen</button>';
+h+='<p class="sp m">Jede Person bekommt einen eigenen Link. Wer ihn öffnet, ist sofort angemeldet, ohne Passwort. Fernseher verbindest du bei der Person über „Gerät per Code verbinden“.</p>';
+sheet('Personen',h);if(ok)note('',ok);
+on('padd',function(){persForm(null)});
+var b=$('ovc').querySelectorAll('.prow');for(i=0;i<b.length;i++)b[i].onclick=function(){persView(this.getAttribute('data-p'),'')}},function(e){if(g===gen)ppErr(e)})}
+function persView(pid,ok){var u=PP.u[pid];if(!u){persList('');return}var n=ppActive(pid),h;
+h='<p class="sp"><b>'+RN[u.r]+'</b> · Ansicht: '+VN[u.v]+' · '+(u.m?'mehrere Geräte':'ein Gerät')+'<br>'
++(u.x===true?'<span class="red">Zugang gesperrt</span>':n?n+(n===1?' Gerät verbunden':' Geräte verbunden'):'Noch kein Gerät verbunden')+'</p>';
+h+=row('pl','Link teilen','')+row('pc','Gerät per Code verbinden','')+row('pe','Bearbeiten','');
+if(ppDevs(pid).length)h+=row('po','Geräte abmelden','');
+h+=row('pn','Neuen Link erstellen','')+row('px',u.x===true?'Entsperren':'Sperren','')+row('pv','Ansehen wie diese Person','')+row('pd','Entfernen','');
+sheet(u.n,h,function(){persList('')});if(ok)note('',ok);
+var back=function(){persView(pid,'')};
+on('pl',function(){persShare(pid,'')});on('pc',function(){persCode(pid)});on('pe',function(){persForm(pid)});
+if($('po'))on('po',function(){ask('Geräte abmelden?','Alle Geräte von '+esc(u.n)+' werden abgemeldet. Wer den Link noch hat, kann sich damit wieder anmelden. Zum endgültigen Aussperren nimm „Neuen Link erstellen“ oder „Sperren“.','Abmelden',function(){
+var o={},a=ppDevs(pid),i;o['one/'+pid]=null;for(i=0;i<a.length;i++)o['dev/'+a[i]]=null;ppRun(o,function(){persView(pid,'Die Geräte sind abgemeldet.')})},back)});
+on('pn',function(){ask('Neuen Link erstellen?','Der bisherige Link von '+esc(u.n)+' funktioniert danach nicht mehr, und alle Geräte werden abgemeldet. '+esc(u.n)+' braucht dann den neuen Link.','Neuer Link',function(){
+var o={},a=ppDevs(pid),i;o['users/'+pid+'/k']=rnd(22,ABC62);o['one/'+pid]=null;for(i=0;i<a.length;i++)o['dev/'+a[i]]=null;ppRun(o,function(){persShare(pid,'Der neue Link ist fertig. Der alte gilt nicht mehr.')})},back)});
+on('px',function(){var o={};o['users/'+pid+'/x']=!(u.x===true);ppRun(o,function(){persView(pid,u.x===true?'Der Zugang ist wieder frei.':'Der Zugang ist gesperrt. Das wirkt sofort.')})});
+on('pv',function(){SIM={name:u.n,role:u.r,view:u.v};closeSheet();regate();if(tvOn())tvPoke()});
+on('pd',function(){ask(u.n+' entfernen?','Der Link funktioniert dann nicht mehr, und alle Geräte werden abgemeldet.','Entfernen',function(){
+var o={},a=ppDevs(pid),i;o['users/'+pid]=null;o['one/'+pid]=null;for(i=0;i<a.length;i++)o['dev/'+a[i]]=null;ppRun(o,function(){persList(u.n+' ist entfernt.')})},back)})}
+// mehrere Aenderungen auf einmal speichern, danach neu laden
+var ABC62='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function ppRun(o,then){note('','');busy(true);var g=gen;dput('',o,'PATCH').then(ppLoad).then(function(){if(g!==gen)return;busy(false);then()},function(e){if(g===gen)ppErr(e)})}
+function seg(id,opts,val){var h='<div class="s3" id="'+id+'">',i;for(i=0;i<opts.length;i++)h+='<button type="button" data-v="'+opts[i][0]+'"'+(opts[i][0]===val?' class="on"':'')+'>'+opts[i][1]+'</button>';return h+'</div>'}
+function segBind(id,fn){var b=$(id).querySelectorAll('button'),i;for(i=0;i<b.length;i++)b[i].onclick=function(){for(var j=0;j<b.length;j++)b[j].className='';this.className='on';fn(+this.getAttribute('data-v'))}}
+function persForm(pid){var u=pid?PP.u[pid]:{n:'',r:1,v:1,m:false},f={r:u.r,v:u.v,m:u.m===true?1:0},
+HR=['','Sieht Füllstand und Statistik, kann aber nichts verstellen.','Kann zusätzlich Fass und Zapfkopf umstellen und Produkte wiegen.','Darf alles: Einstellungen der Waage ändern und Personen verwalten.'],
+HV=['','Die Seite zeigt nur die Handy-Ansicht.','Die Seite zeigt nur die große TV-Ansicht, zum Beispiel für einen Fernseher.','Handy-Ansicht, auf großen Bildschirmen wahlweise die TV-Ansicht.'],
+HM=['Der Link gilt immer nur auf einem Gerät gleichzeitig. Wird er auf einem zweiten geöffnet, ist das erste abgemeldet.','Der Link darf auf beliebig vielen Geräten offen sein, zum Beispiel für eine Gruppe.'];
+sheet(pid?'Bearbeiten':'Person anlegen','<label class="slab" for="fn">Name</label><input class="sin" id="fn" type="text" maxlength="40" autocomplete="off" value="'+esc(u.n)+'">'
++'<label class="slab">Darf</label>'+seg('fr',[[1,'Ansehen'],[2,'Bedienen'],[3,'Admin']],f.r)+'<p class="sp m" id="hr">'+HR[f.r]+'</p>'
++'<label class="slab">Ansicht</label>'+seg('fv',[[1,'Handy'],[2,'TV'],[3,'Beides']],f.v)+'<p class="sp m" id="hv">'+HV[f.v]+'</p>'
++'<label class="slab">Geräte</label>'+seg('fm',[[0,'Ein Gerät'],[1,'Mehrere']],f.m)+'<p class="sp m" id="hm">'+HM[f.m]+'</p>'
++'<button type="button" class="sbtn" id="fgo">'+(pid?'Speichern':'Anlegen und Link zeigen')+'</button>',pid?function(){persView(pid,'')}:function(){persList('')});
+segBind('fr',function(v){f.r=v;$('hr').textContent=HR[v]});segBind('fv',function(v){f.v=v;$('hv').textContent=HV[v]});segBind('fm',function(v){f.m=v;$('hm').textContent=HM[v]});
+on('fgo',function(){var n=$('fn').value.replace(/\s+/g,' ').replace(/^ | $/g,''),o={};
+if(!n){note('Bitte einen Namen eintragen.','');return}
+if(pid){o['users/'+pid+'/n']=n;o['users/'+pid+'/r']=f.r;o['users/'+pid+'/v']=f.v;o['users/'+pid+'/m']=!!f.m;ppRun(o,function(){persView(pid,'Gespeichert.')})}
+else{var id='p'+rnd(6,'abcdefghijklmnopqrstuvwxyz0123456789');o['users/'+id]={n:n,r:f.r,v:f.v,m:!!f.m,x:false,k:rnd(22,ABC62),t:{'.sv':'timestamp'}};
+ppRun(o,function(){persShare(id,n+' ist angelegt. Schick jetzt den Link.')})}});
+if(!pid)try{$('fn').focus()}catch(e){}}
+function persShare(pid,ok){var u=PP.u[pid],l=ppLink(pid);
+sheet('Link für '+u.n,'<p class="sp">Schick diesen Link an '+esc(u.n)+', zum Beispiel per WhatsApp. Wer ihn öffnet, ist sofort angemeldet. Oder lass den Code mit der Handy-Kamera scannen.</p>'
++'<div class="qr">'+qrSvg(l)+'</div><input class="sin lnk" id="plk" type="text" readonly value="'+esc(l)+'">'
++'<button type="button" class="sbtn" id="psh">Link teilen</button><button type="button" class="sbtn sec" id="pcp">Link kopieren</button>',function(){persView(pid,'')});
+if(ok)note('',ok);
+if(!navigator.share)$('psh').hidden=true;
+on('psh',function(){navigator.share({title:'Bierwaage',text:'Dein Zugang zur Bierwaage',url:l}).catch(function(){})});
+on('pcp',function(){var done=function(){note('','Der Link ist kopiert.')},e=$('plk');
+if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(l).then(done,function(){e.focus();e.select()});
+else{e.focus();e.select();try{if(document.execCommand('copy'))done()}catch(x){}}});
+$('plk').onclick=function(){this.select()}}
+function persCode(pid){var u=PP.u[pid];
+sheet('Gerät verbinden','<p class="sp">Öffne die Bierwaage auf dem Fernseher oder Gerät, das zu '+esc(u.n)+' gehören soll. Dort steht ein Code aus 6 Zeichen.</p>'
++'<label class="slab" for="pci">Code</label><input class="sin" id="pci" type="text" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false">'
++'<button type="button" class="sbtn" id="pcg">Verbinden</button>',function(){persView(pid,'')});
+var go=function(){var c=$('pci').value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+if(c.length!==6){note('Der Code hat 6 Zeichen.','');return}
+note('','');busy(true);var g=gen;dget('join','orderBy=%22c%22&equalTo=%22'+c+'%22').then(function(j){if(g!==gen)return;var id=null,k,now=Date.now(),o={},n=0;j=j||{};
+for(k in j)if(j[k]&&j[k].c===c&&now-j[k].t<2700000){id=k;n++}
+if(n>1){busy(false);note('Dieser Code ist gerade doppelt vergeben. Lade die Seite auf dem Gerät neu und nimm den neuen Code.','');return}
+if(!id){busy(false);note('Diesen Code gibt es nicht (mehr). Lade die Seite auf dem Gerät neu und nimm den Code, der dann dort steht.','');return}
+o['dev/'+id]={p:pid,k:u.k,t:{'.sv':'timestamp'},a:String(j[id].a||'Gerät').slice(0,40)};o['join/'+id]=null;if(!u.m)o['one/'+pid]=id;
+return dput('',o,'PATCH').then(ppLoad).then(function(){if(g!==gen)return;busy(false);persView(pid,'Das Gerät ist verbunden. Dort geht es in ein paar Sekunden von selbst weiter.')})}).catch(function(e){if(g===gen)ppErr(e)})};
+on('pcg',go);$('pci').onkeydown=function(e){if(e.keyCode===13)go()};try{$('pci').focus()}catch(e){}}
+$('pers').onclick=function(){persList('')};
+
+// ---------- QR-Code fuer die persoenlichen Links ----------
+// QR-Code (Byte-Modus, Fehlerkorrektur M, Versionen 1 bis 10). Liefert die Matrix als Zeilen aus 0/1.
+function qrMatrix(text){
+var CW=[0,16,28,44,64,86,108,124,154,182,216],EC=[0,10,16,26,18,24,16,18,22,22,26],NB=[0,1,1,1,2,2,4,4,4,5,5],
+AL=[0,[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50]];
+var b=[],i,j,k,c;
+for(i=0;i<text.length;i++){c=text.charCodeAt(i);
+if(c<128)b.push(c);else if(c<2048)b.push(192|c>>6,128|c&63);else b.push(224|c>>12,128|c>>6&63,128|c&63)}
+var v=0;for(i=1;i<=10;i++)if(b.length<=CW[i]-(i<10?2:3)){v=i;break}
+if(!v)return null;
+var n=17+4*v,nd=CW[v],bits=[];
+function put(val,len){for(var q=len-1;q>=0;q--)bits.push(val>>q&1)}
+put(4,4);put(b.length,v<10?8:16);for(i=0;i<b.length;i++)put(b[i],8);
+for(i=0;i<4&&bits.length<nd*8;i++)bits.push(0);
+while(bits.length%8)bits.push(0);
+var d=[];for(i=0;i<bits.length;i+=8){c=0;for(j=0;j<8;j++)c=c<<1|bits[i+j];d.push(c)}
+for(i=0;d.length<nd;i++)d.push(i%2?17:236);
+// Reed-Solomon ueber GF(256)
+var ex=[],lg=[],x=1;for(i=0;i<255;i++){ex[i]=x;lg[x]=i;x<<=1;if(x&256)x^=285}
+function mul(a,e){return a&&e?ex[(lg[a]+lg[e])%255]:0}
+var ne=EC[v],g=[1];for(i=0;i<ne;i++){var g2=[];for(j=0;j<=g.length;j++)g2[j]=(j<g.length?mul(g[j],ex[i]):0)^(j>0?g[j-1]:0);g=g2}
+// g[j] = Koeffizient von x^j, g[ne] = 1
+function rs(data){var r=[],q,f;for(q=0;q<ne;q++)r.push(0);
+for(q=0;q<data.length;q++){f=data[q]^r[0];r.shift();r.push(0);for(var t=0;t<ne;t++)r[t]^=mul(g[ne-1-t],f)}return r}
+var nb=NB[v],shortLen=Math.floor(nd/nb),nLong=nd%nb,blocks=[],ecs=[],pos=0,len;
+for(i=0;i<nb;i++){len=shortLen+(i>=nb-nLong?1:0);blocks.push(d.slice(pos,pos+len));ecs.push(rs(blocks[i]));pos+=len}
+var all=[];
+for(j=0;j<=shortLen;j++)for(i=0;i<nb;i++)if(j<blocks[i].length)all.push(blocks[i][j]);
+for(j=0;j<ne;j++)for(i=0;i<nb;i++)all.push(ecs[i][j]);
+// Matrix und feste Muster
+var m=[],fn=[];for(i=0;i<n;i++){m.push([]);fn.push([]);for(j=0;j<n;j++){m[i].push(0);fn[i].push(0)}}
+function setF(xx,yy,val){if(xx<0||yy<0||xx>=n||yy>=n)return;m[yy][xx]=val?1:0;fn[yy][xx]=1}
+function finder(cx,cy){for(var dy=-4;dy<=4;dy++)for(var dx=-4;dx<=4;dx++){var dist=Math.max(Math.abs(dx),Math.abs(dy));setF(cx+dx,cy+dy,dist!==2&&dist!==4)}}
+for(i=0;i<n;i++){setF(6,i,i%2===0);setF(i,6,i%2===0)}
+finder(3,3);finder(n-4,3);finder(3,n-4);
+var al=AL[v];for(i=0;i<al.length;i++)for(j=0;j<al.length;j++){
+if((i===0&&j===0)||(i===0&&j===al.length-1)||(i===al.length-1&&j===0))continue;
+for(var dy=-2;dy<=2;dy++)for(var dx=-2;dx<=2;dx++)setF(al[i]+dx,al[j]+dy,Math.max(Math.abs(dx),Math.abs(dy))!==1)}
+function fmt(mask){var data=mask,rem=data,q;for(q=0;q<10;q++)rem=rem<<1^(rem>>9)*1335;var bb=(data<<10|rem)^21522;
+function gb(t){return bb>>t&1}
+for(q=0;q<=5;q++)setF(8,q,gb(q));setF(8,7,gb(6));setF(8,8,gb(7));setF(7,8,gb(8));
+for(q=9;q<15;q++)setF(14-q,8,gb(q));
+for(q=0;q<8;q++)setF(n-1-q,8,gb(q));
+for(q=8;q<15;q++)setF(8,n-15+q,gb(q));
+setF(8,n-8,1)}
+fmt(0);
+if(v>=7){var rem=v;for(i=0;i<12;i++)rem=rem<<1^(rem>>11)*7973;var vb=v<<12|rem;
+for(i=0;i<18;i++){var bt=vb>>i&1,a=n-11+i%3,e=Math.floor(i/3);setF(a,e,bt);setF(e,a,bt)}}
+// Daten im Zickzack einsetzen
+k=0;for(var right=n-1;right>=1;right-=2){if(right===6)right=5;
+for(var vert=0;vert<n;vert++)for(j=0;j<2;j++){var xx=right-j,up=((right+1)&2)===0,yy=up?n-1-vert:vert;
+if(!fn[yy][xx]&&k<all.length*8){m[yy][xx]=all[k>>3]>>(7-(k&7))&1;k++}}}
+function mk(t,xx,yy){switch(t){case 0:return(xx+yy)%2===0;case 1:return yy%2===0;case 2:return xx%3===0;case 3:return(xx+yy)%3===0;
+case 4:return(Math.floor(xx/3)+Math.floor(yy/2))%2===0;case 5:return xx*yy%2+xx*yy%3===0;case 6:return(xx*yy%2+xx*yy%3)%2===0;default:return((xx+yy)%2+xx*yy%3)%2===0}}
+function apply(t){for(var yy=0;yy<n;yy++)for(var xx=0;xx<n;xx++)if(!fn[yy][xx]&&mk(t,xx,yy))m[yy][xx]^=1}
+function pen(){var p=0,xx,yy,run,col,dark=0,t;
+for(t=0;t<2;t++)for(yy=0;yy<n;yy++){run=0;col=-1;var hist=0;
+for(xx=0;xx<n;xx++){var cc=t?m[xx][yy]:m[yy][xx];if(cc===col){run++;if(run===5)p+=3;else if(run>5)p++}else{col=cc;run=1}
+hist=(hist<<1|cc)&2047;if(xx>=10&&(hist===1488||hist===93))p+=40}}
+for(yy=0;yy<n-1;yy++)for(xx=0;xx<n-1;xx++){var s=m[yy][xx]+m[yy][xx+1]+m[yy+1][xx]+m[yy+1][xx+1];if(s===0||s===4)p+=3}
+for(yy=0;yy<n;yy++)for(xx=0;xx<n;xx++)dark+=m[yy][xx];
+p+=Math.floor(Math.abs(dark*20-n*n*10)/(n*n))*10;return p}
+var best=0,bp=1e9;for(i=0;i<8;i++){apply(i);fmt(i);var pp=pen();if(pp<bp){bp=pp;best=i}apply(i)}
+apply(best);fmt(best);return m}
+// Als SVG (dunkle Punkte als ein Pfad), mit hellem Rand
+function qrSvg(text){var m=qrMatrix(text);if(!m)return'';var n=m.length,p='',x,y;
+for(y=0;y<n;y++)for(x=0;x<n;x++)if(m[y][x])p+='M'+(x+4)+' '+(y+4)+'h1v1h-1z';
+return '<svg viewBox="0 0 '+(n+8)+' '+(n+8)+'" role="img" aria-label="QR-Code"><rect width="100%" height="100%" fill="#fff"/><path d="'+p+'" fill="#000"/></svg>'}
 
 // ---------- Zapf-Statistik ----------
 // Alle 10 Minuten ein Eintrag {l: Liter am Ende, k: Fassgroesse}. Gezapft = um wie viel der Fuellstand unter den bisher
@@ -805,19 +1090,19 @@ lastTotal=total;
 var eta='';if(warnOK&&s.win>=900000&&s.hour>.3&&target>.2){var ms=target/(s.hour/s.win);if(ms<864e5)eta='Fass leer ca. '+hhmm(t+ms)+' Uhr'}
 $('tveta').textContent=eta;fitNums()}
 function flush(){if(demo||!cfg)return;for(var x in dirty)(function(k){var r=hist[k];delete dirty[k];if(!r)return;
-fetch(base()+'/hist/b'+k+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)})
+dbf('hist/b'+k,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)})
 .then(function(q){if(!q.ok)throw 0}).catch(function(){dirty[k]=1})})(x)}
 function loadHist(){if(demo){demoHist();return}if(!cfg)return;
-fetch(base()+'/hist.json?orderBy=%22%24key%22&startAt=%22b'+(bk(Date.now())-72)+'%22',{cache:'no-store'})
+dbf('hist',null,'orderBy=%22%24key%22&startAt=%22b'+(bk(Date.now())-72)+'%22')
 .then(function(r){return r.ok?r.json():null}).then(function(o){if(!o||typeof o!=='object')return;
 for(var key in o){var k=+String(key).slice(1),r=o[key];if(!k||!r||typeof r.l!=='number')continue;
 if(!hist[k])hist[k]={l:r.l,k:r.k};if(r.e)hist[k].e=1;if(typeof r.h==='number'&&hist[k].h==null)hist[k].h=r.h;if(typeof r.p==='number'&&hist[k].p==null)hist[k].p=r.p;if(r.a>0&&!(hist[k].a>=r.a))hist[k].a=r.a}
 stats()}).catch(function(){})}
 // Eintraege, die aelter als zwei Tage sind, aus der Datenbank entfernen
 function tidy(){if(demo||!cfg)return;var cut='b'+(bk(Date.now())-288);
-fetch(base()+'/hist.json?shallow=true',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(o){var p={},n=0;
+dbf('hist',null,'shallow=true').then(function(r){return r.ok?r.json():null}).then(function(o){var p={},n=0;
 for(var key in o||{})if(/^b\d+$/.test(key)&&key.length<=cut.length&&(key.length<cut.length||key<cut)&&n<400){p[key]=null;n++}
-if(n)fetch(base()+'/hist.json',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){})}).catch(function(){})}
+if(n)dbf('hist',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)}).catch(function(){})}).catch(function(){})}
 setInterval(flush,20000);setInterval(loadHist,600000);setTimeout(tidy,30000);
 
 // ---------- Vorfuehrung ohne Waage: Adresse mit ?demo=1 ----------
@@ -889,10 +1174,11 @@ var VKEY='bierwaage.view',vmode=null,shiftN=0,btnT=0,U=12,fitKey='';
 try{vmode=localStorage.getItem(VKEY)}catch(e){}
 if(/[?&]tv=1(&|$)/.test(Q))vmode='tv';
 var isTV=/SMART-?TV|Tizen|Web0S|webOS|NetCast|HbbTV|BRAVIA|Android ?TV|Google ?TV|\bAFT[A-Z0-9]+\b|CrKey|AppleTV|VIERA|Roku|\bTV\b/i.test(navigator.userAgent||'');
-function tvWanted(){return(!!cfg||demo)&&(vmode==='tv'||(vmode!=='normal'&&isTV))}
+// Welche Ansicht ein Zugang zeigen darf, legt der Admin fest: nur Handy, nur TV oder beides
+function tvWanted(){if(!(cfg||demo))return false;var v=viewOf();if(v===2)return true;if(v===1)return false;return vmode==='tv'||(vmode!=='normal'&&isTV)}
 function tvOn(){return document.body.className==='tv'}
 function tvFit(){U=Math.min(window.innerWidth/160,window.innerHeight/90);$('tv').style.fontSize=U+'px';
-$('tvbtn').style.fontSize=Math.max(13,2.1*U)+'px';$('tvon').hidden=window.innerWidth<900;dsFit();fitKey='';fitNums()}
+$('tvbtn').style.fontSize=Math.max(13,2.1*U)+'px';$('tvon').hidden=window.innerWidth<900||viewOf()===1;dsFit();fitKey='';fitNums()}
 // Zahlen, die in der gewaehlten Schrift zu breit wuerden, verkleinern
 function fitNums(){if(!tvOn())return;var key=$('tvlit').textContent.length+'|'+$('tvgl').textContent.length+'|'+$('tvtot').textContent.length+'|'+$('tvhour').textContent.length+'|'+theme;
 if(key===fitKey)return;fitKey=key;var w=$('tvlitw'),ids=['tvgl','tvtot','tvhour'],i,e;
@@ -901,7 +1187,8 @@ for(i=0;i<3;i++){e=$(ids[i]);e.style.fontSize='';if(e.scrollWidth>e.clientWidth+
 function tvClock(){$('tvtime').textContent=hhmm(now())}
 function tvWake(){try{if(navigator.wakeLock&&tvOn()&&!document.hidden)navigator.wakeLock.request('screen').catch(function(){})}catch(e){}}
 // Das Handy bleibt immer im Vereins-Design; die drei Designs gibt es nur in der TV-Ansicht
-function tvApply(){var on=tvWanted();document.body.className=on?'tv':'';if(theme!==(on?tvTheme:'verein'))setTheme(on?tvTheme:'verein');if(on)closeSheet();tvFit();tvClock();tvWake();tvPoke()}
+function tvApply(){var on=tvWanted();document.body.className=on?'tv':'';
+$('tvoff').hidden=viewOf()===2&&!SIM;$('tvoff').textContent=SIM?'Vorschau beenden':'Handy-Ansicht';$('tvon').hidden=window.innerWidth<900||viewOf()===1;if(theme!==(on?tvTheme:'verein'))setTheme(on?tvTheme:'verein');if(on)closeSheet();tvFit();tvClock();tvWake();tvPoke()}
 function tvSet(m){vmode=m;try{localStorage.setItem(VKEY,m)}catch(e){}
 if(m==='normal'){try{if(/[?&]tv=1(&|$)/.test(location.search))history.replaceState(null,'',location.pathname+location.search.replace(/([?&])tv=1(&|$)/,'$1').replace(/[?&]$/,'')+location.hash)}catch(e){}tvFull(false)}
 tvApply()}
@@ -914,7 +1201,7 @@ btnT=setTimeout(function(){w.className='tvbtn';try{if(w.contains(document.active
 if(e&&e.type==='keydown'&&!was&&$('dsgn').hidden){try{$('tvfull').hidden?$('tvdsg').focus():$('tvfull').focus()}catch(x){}}}
 ['mousemove','mousedown','touchstart','keydown'].forEach(function(n){document.addEventListener(n,tvPoke)});
 $('tvon').onclick=function(){tvSet('tv');if(tvOn())openPick(true)};
-$('tvoff').onclick=function(){tvSet('normal')};
+$('tvoff').onclick=function(){if(SIM)simEnd();else tvSet('normal')};
 $('tvfull').onclick=function(){tvFull(!(document.fullscreenElement||document.webkitFullscreenElement))};
 if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))$('tvfull').hidden=true;
 window.addEventListener('resize',tvFit);
@@ -927,8 +1214,9 @@ try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function()
 // ---------- Start ----------
 (function(){var m=/[?&]design=(verein|party|vtk)(&|$)/.exec(Q),saved=null;
 try{saved=localStorage.getItem(TKEY)}catch(e){}
-tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');setTheme('verein');view();stats();
-if(tvOn()){if(!m)openPick(true)}else splash()})();
+tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');setTheme('verein');pickOK=!m;
+if(demo){view();stats();if(tvOn()){if(!m)openPick(true)}else splash();return}
+stats();splash();boot()})();
 </script>
 </body>
 </html>
