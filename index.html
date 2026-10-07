@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="icon" href="icon.png">
 <title>Bierwaage</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Kaushan+Script&family=Fredoka:wght@500;600;700&family=Barlow:wght@500;600;700&family=Barlow+Condensed:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Kaushan+Script&family=Fredoka:wght@500;600;700&family=Barlow:wght@500;600;700&family=Jost:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&family=Cabin+Sketch:wght@400;700&family=Patrick+Hand&family=Barlow+Condensed:wght@600;700&display=swap">
 <style>
 /* ---------- Die drei Designs: nur diese Bloecke aendern, um Farben anzupassen ---------- */
 html{--bg:#20317f;--bg2:#131d57;--glow:rgba(255,255,255,.16);
@@ -360,6 +360,138 @@ span.red{color:#a3342a}
 /* Safari (iPhone, iPad): bewegte Inhalte ragten sonst ueber die runden Ecken von Fass und Gasflasche hinaus */
 .keg,.gbody,.tvkeg{isolation:isolate}
 .keg,.gbody{-webkit-mask-image:-webkit-radial-gradient(#fff,#000)}
+
+/* ================= Etappe 2: fuenf Designs ================= */
+html[data-theme="vtk"]{--acc:#7495f2;--acc-ink:#0b0d12;--soft:#3757af;--soft-ink:#fff;--seg-bg:#3757af;--seg-ink:#fff;--pill:#3757af;--pill-ink:#fff;--bar:#7495f2;--glow:rgba(75,111,214,.16)}
+html[data-theme="edel"]{--bg:#2b2e33;--bg2:#15171a;--glow:rgba(212,180,122,.10);
+--card:#1f2226;--cardline:rgba(212,180,122,.4);--fg:#f1ece2;--muted:#aaa497;--field:#2a2e33;--inline:#57503c;--soft:#d4b47a;--soft-ink:#1b1c1e;
+--acc:#d4b47a;--acc-ink:#1b1c1e;--kegline:#d4b47a;--band:rgba(212,180,122,.4);--seg-bg:#d4b47a;--seg-ink:#1b1c1e;--err:#e8a79a;--warn:#9c2f2a;--shadow:rgba(0,0,0,.55);
+--tvkeg:#15171a;--tvkegline:#d4b47a;--pill:#d4b47a;--pill-ink:#1b1c1e;--numc:#f4efe6;--bar:#d4b47a;--panel:rgba(255,255,255,.035);--panelline:rgba(212,180,122,.45);
+--club:Jost,"Century Gothic","Helvetica Neue",Arial,sans-serif;--num:"Cormorant Garamond","Playfair Display",Georgia,"Times New Roman",serif}
+html[data-theme="brau"]{--bg:#313b37;--bg2:#1d2321;--glow:rgba(255,255,255,.07);
+--card:#2a332f;--cardline:rgba(244,241,232,.75);--fg:#f4f1e8;--muted:#b9c2b8;--field:#36413c;--inline:#6f7a73;--soft:#f2b441;--soft-ink:#2a2118;
+--acc:#f2b441;--acc-ink:#2a2118;--kegline:#f4f1e8;--band:rgba(255,255,255,.4);--seg-bg:#f4f1e8;--seg-ink:#26302c;--err:#ffb3a1;--warn:#b5402f;--shadow:rgba(0,0,0,.5);
+--tvkeg:#232b28;--tvkegline:#f4f1e8;--pill:#f2b441;--pill-ink:#2a2118;--numc:#f4f1e8;--bar:#f2b441;--panel:rgba(255,255,255,.04);--panelline:rgba(244,241,232,.6);
+--club:"Patrick Hand","Segoe Print","Comic Sans MS","Trebuchet MS",sans-serif;--num:"Cabin Sketch","Patrick Hand","Segoe Print",sans-serif}
+
+/* Koch: Logo statt Schriftzug */
+html[data-theme="vtk"] .chip img{height:58px;max-width:170px;filter:none}
+html[data-theme="vtk"] .club b:empty{display:none}
+html[data-theme="vtk"] .tvhead img{height:13em;max-width:40em;-webkit-filter:none;filter:none}
+html[data-theme="vtk"] .tvclub b:empty{display:none}
+html[data-theme="vtk"] .tvclub span{margin-top:0}
+/* Edel */
+html[data-theme="edel"] .chip::before,html[data-theme="brau"] .chip::before{display:none}
+html[data-theme="edel"] .club b{font-family:var(--num);font-size:1.9rem;font-weight:600;letter-spacing:.06em}
+html[data-theme="edel"] .pill,html[data-theme="edel"] .tvclub span{background:transparent;border-color:var(--acc);color:var(--acc)}
+html[data-theme="edel"] .lit span{font-size:4.2rem;font-weight:600;letter-spacing:0;font-variant-numeric:lining-nums tabular-nums}
+html[data-theme="edel"] .lit em{color:var(--acc)}
+html[data-theme="edel"] .card,html[data-theme="edel"] .sheet{border-radius:6px}
+html[data-theme="edel"] .seg,html[data-theme="edel"] .seg button,html[data-theme="edel"] .stat,html[data-theme="edel"] .srow{border-radius:4px}
+html[data-theme="edel"] .tvclub b{font-family:var(--num);font-size:7em;font-weight:600;letter-spacing:.08em;line-height:1}
+html[data-theme="edel"] .tvlit span{font-size:20.5em;font-weight:600;letter-spacing:0;font-variant-numeric:lining-nums tabular-nums}
+html[data-theme="edel"] .tvlit em{color:var(--acc);font-weight:600}
+html[data-theme="edel"] .tvtime b,html[data-theme="edel"] .tvtile b{font-weight:600;font-variant-numeric:lining-nums tabular-nums}
+html[data-theme="edel"] .tvtile,html[data-theme="edel"] .tvchart,html[data-theme="edel"] .tvgame{border-radius:.6em}
+html[data-theme="edel"] .tvkeg{border-width:.35em;border-radius:5em;box-shadow:0 0 0 .5em rgba(212,180,122,.12),0 1.5em 3.5em rgba(0,0,0,.5)}
+html[data-theme="edel"] .bar i{border-radius:.15em .15em 0 0;width:36%;left:32%}
+/* Brauhaus: Kreidetafel */
+html[data-theme="brau"] .club b{font-family:var(--num);font-size:1.9rem;font-weight:700}
+html[data-theme="brau"] .lit span{font-size:4rem;letter-spacing:0;font-weight:700;text-shadow:0 0 1px rgba(255,255,255,.7)}
+html[data-theme="brau"] .lit em{color:var(--acc)}
+html[data-theme="brau"] .card,html[data-theme="brau"] .sheet,html[data-theme="brau"] .tvtile,html[data-theme="brau"] .tvchart,html[data-theme="brau"] .tvgame{border-width:2px;border-radius:255px 18px 225px 18px/18px 225px 18px 255px}
+html[data-theme="brau"] .sheet{border-radius:26px 26px 0 0}
+html[data-theme="brau"] .k,html[data-theme="brau"] .slab,html[data-theme="brau"] .sbig{letter-spacing:.03em;font-size:.9rem}
+html[data-theme="brau"] .tvclub b{font-family:var(--num);font-size:6.6em;font-weight:700;line-height:1}
+html[data-theme="brau"] .tvlit span{font-size:20em;letter-spacing:0;font-weight:700;text-shadow:0 0 .03em rgba(255,255,255,.7)}
+html[data-theme="brau"] .tvlit em{color:var(--acc)}
+html[data-theme="brau"] .tvkeg{border-radius:7em 6.4em 7.2em 6.6em;box-shadow:none}
+html[data-theme="brau"] .tvsub>span,html[data-theme="brau"] .ct b{font-size:2.6em}
+html[data-theme="brau"] .tvtile span{font-size:2.3em}
+html[data-theme="brau"] .bar i{border-radius:.3em .5em 0 0;background:repeating-linear-gradient(115deg,var(--bar) 0,var(--bar) .28em,rgba(242,180,65,.55) .28em,rgba(242,180,65,.55) .42em)}
+
+/* ---------- bewegte Hintergruende ---------- */
+#fx .pitch{top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0,rgba(255,255,255,.022) 12.5%,transparent 12.5%,transparent 25%)}
+#fx .pitch::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 90' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%23fff' stroke-opacity='.085' stroke-width='.4'%3E%3Crect x='5' y='5' width='150' height='80'/%3E%3Cpath d='M80 5v80'/%3E%3Ccircle cx='80' cy='45' r='11.5'/%3E%3Crect x='5' y='22' width='21' height='46'/%3E%3Crect x='134' y='22' width='21' height='46'/%3E%3Crect x='5' y='34' width='7.5' height='22'/%3E%3Crect x='147.5' y='34' width='7.5' height='22'/%3E%3Cpath d='M26 37a11.5 11.5 0 0 1 0 16M134 37a11.5 11.5 0 0 0 0 16'/%3E%3C/g%3E%3Ccircle cx='80' cy='45' r='.9' fill='%23fff' fill-opacity='.13'/%3E%3C/svg%3E") center/cover no-repeat}
+/* Koch: Scheinwerfer in drei Farben, Nebel, Reaktion auf Ereignisse */
+#fx .beam{--bc:255,190,70;background:linear-gradient(180deg,rgba(var(--bc),.36),rgba(var(--bc),0) 80%);animation:swayA 7s ease-in-out infinite alternate,beamPulse 3.3s ease-in-out infinite alternate;transition:filter .3s}
+#fx .beam.c{--bc:90,140,255;background:linear-gradient(180deg,rgba(var(--bc),.4),rgba(var(--bc),0) 80%);animation:swayB 9s ease-in-out infinite alternate,beamPulse 4.1s ease-in-out infinite alternate}
+#fx .beam.w{--bc:235,240,255;background:linear-gradient(180deg,rgba(var(--bc),.22),rgba(var(--bc),0) 78%);animation:swayC 11s ease-in-out infinite alternate,beamPulse 2.6s ease-in-out infinite alternate}
+#fx .haze{left:-20vw;bottom:-12vh;width:140vw;height:46vh;background:radial-gradient(ellipse at 28% 100%,rgba(100,140,255,.2),transparent 60%),radial-gradient(ellipse at 72% 100%,rgba(255,255,255,.1),transparent 55%);animation:hazeDrift 16s ease-in-out infinite alternate}
+#fx .lamp{top:.9vh;width:2.6vmin;height:2.6vmin;margin-left:-1.3vmin;border-radius:50%;background:radial-gradient(circle,#fff 0,rgba(255,255,255,.5) 40%,transparent 70%);animation:beamPulse 2.2s ease-in-out infinite alternate}
+html.ev-win #fx .beam{--bc:255,214,60;filter:brightness(2.1) saturate(1.5);animation-duration:1.1s,.35s}
+html.ev-win #fx .beam.c{--bc:80,255,170}
+html.ev-fail #fx .beam{--bc:240,50,40;filter:brightness(1.7);animation-duration:2.5s,.25s}
+html.ev-beat #fx .beam{filter:brightness(2.2)}
+html.ev-win #fx .cf{animation-duration:1.5s!important}
+html.ev-win #fx .blob{animation-duration:2.5s}
+/* Edel: feine Rahmenlinien und ein langsamer Schimmer */
+#fx .frame{top:2vmin;left:2vmin;right:2vmin;bottom:2vmin;border:1px solid rgba(212,180,122,.5)}
+#fx .frame.f2{top:3.1vmin;left:3.1vmin;right:3.1vmin;bottom:3.1vmin;border-color:rgba(212,180,122,.2)}
+#fx .sheen{top:-20%;left:-60%;width:45%;height:140%;background:linear-gradient(100deg,transparent,rgba(212,180,122,.09),transparent);transform:skewX(-18deg);animation:sheen 13s ease-in-out infinite}
+html.ev-win #fx .frame{border-color:#f0d9a8;box-shadow:0 0 4vmin rgba(212,180,122,.5) inset;transition:all .4s}
+/* Brauhaus: Kreidestaub, Holzleisten, Hopfen */
+#fx .board{top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 20% 30%,rgba(255,255,255,.07),transparent 45%),radial-gradient(ellipse at 78% 62%,rgba(255,255,255,.055),transparent 40%),radial-gradient(ellipse at 55% 8%,rgba(255,255,255,.04),transparent 35%),repeating-linear-gradient(8deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 3px,transparent 3px,transparent 9px)}
+#fx .wood{left:0;width:100%;height:1.9vh;background:repeating-linear-gradient(90deg,rgba(0,0,0,.12) 0,rgba(0,0,0,.12) 2px,transparent 2px,transparent 23px),linear-gradient(180deg,#8a5a2b,#6b431f)}
+#fx .wood.t{top:0}#fx .wood.b{bottom:0}
+#fx .hop{width:22vmin;height:22vmin;opacity:.42}
+#fx .hop.h1{left:1vmin;bottom:3vh;transform:rotate(-14deg)}
+#fx .hop.h2{left:50vw;top:1vh;width:15vmin;height:15vmin;transform:rotate(24deg)}
+#fx .hop svg{width:100%;height:100%}
+#fx .dust{width:.5vmin;height:.5vmin;border-radius:50%;background:rgba(255,255,255,.5);animation:dust linear infinite}
+html.ev-win #fx .board{background-color:rgba(242,180,65,.08);transition:background-color .4s}
+@keyframes swayC{from{transform:rotate(-7deg)}to{transform:rotate(17deg)}}
+@keyframes beamPulse{from{opacity:.55}to{opacity:1}}
+@keyframes hazeDrift{from{transform:translateX(-6vw)}to{transform:translateX(6vw)}}
+@keyframes sheen{0%,35%{left:-60%}75%,100%{left:120%}}
+@keyframes dust{from{transform:translate3d(0,0,0);opacity:0}15%{opacity:.7}to{transform:translate3d(4vw,-60vh,0);opacity:0}}
+
+/* ---------- Dialoge in allen Designs ---------- */
+.sheet{background:var(--card);color:var(--fg);border:1px solid var(--cardline);font-family:var(--club)}
+.sh button{background:var(--field);color:var(--fg)}
+.srow{background:var(--field);color:var(--fg)}
+.srow span{color:var(--muted)}
+.sp.m,.slab{color:var(--muted)}
+.sbig{background:var(--field);color:var(--muted)}
+.sbig b{color:var(--fg)}
+.sin{border-color:var(--inline);background:var(--field);color:var(--fg)}
+.sin:focus{outline-color:var(--acc)}
+.sbtn{background:var(--acc);color:var(--acc-ink)}
+.sbtn.sec{background:var(--soft);color:var(--soft-ink)}
+.sbtn.red{background:#a3342a;color:#fff}
+.lvl button{background:var(--acc);color:var(--acc-ink)}
+.lvl div i{background:var(--inline)}
+.lvl div i.on{background:var(--acc)}
+.tog{background:var(--inline);color:var(--fg)}
+.pick2{background:var(--field);color:var(--fg)}
+.pick2 small{color:var(--muted)}
+.gl7 button{background:var(--field);color:var(--fg)}
+.gl7 button.on{background:var(--acc);color:var(--acc-ink)}
+.schk input{accent-color:var(--acc)}
+.isvg rect[fill="#20317f"]{fill:var(--kegline)}
+html[data-theme="party"] .isvg rect[fill="#20317f"],html[data-theme="vtk"] .isvg rect[fill="#20317f"]{fill:var(--acc)}
+
+.pk[data-t="edel"] .pv{background:linear-gradient(160deg,#2f3237,#15171a);box-shadow:inset 0 0 0 1px rgba(212,180,122,.55)}
+.pk[data-t="edel"] .pv i{border-color:#d4b47a;background:#15171a}
+.pk[data-t="edel"] .pv b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;font-size:2.8em;color:#f4efe6}
+.pk[data-t="brau"] .pv{background:radial-gradient(ellipse at 25% 30%,rgba(255,255,255,.1),transparent 50%),#2c3632;border-top:.35em solid #7a4e25}
+.pk[data-t="brau"] .pv i{border-color:#f4f1e8;background:#232b28}
+.pk[data-t="brau"] .pv b{font-family:"Cabin Sketch","Patrick Hand",sans-serif;font-size:2.6em;color:#f4f1e8}
+.pk[data-t="vtk"] .pv{background:linear-gradient(200deg,rgba(255,190,70,.45) 0,transparent 40%),linear-gradient(160deg,rgba(90,140,255,.5) 0,transparent 40%),#090a0d}
+/* Personen-Dialoge und Hinweise in allen Designs */
+.s3{flex-wrap:wrap}
+.s3 button{flex:1 0 30%;background:var(--field);color:var(--fg)}
+.s3 button.on{background:var(--acc);color:var(--acc-ink)}
+span.red{color:var(--err)}
+.sbtn.warn{background:#a3342a;color:#fff}
+.serr{background:#fbe9e7;color:#a3342a}
+.sok{background:#e6f6ec;color:#16733f}
+/* "ohne Zapfkopf" bleibt auf dunklen Karten lesbar; Waagen-Symbol in der Auswahl passt sich an; Hopfen nicht ueber dem Titel */
+.zp.off{color:var(--acc)}
+.pick2 svg rect[fill="#20317f"]{fill:var(--kegline)}
+html[data-theme="party"] .pick2 svg rect[fill="#20317f"],html[data-theme="vtk"] .pick2 svg rect[fill="#20317f"]{fill:var(--acc)}
+@media (max-width:899px){#fx .hop.h2{display:none}}
+.gl7.d5{grid-template-columns:1fr 1fr}
 </style>
 </head>
 <body>
@@ -369,9 +501,11 @@ span.red{color:#a3342a}
   <h1>Design wählen</h1>
   <p id="dsgnp">Die Auswahl gilt für dieses Gerät. Du kannst sie später über „Design“ ändern.</p>
   <div class="pks">
-    <button type="button" class="pk" data-t="verein"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Sportverein</strong><small>Blau-weiß mit Vereinswappen</small><em></em></button>
+    <button type="button" class="pk" data-t="verein"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Sportverein</strong><small>Blau-weiß mit Wappen und Platzlinien</small><em></em></button>
     <button type="button" class="pk" data-t="party"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Party</strong><small>Bunt und lebhaft, ohne Logo</small><em></em></button>
-    <button type="button" class="pk" data-t="vtk"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Veranstaltungstechnik Koch</strong><small>Bühne im Dunkeln mit Scheinwerfern</small><em></em></button>
+    <button type="button" class="pk" data-t="vtk"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Veranstaltungstechnik Koch</strong><small>Bühne mit Scheinwerfern in Blau, Weiß und Gelb</small><em></em></button>
+    <button type="button" class="pk" data-t="edel"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Edel</strong><small>Anthrazit mit feinen goldenen Linien</small><em></em></button>
+    <button type="button" class="pk" data-t="brau"><span class="pv"><i><u></u></i><b>23,4 L</b></span><strong>Brauhaus</strong><small>Kreidetafel, Holz und Hopfen</small><em></em></button>
   </div>
 </div></div>
 
@@ -645,7 +779,7 @@ return dput('dev/'+uid,{p:L.p,k:L.k,t:{'.sv':'timestamp'},a:devName()})
 return dget('users/'+dev.p).then(null,function(e){if(e.message!=='401')throw e;return null}).then(function(u){
 if(!u||u.k!==dev.k)return ddel('dev/'+uid).catch(function(){}).then(function(){return{gate:'pair',note:badLink?'link':'gone'}});
 if(u.x===true)return{gate:'blocked'};
-var me={owner:false,pid:dev.p,name:u.n,role:u.r,view:u.v,multi:u.m===true};
+var me={owner:false,pid:dev.p,name:u.n,role:u.r,view:u.v,multi:u.m===true,design:typeof u.d==='string'?u.d:''};
 if(me.multi)return{me:me};
 // nur ein Geraet gleichzeitig: wer den Link neu oeffnet, uebernimmt
 return dget('one/'+dev.p).then(function(o){if(o===uid)return{me:me};
@@ -736,8 +870,9 @@ function stopApp(){cfg=null;S=null;clearTimeout(timer);timer=0;waiting=null;clos
 var pairNote='';
 function access(r){firstDone=true;
 if(r.gate==='pair'){if(r.note)pairNote=r.note;else r.note=pairNote}
-if(r.me){var was=!!cfg;pairNote='';ME=r.me;cfg=1;gateShow(null);
-if(!was){view();if(tvOn()&&pickOK){pickOK=false;openPick(true)}}else regate()}
+if(r.me){var was=!!cfg;pairNote='';ME=r.me;cfg=1;gateShow(null);try{localStorage.setItem(DKEY,fixedDesign())}catch(e){}
+if(fixedDesign()&&fixedDesign()!=='verein')$('splash').hidden=true;
+if(!was){view();if(tvOn()&&pickOK&&!fixedDesign()){pickOK=false;openPick(true)}}else regate()}
 else{ME=null;SIM=null;if(cfg)stopApp();gateShow(r);view()}}
 // Zugang pruefen: beim Start, danach jede Minute; ohne Zugang alle paar Sekunden (damit es nach dem Freischalten gleich losgeht)
 function recheck(){if(demo||whoBusy||!konfOk())return;whoT=Date.now();whoBusy=true;
@@ -824,12 +959,18 @@ h+=row('s0','Leergewicht 20 L',fmt(j.t20||0,1)+' kg')+row('s1','Leergewicht 30 L
 h+=row('s3','Zapfkopf-Gewicht',fmt(j.coupler_kg||0,2)+' kg')+row('s4','Nullpunkt setzen','')+row('s5','Kalibrieren',j.calibrated?'':'nötig!',true);
 h+=row('s6','Ton',j.beep?'an, Stufe '+j.vol:'aus')+row('s7','Glasgröße',gfmt(j.glass_l||.5)+' L')+row('s8','Helligkeit',(j.bright||10)*10+' %');
 h+=row('s9','PIN ändern','')+row('s10','Bild korrigieren','')+row('s11','Anzeige drehen','');
+if(j.fw>=7)h+=row('s12','Design am Display der Waage',DNW[j.design]||'');
 h+='<p class="sp m">WLAN wechseln und Touch einrichten geht nur direkt am Display der Waage.</p>';
 sheet('Einstellungen',h);if(ok)note('',ok);
 on('s0',function(){tareFlow(0)});on('s1',function(){tareFlow(1)});on('s2',function(){tareFlow(2)});on('s3',function(){zapfFlow(1)});
 on('s4',zeroFlow);on('s5',function(){calFlow(1)});on('s6',soundView);on('s7',glassView);on('s8',brightView);on('s9',pinFlow);
 on('s10',function(){run('cmode',{},true,function(){note('','Die Anzeige zeigt jetzt die nächste Bildvariante.')})});
-on('s11',function(){run('rot',{},true,function(){note('','Die Anzeige ist gedreht.')})})}
+on('s11',function(){run('rot',{},true,function(){note('','Die Anzeige ist gedreht.')})});if($('s12'))on('s12',designView)}
+var DNW=['Sportverein','Technik Koch','Party','Edel','Brauhaus'];
+function designView(){var j=S||{},h='<p class="sp">So sieht das Display an der Waage aus. Das Handy und der Fernseher sind davon unabhängig.</p><div class="gl7 d5">',i;
+for(i=0;i<DNW.length;i++)h+='<button type="button" data-g="'+i+'"'+(j.design===i?' class="on"':'')+'>'+DNW[i]+'</button>';
+sheet('Design am Display',h+'</div>',home);
+var b=$('ovc').querySelectorAll('.gl7 button');for(i=0;i<b.length;i++)b[i].onclick=function(){run('design',{v:+this.getAttribute('data-g')},true,designView)}}
 function home(){setHome('')}
 function live(){return '<div class="sbig">Jetzt auf der Waage<b id="lw">'+(S?fmt(S.w,2):'–')+' kg</b></div>'}
 function liveTick(){tickFn=function(j){var e=$('lw');if(e)e.textContent=fmt(j.w,2)+' kg'}}
@@ -909,7 +1050,7 @@ sheet('Personen',h);if(ok)note('',ok);
 on('padd',function(){persForm(null)});
 var b=$('ovc').querySelectorAll('.prow');for(i=0;i<b.length;i++)b[i].onclick=function(){persView(this.getAttribute('data-p'),'')}},function(e){if(g===gen)ppErr(e)})}
 function persView(pid,ok){var u=PP.u[pid];if(!u){persList('');return}var n=ppActive(pid),h;
-h='<p class="sp"><b>'+RN[u.r]+'</b> · Ansicht: '+VN[u.v]+' · '+(u.m?'mehrere Geräte':'ein Gerät')+'<br>'
+h='<p class="sp"><b>'+RN[u.r]+'</b> · Ansicht: '+VN[u.v]+' · '+(u.m?'mehrere Geräte':'ein Gerät')+' · Design: '+(DN[u.d||'']||'frei')+'<br>'
 +(u.x===true?'<span class="red">Zugang gesperrt</span>':n?n+(n===1?' Gerät verbunden':' Geräte verbunden'):'Noch kein Gerät verbunden')+'</p>';
 h+=row('pl','Link teilen','')+row('pc','Gerät per Code verbinden','')+row('pe','Bearbeiten','');
 if(ppDevs(pid).length)h+=row('po','Geräte abmelden','');
@@ -922,7 +1063,7 @@ var o={},a=ppDevs(pid),i;o['one/'+pid]=null;for(i=0;i<a.length;i++)o['dev/'+a[i]
 on('pn',function(){ask('Neuen Link erstellen?','Der bisherige Link von '+esc(u.n)+' funktioniert danach nicht mehr, und alle Geräte werden abgemeldet. '+esc(u.n)+' braucht dann den neuen Link.','Neuer Link',function(){
 var o={},a=ppDevs(pid),i;o['users/'+pid+'/k']=rnd(22,ABC62);o['one/'+pid]=null;for(i=0;i<a.length;i++)o['dev/'+a[i]]=null;ppRun(o,function(){persShare(pid,'Der neue Link ist fertig. Der alte gilt nicht mehr.')})},back)});
 on('px',function(){var o={};o['users/'+pid+'/x']=!(u.x===true);ppRun(o,function(){persView(pid,u.x===true?'Der Zugang ist wieder frei.':'Der Zugang ist gesperrt. Das wirkt sofort.')})});
-on('pv',function(){SIM={name:u.n,role:u.r,view:u.v};closeSheet();regate();if(tvOn())tvPoke()});
+on('pv',function(){SIM={name:u.n,role:u.r,view:u.v,design:u.d||''};closeSheet();regate();if(tvOn())tvPoke()});
 on('pd',function(){ask(u.n+' entfernen?','Der Link funktioniert dann nicht mehr, und alle Geräte werden abgemeldet.','Entfernen',function(){
 var o={},a=ppDevs(pid),i;o['users/'+pid]=null;o['one/'+pid]=null;for(i=0;i<a.length;i++)o['dev/'+a[i]]=null;ppRun(o,function(){persList(u.n+' ist entfernt.')})},back)})}
 // mehrere Aenderungen auf einmal speichern, danach neu laden
@@ -930,7 +1071,8 @@ var ABC62='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 function ppRun(o,then){note('','');busy(true);var g=gen;dput('',o,'PATCH').then(ppLoad).then(function(){if(g!==gen)return;busy(false);then()},function(e){if(g===gen)ppErr(e)})}
 function seg(id,opts,val){var h='<div class="s3" id="'+id+'">',i;for(i=0;i<opts.length;i++)h+='<button type="button" data-v="'+opts[i][0]+'"'+(opts[i][0]===val?' class="on"':'')+'>'+opts[i][1]+'</button>';return h+'</div>'}
 function segBind(id,fn){var b=$(id).querySelectorAll('button'),i;for(i=0;i<b.length;i++)b[i].onclick=function(){for(var j=0;j<b.length;j++)b[j].className='';this.className='on';fn(+this.getAttribute('data-v'))}}
-function persForm(pid){var u=pid?PP.u[pid]:{n:'',r:1,v:1,m:false},f={r:u.r,v:u.v,m:u.m===true?1:0},
+function persForm(pid){var u=pid?PP.u[pid]:{n:'',r:1,v:1,m:false,d:''},f={r:u.r,v:u.v,m:u.m===true?1:0,d:Math.max(0,DL.indexOf(u.d||''))},
+HD=['Handy im Vereins-Design. Am Fernseher wählt man das Design beim Start.','Handy und Fernseher zeigen immer dieses Design.'],
 HR=['','Sieht Füllstand und Statistik, kann aber nichts verstellen.','Kann zusätzlich Fass und Zapfkopf umstellen und Produkte wiegen.','Darf alles: Einstellungen der Waage ändern und Personen verwalten.'],
 HV=['','Die Seite zeigt nur die Handy-Ansicht.','Die Seite zeigt nur die große TV-Ansicht, zum Beispiel für einen Fernseher.','Handy-Ansicht, auf großen Bildschirmen wahlweise die TV-Ansicht.'],
 HM=['Der Link gilt immer nur auf einem Gerät gleichzeitig. Wird er auf einem zweiten geöffnet, ist das erste abgemeldet.','Der Link darf auf beliebig vielen Geräten offen sein, zum Beispiel für eine Gruppe.'];
@@ -938,12 +1080,13 @@ sheet(pid?'Bearbeiten':'Person anlegen','<label class="slab" for="fn">Name</labe
 +'<label class="slab">Darf</label>'+seg('fr',[[1,'Ansehen'],[2,'Bedienen'],[3,'Admin']],f.r)+'<p class="sp m" id="hr">'+HR[f.r]+'</p>'
 +'<label class="slab">Ansicht</label>'+seg('fv',[[1,'Handy'],[2,'TV'],[3,'Beides']],f.v)+'<p class="sp m" id="hv">'+HV[f.v]+'</p>'
 +'<label class="slab">Geräte</label>'+seg('fm',[[0,'Ein Gerät'],[1,'Mehrere']],f.m)+'<p class="sp m" id="hm">'+HM[f.m]+'</p>'
++'<label class="slab">Design</label>'+seg('fd',[[0,'Frei'],[1,'Sportverein'],[2,'Koch'],[3,'Party'],[4,'Edel'],[5,'Brauhaus']],f.d)+'<p class="sp m" id="hd">'+HD[f.d?1:0]+'</p>'
 +'<button type="button" class="sbtn" id="fgo">'+(pid?'Speichern':'Anlegen und Link zeigen')+'</button>',pid?function(){persView(pid,'')}:function(){persList('')});
-segBind('fr',function(v){f.r=v;$('hr').textContent=HR[v]});segBind('fv',function(v){f.v=v;$('hv').textContent=HV[v]});segBind('fm',function(v){f.m=v;$('hm').textContent=HM[v]});
+segBind('fr',function(v){f.r=v;$('hr').textContent=HR[v]});segBind('fv',function(v){f.v=v;$('hv').textContent=HV[v]});segBind('fm',function(v){f.m=v;$('hm').textContent=HM[v]});segBind('fd',function(v){f.d=v;$('hd').textContent=HD[v?1:0]});
 on('fgo',function(){var n=$('fn').value.replace(/\s+/g,' ').replace(/^ | $/g,''),o={};
 if(!n){note('Bitte einen Namen eintragen.','');return}
-if(pid){o['users/'+pid+'/n']=n;o['users/'+pid+'/r']=f.r;o['users/'+pid+'/v']=f.v;o['users/'+pid+'/m']=!!f.m;ppRun(o,function(){persView(pid,'Gespeichert.')})}
-else{var id='p'+rnd(6,'abcdefghijklmnopqrstuvwxyz0123456789');o['users/'+id]={n:n,r:f.r,v:f.v,m:!!f.m,x:false,k:rnd(22,ABC62),t:{'.sv':'timestamp'}};
+if(pid){o['users/'+pid+'/n']=n;o['users/'+pid+'/r']=f.r;o['users/'+pid+'/v']=f.v;o['users/'+pid+'/m']=!!f.m;o['users/'+pid+'/d']=DL[f.d];ppRun(o,function(){persView(pid,'Gespeichert.')})}
+else{var id='p'+rnd(6,'abcdefghijklmnopqrstuvwxyz0123456789');o['users/'+id]={n:n,r:f.r,v:f.v,m:!!f.m,d:DL[f.d],x:false,k:rnd(22,ABC62),t:{'.sv':'timestamp'}};
 ppRun(o,function(){persShare(id,n+' ist angelegt. Schick jetzt den Link.')})}});
 if(!pid)try{$('fn').focus()}catch(e){}}
 function persShare(pid,ok){var u=PP.u[pid],l=ppLink(pid);
@@ -1139,20 +1282,36 @@ else if(c==='tare')DS.t[o.v]=9.62;else if(c==='zapf2')DS.zk=.58;else if(c==='pin
 var j=demoStatus();got(j);res(j)},600)})}
 
 // ---------- Designs ----------
-var TKEY='bierwaage.design',theme='verein',tvTheme='verein',pickT=0;
+// Fuenf Designs. Hat der Admin einer Person ein Design zugewiesen, gilt es auf Handy und TV. Sonst ("frei"):
+// Handy im Vereins-Design, am TV waehlt man beim Start.
+var TKEY='bierwaage.design',DKEY='bierwaage.fest',theme='verein',tvTheme='verein',pickT=0;
 var MUG='<svg viewBox="0 0 48 56" aria-hidden="true"><path d="M8 18h26v30a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5z" fill="#ffc531"/><path d="M34 24h5a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6h-5" fill="none" stroke="#fff" stroke-width="4"/><path d="M6 18a6 6 0 0 1 4-10 7 7 0 0 1 12-3 6 6 0 0 1 10 3 5 5 0 0 1 4 10z" fill="#fff"/><path d="M15 27v17M21 27v17M27 27v17" stroke="#fff" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round"/></svg>';
-// Fuer das Design "vtk": liegt neben dieser Datei ein Bild vtk-logo.png, wird es als Logo gezeigt
+var HOP='<svg viewBox="0 0 100 100" fill="none" stroke="#f4f1e8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M50 8c6 6 8 12 6 18"/><path d="M56 26c-14 2-24 14-24 30 0 18 10 32 24 38 14-6 24-20 24-38 0-16-10-28-24-30z"/><path d="M36 46c7 6 13 6 20 0 7 6 13 6 20 0M33 62c8 6 15 6 23 0 8 6 15 6 23 0M38 78c6 5 12 5 18 0 6 5 12 5 18 0"/><path d="M50 8c-12-4-22 0-28 10 10 6 20 4 28-10z"/></svg>';
+// Koch: Liegt das Logo (vtk-logo.png) nicht neben dieser Datei, steht stattdessen der Name da
+function logoFail(i){try{i.parentNode.removeChild(i)}catch(e){}var b=document.querySelectorAll('#brand .club b,#tvhead .tvclub b'),k;for(k=0;k<b.length;k++)if(!b[k].textContent)b[k].textContent='Veranstaltungstechnik Koch';
+var c=document.querySelector('#brand .chip');if(c&&!c.firstChild)c.parentNode.removeChild(c)}
 var THEMES={verein:{title:'Sportverein Blau Weiß Etteln 1923 e.V.',pill:'Bierwaage',logo:'<img src="logo.png" alt="Wappen SV Blau Weiß Etteln">',tc:'#20317f'},
+vtk:{title:'',pill:'Bierwaage',logo:'<img src="vtk-logo.png" alt="Veranstaltungstechnik Koch" onerror="logoFail(this)">',tc:'#06070a'},
 party:{title:'Bierwaage',pill:'Prost!',logo:MUG,tc:'#3a0d6e'},
-vtk:{title:'Veranstaltungstechnik Koch',pill:'Bierwaage',logo:'<img src="vtk-logo.png" alt="" onerror="this.parentNode.removeChild(this)">',tc:'#06070a'}};
+edel:{title:'Bierwaage',pill:'Fassanzeige',logo:'',tc:'#2b2e33'},
+brau:{title:'Bierwaage',pill:'frisch gezapft',logo:HOP,tc:'#313b37'}};
+var DL=['','verein','vtk','party','edel','brau'],DN={'':'frei',verein:'Sportverein',vtk:'Koch',party:'Party',edel:'Edel',brau:'Brauhaus'};
 function setTheme(t){theme=THEMES[t]?t:'verein';var T=THEMES[theme],h='',i;
 document.documentElement.setAttribute('data-theme',theme);$('tc').setAttribute('content',T.tc);
-$('brand').innerHTML='<span class="chip">'+T.logo+'</span><div class="club"><b>'+T.title+'</b><span class="pill">'+T.pill+'</span></div>';
+$('brand').innerHTML=(T.logo?'<span class="chip">'+T.logo+'</span>':'')+'<div class="club"><b>'+T.title+'</b><span class="pill">'+T.pill+'</span></div>';
 $('tvhead').innerHTML=T.logo+'<div class="tvclub"><b>'+T.title+'</b><span>'+T.pill+'</span></div>';
-if(theme==='party'){var col=['#ff2d95','#22e0ff','#ffd60a','#9dff3c','#fff'];h='<i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>';
+if(theme==='verein')h='<i class="pitch"></i>';
+else if(theme==='party'){var col=['#ff2d95','#22e0ff','#ffd60a','#9dff3c','#fff'];h='<i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i>';
 for(i=0;i<16;i++)h+='<i class="cf" style="left:'+(3+i*6.1)+'%;background:'+col[i%5]+';animation-duration:'+(6+(i*7)%5)+'s;animation-delay:-'+((i*13)%9)+'s"></i>'}
-else if(theme==='vtk'){h='<i class="truss"></i>';for(i=0;i<5;i++)h+='<i class="beam'+(i%2?' c':'')+'" style="left:'+(10+i*20)+'%;animation-delay:-'+(i*2.3)+'s"></i>'}
+else if(theme==='vtk'){var cls=['','c','w','c','','w','c'];h='<i class="haze"></i><i class="truss"></i>';
+for(i=0;i<7;i++)h+='<i class="lamp" style="left:'+(7+i*14.3)+'%"></i><i class="beam '+cls[i]+'" style="left:'+(7+i*14.3)+'%;animation-delay:-'+(i*1.7)+'s,-'+(i*.9)+'s"></i>'}
+else if(theme==='edel')h='<i class="frame"></i><i class="frame f2"></i><i class="sheen"></i>';
+else if(theme==='brau'){h='<i class="board"></i><i class="wood t"></i><i class="wood b"></i><i class="hop h1">'+HOP+'</i><i class="hop h2">'+HOP+'</i>';
+for(i=0;i<9;i++)h+='<i class="dust" style="left:'+(6+i*11)+'%;top:'+(70+(i*17)%25)+'%;animation-duration:'+(14+(i*5)%9)+'s;animation-delay:-'+(i*2.3)+'s"></i>'}
 $('fx').innerHTML=h;setTimeout(tvFit,60)}
+// Vom Admin fest zugewiesenes Design ('' = frei) und das Design, das gerade gelten soll
+function fixedDesign(){var m=SIM||ME;return m&&THEMES[m.design]?m.design:''}
+function themeWant(tv){return fixedDesign()||(tv?tvTheme:'verein')}
 function openPick(auto){var saved=null,ps=document.querySelectorAll('.pk'),i,cur=null,left=8;
 try{saved=localStorage.getItem(TKEY)}catch(e){}
 for(i=0;i<ps.length;i++){ps[i].className='pk';ps[i].lastChild.style.width='0';if(ps[i].getAttribute('data-t')===saved)cur=ps[i]}
@@ -1163,7 +1322,7 @@ if(auto&&cur){cur.className='pk cur';
 var say=function(){$('dsgnp').textContent='Startet in '+left+' Sekunden mit dem zuletzt gewählten Design. Tippe auf ein anderes, um zu wechseln.';cur.lastChild.style.width=((8-left+1)/8*100)+'%'};
 setTimeout(say,30);pickT=setInterval(function(){if(--left<=0){choose(saved)}else say()},1000)}}
 function choose(t){clearInterval(pickT);try{localStorage.setItem(TKEY,t)}catch(e){}
-var first=!$('dsgn').hidden;tvTheme=THEMES[t]?t:'verein';setTheme(tvOn()?tvTheme:'verein');$('dsgn').hidden=true;tvPoke();
+var first=!$('dsgn').hidden;tvTheme=THEMES[t]?t:'verein';setTheme(themeWant(tvOn()));$('dsgn').hidden=true;tvPoke();
 if(theme==='verein'&&first)splash()}
 function splash(){var s=$('splash');s.className='splash';s.hidden=false;setTimeout(function(){s.className='splash out'},3600);setTimeout(function(){s.hidden=true},4300)}
 (function(){var ps=document.querySelectorAll('.pk'),i;for(i=0;i<ps.length;i++)ps[i].onclick=function(){choose(this.getAttribute('data-t'))};
@@ -1193,8 +1352,8 @@ for(i=0;i<3;i++){e=$(ids[i]);e.style.fontSize='';if(e.scrollWidth>e.clientWidth+
 function tvClock(){$('tvtime').textContent=hhmm(now())}
 function tvWake(){try{if(navigator.wakeLock&&tvOn()&&!document.hidden)navigator.wakeLock.request('screen').catch(function(){})}catch(e){}}
 // Das Handy bleibt immer im Vereins-Design; die drei Designs gibt es nur in der TV-Ansicht
-function tvApply(){var on=tvWanted();document.body.className=on?'tv':'';
-$('tvoff').hidden=viewOf()===2&&!SIM;$('tvoff').textContent=SIM?'Vorschau beenden':'Handy-Ansicht';$('tvon').hidden=window.innerWidth<900||viewOf()===1;if(theme!==(on?tvTheme:'verein'))setTheme(on?tvTheme:'verein');if(on)closeSheet();tvFit();tvClock();tvWake();tvPoke()}
+function tvApply(){var on=tvWanted(),want=themeWant(on);document.body.className=on?'tv':'';$('tvdsg').hidden=!!fixedDesign();if(fixedDesign())$('dsgn').hidden=true;
+$('tvoff').hidden=viewOf()===2&&!SIM;$('tvoff').textContent=SIM?'Vorschau beenden':'Handy-Ansicht';$('tvon').hidden=window.innerWidth<900||viewOf()===1;if(theme!==want)setTheme(want);if(on)closeSheet();tvFit();tvClock();tvWake();tvPoke()}
 function tvSet(m){vmode=m;try{localStorage.setItem(VKEY,m)}catch(e){}
 if(m==='normal'){try{if(/[?&]tv=1(&|$)/.test(location.search))history.replaceState(null,'',location.pathname+location.search.replace(/([?&])tv=1(&|$)/,'$1').replace(/[?&]$/,'')+location.hash)}catch(e){}tvFull(false)}
 tvApply()}
@@ -1206,7 +1365,7 @@ function tvPoke(e){if(!tvOn())return;var w=$('tvbtnw'),was=w.className!=='tvbtn'
 btnT=setTimeout(function(){w.className='tvbtn';try{if(w.contains(document.activeElement))document.activeElement.blur()}catch(x){}},7000);
 if(e&&e.type==='keydown'&&!was&&$('dsgn').hidden){try{$('tvfull').hidden?$('tvdsg').focus():$('tvfull').focus()}catch(x){}}}
 ['mousemove','mousedown','touchstart','keydown'].forEach(function(n){document.addEventListener(n,tvPoke)});
-$('tvon').onclick=function(){tvSet('tv');if(tvOn())openPick(true)};
+$('tvon').onclick=function(){tvSet('tv');if(tvOn()&&!fixedDesign())openPick(true)};
 $('tvoff').onclick=function(){if(SIM)simEnd();else tvSet('normal')};
 $('tvfull').onclick=function(){tvFull(!(document.fullscreenElement||document.webkitFullscreenElement))};
 if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))$('tvfull').hidden=true;
@@ -1218,11 +1377,12 @@ document.addEventListener('visibilitychange',function(){if(!document.hidden){loo
 try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){fitKey='';fitNums()})}catch(e){}
 
 // ---------- Start ----------
-(function(){var m=/[?&]design=(verein|party|vtk)(&|$)/.exec(Q),saved=null;
-try{saved=localStorage.getItem(TKEY)}catch(e){}
-tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');setTheme('verein');pickOK=!m;
-if(demo){view();stats();if(tvOn()){if(!m)openPick(true)}else splash();return}
-stats();splash();boot()})();
+// Bis feststeht, wer dieses Geraet ist, gilt das zuletzt zugewiesene Design (sonst Verein mit Startbild)
+(function(){var m=/[?&]design=(verein|party|vtk|edel|brau)(&|$)/.exec(Q),saved=null,fest='';
+try{saved=localStorage.getItem(TKEY);fest=localStorage.getItem(DKEY)||''}catch(e){}
+tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');pickOK=!m;
+if(demo){setTheme('verein');view();stats();if(tvOn()){if(!m)openPick(true)}else splash();return}
+setTheme(THEMES[fest]?fest:'verein');stats();if(theme==='verein')splash();boot()})();
 </script>
 </body>
 </html>
