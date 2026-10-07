@@ -357,6 +357,9 @@ font-family:"AvantGarde Bk BT","ITC Avant Garde Gothic","Century Gothic",Montser
 .qr svg{display:block;width:100%;height:auto}
 .sin.lnk{font-size:.82rem;font-weight:600;min-height:46px}
 span.red{color:#a3342a}
+/* Safari (iPhone, iPad): bewegte Inhalte ragten sonst ueber die runden Ecken von Fass und Gasflasche hinaus */
+.keg,.gbody,.tvkeg{isolation:isolate}
+.keg,.gbody{-webkit-mask-image:-webkit-radial-gradient(#fff,#000)}
 </style>
 </head>
 <body>
@@ -729,8 +732,11 @@ $('gabtn').onclick=function(){if(gateKind==='moved'&&gateArg&&gateArg.pid){$('ga
 dput('one/'+gateArg.pid,AU.uid).then(function(){},function(){}).then(function(){$('gabtn').disabled=false;whoT=0;recheck()})}
 else{whoT=0;recheck()}};
 function stopApp(){cfg=null;S=null;clearTimeout(timer);timer=0;waiting=null;closeSheet()}
+// Der Hinweis zum Link (z. B. "Admin-Link stimmt nicht") bleibt stehen, auch wenn die Karte alle paar Sekunden neu geprueft wird
+var pairNote='';
 function access(r){firstDone=true;
-if(r.me){var was=!!cfg;ME=r.me;cfg=1;gateShow(null);
+if(r.gate==='pair'){if(r.note)pairNote=r.note;else r.note=pairNote}
+if(r.me){var was=!!cfg;pairNote='';ME=r.me;cfg=1;gateShow(null);
 if(!was){view();if(tvOn()&&pickOK){pickOK=false;openPick(true)}}else regate()}
 else{ME=null;SIM=null;if(cfg)stopApp();gateShow(r);view()}}
 // Zugang pruefen: beim Start, danach jede Minute; ohne Zugang alle paar Sekunden (damit es nach dem Freischalten gleich losgeht)
