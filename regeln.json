@@ -1,0 +1,184 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "bierwaage": {
+      "$code": {
+        "status": {
+          ".read": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 1 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          ".write": "auth != null && root.child('bierwaage').child($code).child('scales').child(auth.uid).val() === 'X9ollG6ozJGZFDPd8rxyC2St'"
+        },
+        "hist": {
+          ".read": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 1 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          "$b": {
+            ".write": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 1 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+            ".validate": "$b.matches(/^b[0-9]+$/) && $b.length <= 12",
+            "l": {
+              ".validate": "newData.isNumber()"
+            },
+            "k": {
+              ".validate": "newData.isNumber()"
+            },
+            "e": {
+              ".validate": "newData.isNumber()"
+            },
+            "h": {
+              ".validate": "newData.isNumber()"
+            },
+            "p": {
+              ".validate": "newData.isNumber()"
+            },
+            "a": {
+              ".validate": "newData.isNumber()"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "cmd": {
+          ".read": "auth != null && root.child('bierwaage').child($code).child('scales').child(auth.uid).val() === 'X9ollG6ozJGZFDPd8rxyC2St'",
+          ".write": "auth != null && ((root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid))) || ((root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 2 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)) && (!newData.exists() || newData.child('lvl').val() === 1)))",
+          ".validate": "newData.hasChildren(['id','c','lvl']) && (newData.child('lvl').val() === 1 || (newData.child('lvl').val() === 2 && (auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid))))))",
+          "id": {
+            ".validate": "newData.isString() && newData.val().length <= 19 && newData.val().matches(/^[A-Za-z0-9_-]+$/)"
+          },
+          "c": {
+            ".validate": "newData.isString() && newData.val().length <= 11 && newData.val().matches(/^[a-z0-9]+$/)"
+          },
+          "s": {
+            ".validate": "newData.isString() && newData.val().length <= 11 && newData.val().matches(/^[A-Za-z0-9_-]+$/)"
+          },
+          "pin": {
+            ".validate": "newData.isNumber() || (newData.isString() && newData.val().length <= 8 && newData.val().matches(/^[0-9]+$/))"
+          },
+          "v": {
+            ".validate": "newData.isNumber()"
+          },
+          "v2": {
+            ".validate": "newData.isNumber()"
+          },
+          "v3": {
+            ".validate": "newData.isNumber()"
+          },
+          "keg": {
+            ".validate": "newData.isNumber()"
+          },
+          "lvl": {
+            ".validate": "newData.val() === 1 || newData.val() === 2"
+          },
+          "$other": {
+            ".validate": false
+          }
+        },
+        "owners": {
+          ".read": "auth != null && root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI'",
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid",
+            ".write": "auth != null && ((auth.uid === $uid && (!newData.exists() || newData.val() === '6KAJq17lTErYmsyMwNuUBXcI')) || (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' && !newData.exists()))"
+          }
+        },
+        "scales": {
+          ".read": "auth != null && root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI'",
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid",
+            ".write": "auth != null && ((auth.uid === $uid && (!newData.exists() || newData.val() === 'X9ollG6ozJGZFDPd8rxyC2St')) || (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' && !newData.exists()))"
+          }
+        },
+        "users": {
+          ".read": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          ".write": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          "$pid": {
+            ".read": "auth != null && root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val() === $pid && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val()",
+            ".validate": "$pid.matches(/^[a-z0-9]+$/) && $pid.length <= 20 && newData.hasChildren(['n','r','v','m','k'])",
+            "n": {
+              ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 40"
+            },
+            "r": {
+              ".validate": "newData.val() === 1 || newData.val() === 2 || newData.val() === 3"
+            },
+            "v": {
+              ".validate": "newData.val() === 1 || newData.val() === 2 || newData.val() === 3"
+            },
+            "m": {
+              ".validate": "newData.isBoolean()"
+            },
+            "x": {
+              ".validate": "newData.isBoolean()"
+            },
+            "k": {
+              ".validate": "newData.isString() && newData.val().length >= 16 && newData.val().length <= 40 && newData.val().matches(/^[A-Za-z0-9]+$/)"
+            },
+            "d": {
+              ".validate": "newData.isString() && newData.val().length <= 12"
+            },
+            "t": {
+              ".validate": "newData.isNumber()"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "dev": {
+          ".read": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          ".write": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid",
+            ".write": "auth != null && auth.uid === $uid && (!newData.exists() || (newData.child('p').isString() && root.child('bierwaage').child($code).child('users').child(newData.child('p').val()).child('k').val() === newData.child('k').val()))",
+            ".validate": "newData.hasChildren(['p','k'])",
+            "p": {
+              ".validate": "newData.isString() && newData.val().length <= 20 && newData.val().matches(/^[a-z0-9]+$/)"
+            },
+            "k": {
+              ".validate": "newData.isString() && newData.val().length <= 40 && newData.val().matches(/^[A-Za-z0-9]+$/)"
+            },
+            "t": {
+              ".validate": "newData.isNumber()"
+            },
+            "a": {
+              ".validate": "newData.isString() && newData.val().length <= 40"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        },
+        "one": {
+          ".read": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          ".write": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          "$pid": {
+            ".read": "auth != null && root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val() === $pid && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val()",
+            ".write": "auth != null && root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val() === $pid && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && (newData.val() === auth.uid || (data.val() === auth.uid && !newData.exists()))",
+            ".validate": "newData.isString() && newData.val().length <= 128"
+          }
+        },
+        "join": {
+          ".read": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          ".write": "auth != null && (root.child('bierwaage').child($code).child('owners').child(auth.uid).val() === '6KAJq17lTErYmsyMwNuUBXcI' || (root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').isString() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('k').val() === root.child('bierwaage').child($code).child('dev').child(auth.uid).child('k').val() && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('x').val() !== true && root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('r').val() >= 3 && (root.child('bierwaage').child($code).child('users').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).child('m').val() === true || root.child('bierwaage').child($code).child('one').child(root.child('bierwaage').child($code).child('dev').child(auth.uid).child('p').val()).val() === auth.uid)))",
+          ".indexOn": [
+            "c",
+            "t"
+          ],
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid",
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.hasChildren(['c','t'])",
+            "c": {
+              ".validate": "newData.isString() && newData.val().length === 6 && newData.val().matches(/^[A-Z0-9]+$/)"
+            },
+            "t": {
+              ".validate": "newData.isNumber() && newData.val() <= now && newData.val() >= now - 60000"
+            },
+            "a": {
+              ".validate": "newData.isString() && newData.val().length <= 40"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      }
+    }
+  }
+}
