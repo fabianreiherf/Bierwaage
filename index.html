@@ -1387,6 +1387,20 @@ setInterval(function(){var o=[[0,0],[.5,.3],[0,.6],[-.5,.3],[0,0],[.5,-.3],[0,-.
 document.addEventListener('visibilitychange',function(){if(!document.hidden){loop();tvWake()}else flush()});
 try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){fitKey='';fitNums()})}catch(e){}
 
+// ---------- Neue Fassung der Seite von selbst laden ----------
+// Handys und Fernseher halten eine alte Seite sonst noch eine Weile im Zwischenspeicher fest. Die Seite fragt deshalb
+// beim Start (und danach alle 30 Minuten) am Zwischenspeicher vorbei nach, ob es eine neuere Fassung gibt, und laedt sie.
+var VER='e2.202610072153';
+function verCheck(){if(demo||!/^https?:/.test(location.protocol))return;
+fetch(location.pathname+'?frisch='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(t){
+var m=/var VER='([A-Za-z0-9._-]+)'/.exec(t);if(!m||m[1]===VER)return;
+if(!$('ov').hidden||waiting){setTimeout(verCheck,60000);return}           // nicht mitten in einer Eingabe
+var q=(location.search||'').replace(/^\?/,'').split('&'),o=[],i,tried=false;
+for(i=0;i<q.length;i++){if(!q[i])continue;if(q[i].indexOf('v=')===0){if(q[i]==='v='+m[1])tried=true}else o.push(q[i])}
+if(tried)return;                                                          // schon versucht: nicht im Kreis laden
+o.push('v='+m[1]);location.replace(location.pathname+'?'+o.join('&')+location.hash)}).catch(function(){})}
+setTimeout(verCheck,2500);setInterval(verCheck,1800000);
+
 // ---------- Start ----------
 // Bis feststeht, wer dieses Geraet ist, gilt das zuletzt zugewiesene Design (sonst Verein mit Startbild)
 // Ist auf diesem Geraet noch gar nichts bekannt (allererstes Oeffnen), bleibt der Bildschirm kurz dunkel,
