@@ -491,6 +491,9 @@ span.red{color:var(--err)}
 .pick2 svg rect[fill="#20317f"]{fill:var(--kegline)}
 html[data-theme="party"] .pick2 svg rect[fill="#20317f"],html[data-theme="vtk"] .pick2 svg rect[fill="#20317f"]{fill:var(--acc)}
 @media (max-width:899px){#fx .hop.h2{display:none}}
+/* allererstes Oeffnen: kurz dunkel, bis das Design feststeht */
+html.wait,html.wait body{background:#0c0e12}
+html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
 .gl7.d5{grid-template-columns:1fr 1fr}
 </style>
 </head>
@@ -785,11 +788,15 @@ if(me.multi)return{me:me};
 return dget('one/'+dev.p).then(function(o){if(o===uid)return{me:me};
 if(o==null||L)return dput('one/'+dev.p,uid).then(function(){return{me:me}});
 return{gate:'moved',pid:dev.p}})})})}
+// Steht ein persoenlicher Link in der Adresse, zeigt dieses Geraet die Seite als diese Person, auch wenn es sonst Admin ist
+// (so laesst sich ein Link auf dem eigenen Geraet ausprobieren). Ohne Link oder mit dem Admin-Link gilt wieder der Admin.
+function ownerCheck(uid){return dget('owners/'+uid).then(function(o){return o!=null?{me:{owner:true,name:'Admin',role:3,view:3,multi:true,design:''}}:null})}
 function whoami(first){var uid;
 return token().then(function(){uid=AU.uid;
 if(first&&LINK&&LINK.w)return dput('owners/'+uid,LINK.w).then(function(){},function(e){if(e.message!=='401')throw e})})
-.then(function(){return dget('owners/'+uid)})
-.then(function(o){if(o!=null)return{me:{owner:true,name:'Admin',role:3,view:3,multi:true}};return memberCheck(first)})}
+.then(function(){
+if(LINK&&LINK.p)return memberCheck(first).then(function(r){return r.me?r:ownerCheck(uid).then(function(o){return o||r})});
+return ownerCheck(uid).then(function(o){return o||memberCheck(first)})})}
 function fail(e){var s=e&&e.message;if(s==='401'||s==='403'){state('Zugriff verweigert',false);if(Date.now()-whoT>4000)recheck()}else state('Keine Verbindung',false)}
 function got(j){
 if(!j||typeof j.liters!=='number'){$('nodata').hidden=false;state('Keine Daten',false);warnOK=liveOK=false;grow();tvm('Von der Waage sind noch keine Daten da.',false,true);stats();return}
@@ -844,7 +851,8 @@ if(k>1.2)w.style.webkitTransform=w.style.transform='scale('+k.toFixed(2)+')'}
 function pairStart(){if(!AU.uid)return;if(!pairCode)pairCode=rnd(6,'ABCDEFGHJKLMNPQRSTUVWXYZ23456789');
 if(pairUid===AU.uid&&Date.now()-pairAt<600000)return;
 dput('join/'+AU.uid,{c:pairCode,t:{'.sv':'timestamp'},a:devName()}).then(function(){pairUid=AU.uid;pairAt=Date.now()},function(){})}
-function gateShow(r){var k=r?r.gate:'',T,sub='',btn='',code='';gateKind=k;gateArg=r;$('gate').hidden=!k||demo;
+function gateShow(r){var k=r?r.gate:'',T,sub='',btn='',code='';gateKind=k;gateArg=r;
+if(k&&k!=='load'&&waitFirst)waitEnd();$('gate').hidden=!k||demo;
 if(!k){gateFit();return}
 if(k==='load')T=['Verbinde …','Einen Moment.'];
 else if(k==='konf')T=['Einrichtung fehlt','Die Datei konfig.js fehlt noch oder ist nicht vollständig ausgefüllt. Sie gehört neben die Datei index.html und enthält die Adresse der Datenbank, den Web-API-Schlüssel und den Code.'];
@@ -870,8 +878,9 @@ function stopApp(){cfg=null;S=null;clearTimeout(timer);timer=0;waiting=null;clos
 var pairNote='';
 function access(r){firstDone=true;
 if(r.gate==='pair'){if(r.note)pairNote=r.note;else r.note=pairNote}
-if(r.me){var was=!!cfg;pairNote='';ME=r.me;cfg=1;gateShow(null);try{localStorage.setItem(DKEY,fixedDesign())}catch(e){}
+if(r.me){var was=!!cfg;pairNote='';ME=r.me;cfg=1;gateShow(null);try{localStorage.setItem(DKEY,THEMES[ME.design]?ME.design:'')}catch(e){}
 if(fixedDesign()&&fixedDesign()!=='verein')$('splash').hidden=true;
+if(waitFirst){waitEnd();if(themeWant(tvWanted())==='verein')splash()}
 if(!was){view();if(tvOn()&&pickOK&&!fixedDesign()){pickOK=false;openPick(true)}}else regate()}
 else{ME=null;SIM=null;if(cfg)stopApp();gateShow(r);view()}}
 // Zugang pruefen: beim Start, danach jede Minute; ohne Zugang alle paar Sekunden (damit es nach dem Freischalten gleich losgeht)
@@ -1310,6 +1319,8 @@ else if(theme==='brau'){h='<i class="board"></i><i class="wood t"></i><i class="
 for(i=0;i<9;i++)h+='<i class="dust" style="left:'+(6+i*11)+'%;top:'+(70+(i*17)%25)+'%;animation-duration:'+(14+(i*5)%9)+'s;animation-delay:-'+(i*2.3)+'s"></i>'}
 $('fx').innerHTML=h;setTimeout(tvFit,60)}
 // Vom Admin fest zugewiesenes Design ('' = frei) und das Design, das gerade gelten soll
+var waitFirst=false;
+function waitEnd(){waitFirst=false;var e=document.documentElement;e.className=e.className.split(' wait').join('')}
 function fixedDesign(){var m=SIM||ME;return m&&THEMES[m.design]?m.design:''}
 function themeWant(tv){return fixedDesign()||(tv?tvTheme:'verein')}
 function openPick(auto){var saved=null,ps=document.querySelectorAll('.pk'),i,cur=null,left=8;
@@ -1378,11 +1389,15 @@ try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function()
 
 // ---------- Start ----------
 // Bis feststeht, wer dieses Geraet ist, gilt das zuletzt zugewiesene Design (sonst Verein mit Startbild)
-(function(){var m=/[?&]design=(verein|party|vtk|edel|brau)(&|$)/.exec(Q),saved=null,fest='';
-try{saved=localStorage.getItem(TKEY);fest=localStorage.getItem(DKEY)||''}catch(e){}
+// Ist auf diesem Geraet noch gar nichts bekannt (allererstes Oeffnen), bleibt der Bildschirm kurz dunkel,
+// bis feststeht, welches Design gilt. So blitzt bei einem zugewiesenen Design nicht erst das Vereins-Startbild auf.
+(function(){var m=/[?&]design=(verein|party|vtk|edel|brau)(&|$)/.exec(Q),saved=null,fest=null;
+try{saved=localStorage.getItem(TKEY);fest=localStorage.getItem(DKEY)}catch(e){fest=''}
 tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');pickOK=!m;
 if(demo){setTheme('verein');view();stats();if(tvOn()){if(!m)openPick(true)}else splash();return}
-setTheme(THEMES[fest]?fest:'verein');stats();if(theme==='verein')splash();boot()})();
+setTheme(THEMES[fest]?fest:'verein');stats();
+if(fest===null&&konfOk()){waitFirst=true;document.documentElement.className+=' wait'}else if(theme==='verein')splash();
+boot()})();
 </script>
 </body>
 </html>
