@@ -495,6 +495,109 @@ html[data-theme="party"] .pick2 svg rect[fill="#20317f"],html[data-theme="vtk"] 
 html.wait,html.wait body{background:#0c0e12}
 html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
 .gl7.d5{grid-template-columns:1fr 1fr}
+/* ================= Etappe 3: Spiele ================= */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chips button{min-height:40px;padding:0 13px;border-radius:999px;border:1.5px solid var(--inline);background:transparent;color:var(--fg);font:inherit;font-size:.9rem;font-weight:700;cursor:pointer}
+.chips button.on{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.grp{margin:0 0 10px;padding:10px 12px;border-radius:14px;background:var(--field)}
+.grp .gh{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:700}
+.grp .gh small{display:block;font-size:.8rem;font-weight:500;color:var(--muted)}
+.stp{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.92rem}
+.stp span{flex:1;min-width:0}
+.stp button[data-k]{flex:none;width:40px;height:38px;border-radius:10px;border:0;background:var(--acc);color:var(--acc-ink);font:inherit;font-size:1.2rem;font-weight:700;cursor:pointer}
+.stp b{flex:none;min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums}
+.stp .tog{min-width:0}
+/* ================= TV: Spiele ================= */
+.tvchart.narrow{width:64em}
+.tvchart.narrow .plot{width:52em}
+.tvchart.narrow .cempty{width:52em}
+.tvchart.narrow .ce b{font-size:2.1em}
+.tvgame{left:112.5em;top:50em;width:39.5em;height:26.5em;border-radius:2.6em;background:var(--panel);border:1px solid var(--panelline);overflow:hidden}
+.tvgame>*{position:absolute}
+.gw{left:0;top:0;width:100%;height:100%}
+.gw>*{position:absolute}
+.gw h3{left:2.2em;top:1.5em;margin:0;font-size:1em}
+.gw h3 b{font-size:2.5em;font-weight:700;line-height:1}
+.gdots{left:0;right:0;bottom:1.1em;text-align:center}
+.gdots i{display:inline-block;width:.9em;height:.9em;margin:0 .35em;border-radius:50%;background:rgba(255,255,255,.3)}
+.gdots i.on{background:#fff}
+.gz{left:2.2em;top:6.6em;width:16em;height:16em}
+.gz svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gz circle{fill:none;stroke-width:9}
+.gz .r0{stroke:rgba(255,255,255,.16)}
+.gz .r1{stroke:var(--bar);stroke-linecap:round;transition:stroke-dashoffset 1s linear}
+.gz div{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center}
+.gz div b{display:block;font-family:var(--num);font-size:6.4em;font-weight:800;line-height:1}
+.gz div span{display:block;font-size:1.9em;font-weight:600;color:rgba(255,255,255,.75)}
+.gt{left:20em;top:8em;width:18em}
+.gt p{margin:0 0 .5em}
+.gt p b{display:block;font-family:var(--num);font-size:4.4em;font-weight:800;line-height:1.05;font-variant-numeric:tabular-nums}
+.gt p span{display:block;font-size:2em;font-weight:600;line-height:1.25;color:rgba(255,255,255,.8)}
+.gr{left:2.2em;right:2.2em;top:6.8em}
+.gr p{margin:0 0 .25em;font-size:1em}
+.gr p span{font-size:2em;font-weight:600;color:rgba(255,255,255,.82)}
+.gr .rb{position:relative;height:2.4em;margin-bottom:1.3em;border-radius:1.2em;background:rgba(255,255,255,.14);overflow:hidden}
+.gr .rb i{position:absolute;left:0;top:0;bottom:0;border-radius:1.2em;background:rgba(255,255,255,.5);transition:width 1s}
+.gr .rb i.me{background:var(--bar)}
+.gr .rv b{font-size:2.5em;font-weight:700}
+.gtq{left:1.8em;top:5.3em;width:17.2em;height:17.2em;padding:.8em;border-radius:1em;background:#fff}
+.gtq svg{display:block;width:100%;height:100%}
+.gtl{left:21em;top:6.1em;right:1.4em}
+.gtl p{margin:0 0 .3em;font-size:1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gtl p span{font-size:1.8em;font-weight:600}
+.gtl p b{font-size:1.8em;font-weight:800;margin-right:.45em;font-variant-numeric:tabular-nums}
+.gtl p.m span{color:rgba(255,255,255,.7);font-size:1.6em}
+.gtf{left:21em;right:1.4em;top:19.2em}
+.gtf span{display:block;font-size:1.7em;font-weight:700;line-height:1.2;color:rgba(255,255,255,.9)}
+.gf{left:0;right:0;top:6.4em;text-align:center;white-space:nowrap}
+.gf b{display:inline-block;font-family:var(--num);font-size:8.4em;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.gfl{left:5em;right:5em;top:15em;display:flex;justify-content:space-between}
+.gfl span{font-size:2.1em;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.8)}
+.gf2{left:2.2em;right:2.2em;top:18.6em;text-align:center}
+.gf2 span{font-size:2.1em;font-weight:600;color:rgba(255,255,255,.8)}
+.gf2 div{height:1.1em;margin-top:.7em;border-radius:.6em;background:rgba(255,255,255,.16);overflow:hidden}
+.gf2 div i{display:block;height:100%;background:var(--bar);transition:width 1s linear}
+/* Zapf-Ticker: kleine Marke am Fass */
+.tvpop{left:26em;top:20.5em;z-index:4}
+.tvpop b{display:block;padding:.3em .8em;border-radius:99em;background:var(--pill);color:var(--pill-ink);font-family:var(--num);font-size:4.2em;font-weight:800;white-space:nowrap;box-shadow:0 .25em .8em rgba(0,0,0,.4);animation:popIn 2.4s ease both}
+/* grosses Ereignis */
+.tvev{left:0;top:0;width:160em;height:90em;z-index:7;background:rgba(6,8,20,.72);animation:evIn .35s ease both}
+.tvev .evin{position:absolute;left:22em;top:19em;width:116em;height:52em;border-radius:4em;background:var(--pill);color:var(--pill-ink);text-align:center;overflow:hidden;box-shadow:0 2em 6em rgba(0,0,0,.6);animation:evPop .6s cubic-bezier(.2,1.5,.4,1) both}
+.tvev.win .evin{background:#1f9d57;color:#fff}
+.tvev.fail .evin{background:var(--warn);color:#fff}
+.tvev .evc{position:absolute;left:3em;right:3em;top:50%;z-index:2;transform:translateY(-50%)}
+.tvev b{display:block;font-family:var(--num);font-size:13em;font-weight:800;line-height:1}
+.tvev.jub b{font-size:20em}
+.tvev span{display:block;margin-top:.25em;font-size:5.2em;font-weight:700;line-height:1.15}
+.tvev small{display:block;margin-top:.5em;font-size:3.2em;font-weight:600;opacity:.9}
+.tvev .cfb{position:absolute;top:-4em;width:1.6em;height:3em;border-radius:.4em;animation:cfb linear both}
+.tvflash{left:0;top:0;width:160em;height:90em;z-index:8;background:#e0261c;pointer-events:none;animation:flash .5s steps(1) infinite}
+/* Flaute */
+.tvfl{left:0;top:0;width:160em;height:90em;z-index:5;background:rgba(6,8,20,.86);text-align:center}
+.tvfl b{position:absolute;left:0;right:0;top:2.7em;font-family:var(--num);font-size:12em;font-weight:800;line-height:1}
+.tvfl span{position:absolute;left:0;right:0;top:11.2em;font-size:4.4em;font-weight:600}
+.tvfl i{position:absolute;left:50%;font-family:var(--num);font-style:normal;font-weight:800;opacity:0;animation:zzz 3s ease-in infinite}
+.tvfl i.z1{top:4.6em;font-size:5em;margin-left:-.5em}
+.tvfl i.z2{top:2.5em;font-size:7em;margin-left:.4em;animation-delay:1s}
+.tvfl i.z3{top:1.3em;font-size:9em;margin-left:1.1em;animation-delay:2s}
+@keyframes popIn{0%{opacity:0;transform:scale(.3) rotate(-10deg)}12%{opacity:1;transform:scale(1.15) rotate(3deg)}20%{transform:scale(1) rotate(0)}80%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-2em)}}
+@keyframes evIn{from{opacity:0}to{opacity:1}}
+@keyframes evPop{from{transform:scale(.6)}to{transform:scale(1)}}
+@keyframes cfb{from{transform:translate3d(0,0,0) rotate(0)}to{transform:translate3d(6em,70em,0) rotate(760deg)}}
+@keyframes flash{0%{opacity:.85}50%{opacity:0}}
+@keyframes zzz{0%{opacity:0;transform:translate(0,2em) scale(.6)}30%{opacity:1}100%{opacity:0;transform:translate(2em,-4em) scale(1.1)}}
+/* Auswahl der Spiele beim Start der TV-Ansicht */
+#gsel .pks{max-width:38em;margin:0 auto}
+.pk .pv.gs{flex-direction:column;height:8.4em;background:linear-gradient(160deg,#2c3454,#161a2e)}
+.pk .pv.gs b{font-size:1.5em}
+.pk .pv.gs small{font-size:.8em;margin-top:.5em;color:rgba(255,255,255,.75)}
+/* Tippspiel fuer Gaeste (Seite hinter dem QR-Code) */
+#tipf{text-align:left}
+#tipf .slab{margin:0 0 6px}
+#tipf .sin{text-align:center;margin:0}
+#tipf .btn{display:block;width:100%}
+.gate p.tipok{padding:10px 12px;border-radius:12px;background:#e6f6ec;color:#16733f;font-weight:700}
+.gate p.serr{color:#a3342a}
 </style>
 </head>
 <body>
@@ -512,6 +615,17 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
   </div>
 </div></div>
 
+<div class="dsgn" id="gsel" hidden><div class="dsin">
+  <h1>Spiele für heute</h1>
+  <p id="gselp"></p>
+  <div class="pks">
+    <button type="button" class="pk" data-g="stat"><span class="pv gs"><b>0 Spiele</b><small>Fass, Zahlen, Diagramm</small></span><strong>Nur Statistik</strong><small>ruhige Anzeige ohne Spiele</small><em></em></button>
+    <button type="button" class="pk" data-g="fest"><span class="pv gs"><b>6 Spiele</b><small>Rundenziel, Ticker, Jubiläum, Rekord, Tippspiel, Flaute</small></span><strong>Vereinsfest</strong><small>die volle Runde für einen langen Abend</small><em></em></button>
+    <button type="button" class="pk" data-g="ruhig"><span class="pv gs"><b>2 Spiele</b><small>Zapf-Ticker und Jubiläumsbier</small></span><strong>Ruhiger Abend</strong><small>etwas Bewegung, keine Aufgaben</small><em></em></button>
+    <button type="button" class="pk" data-g="alles"><span class="pv gs"><b>7 Spiele</b><small>alles, auch der Fußball-Modus</small></span><strong>Alles an</strong><small>zum Ausprobieren</small><em></em></button>
+  </div>
+</div></div>
+
 <div class="splash" id="splash" aria-hidden="true" hidden>
   <div class="mark"><span class="glow"></span><span class="ring"></span><span class="ring r2"></span><img src="logo.png" alt=""></div>
   <div class="sname">Sportverein Blau Weiß Etteln 1923 e.V.</div>
@@ -526,6 +640,20 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
     <div class="gcode" id="gacode" hidden></div>
     <p class="gsub" id="gasub" hidden></p>
     <button type="button" class="btn" id="gabtn" hidden></button>
+  </section>
+  <section class="card gate in" id="tipc" hidden>
+    <h2>Tippspiel: Wann ist das Fass leer?</h2>
+    <p id="tipp"></p>
+    <div id="tipf" hidden>
+      <label class="slab" for="tipn">Dein Name</label>
+      <input class="sin" id="tipn" type="text" maxlength="18" autocomplete="nickname" enterkeyhint="next">
+      <label class="slab" for="tipt" style="margin-top:12px">Leer um (Uhrzeit)</label>
+      <input class="sin" id="tipt" type="time">
+      <p class="serr" id="tiperr" style="margin-top:12px" hidden></p>
+      <button type="button" class="btn" id="tipgo" style="margin-top:12px">Tipp abgeben</button>
+    </div>
+    <p class="tipok" id="tipok" hidden></p>
+    <button type="button" class="btn" id="tipre" hidden>Neu laden</button>
   </section>
   <div id="app">
   <div class="seg in" id="segw" style="animation-delay:.05s">
@@ -602,6 +730,7 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
   <div class="who" id="who" hidden></div>
   <div class="foot">
     <button type="button" id="pers" hidden>Personen</button>
+    <button type="button" id="games" hidden>Spiele</button>
     <button type="button" id="tvon">TV-Ansicht</button>
   </div>
   </div>
@@ -644,8 +773,8 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
   <div class="tvtile t1"><b id="tvgl">0</b><span>Bier noch<br>im Fass</span><small>à <i id="tvgs" style="font-style:normal">0,5</i> L</small></div>
   <div class="tvtile t2" id="tvt2"><b id="tvtot">0</b><span>Bier<br>gezapft</span><small id="tvsince"></small></div>
   <div class="tvtile t3"><b id="tvhour">0</b><span>Bier in der<br>letzten Stunde</span></div>
-  <div class="tvchart">
-   <div class="ct"><b>Gezapfte Biere je 10 Minuten</b></div>
+  <div class="tvchart" id="tvchart">
+   <div class="ct"><b id="tvct">Gezapfte Biere je 10 Minuten</b></div>
    <div class="ce"><b id="tveta"></b></div>
    <div class="plot">
     <div class="gl" style="top:0"><span id="tvy2">4</span></div>
@@ -655,9 +784,14 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
    </div>
    <div class="cempty" id="tvcempty"><span>Noch nichts gezapft. Die Statistik füllt sich mit dem ersten Bier.</span></div>
   </div>
+  <div class="tvgame" id="tvgame" hidden><div class="gw" id="gw"></div><div class="gdots" id="gdots"></div></div>
+  <div class="tvpop" id="tvpop" hidden></div>
+  <div class="tvfl" id="tvfl" hidden><i class="z1">z</i><i class="z2">z</i><i class="z3">Z</i><b>Flaute!</b><span id="tvflt"></span></div>
+  <div class="tvflash" id="tvflash" hidden></div>
+  <div class="tvev" id="tvev" hidden><div class="evin"><div id="evcf"></div><div class="evc"><b id="ev1"></b><span id="ev2"></span><small id="ev3"></small></div></div></div>
   <div class="tvmsgw"><div class="tvmsg" id="tvmsg" hidden></div></div>
   <div class="tvgrow" id="tvgrow"><div><b id="tvg1"></b><span id="tvg2"></span><small id="tvg3"></small></div></div>
-  <div class="tvbtn" id="tvbtnw"><span id="tvbtn"><button type="button" id="tvfull">Vollbild</button><button type="button" id="tvdsg">Design</button><button type="button" id="tvoff">Handy-Ansicht</button></span></div>
+  <div class="tvbtn" id="tvbtnw"><span id="tvbtn"><button type="button" id="tvfull">Vollbild</button><button type="button" id="tvdsg">Design</button><button type="button" id="tvgam" hidden>Spiele</button><button type="button" id="tvoff">Handy-Ansicht</button></span></div>
  </div>
 </div>
 
@@ -665,6 +799,8 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
 <script>
 var $=function(i){return document.getElementById(i)},Q=location.search||'';
 var demo=/[?&]demo=1(&|$)/.test(Q),T0=Date.now();
+// Seite hinter dem QR-Code des Tippspiels: Adresse mit ?tipp=1. Gaeste brauchen dafuer keinen Zugang.
+var tipMode=/[?&]tipp=1(&|$)/.test(Q)&&!demo;
 // In der Vorfuehrung (?demo=1) laeuft die Zeit 60-mal schneller, damit man die Statistik wandern sieht
 function now(){return demo?T0+(Date.now()-T0)*60:Date.now()}
 function fmt(v,d){return v.toFixed(d).replace('.',',')}
@@ -713,7 +849,7 @@ function tvm(t,low,stale){var m=$('tvmsg');m.textContent=t;m.hidden=!t;m.classNa
 // ---------- Warnung der letzten 10 Bier: je leerer das Fass, desto groesser ----------
 var growKey='';
 function grow(){var g=$('tvgrow'),n=Math.floor((shown+.02)/glass);
-if(!warnOK||n>10){if(growKey){growKey='';g.className='tvgrow';g.style.height=''}return}
+if(!warnOK||n>10||!G.hints.last10){if(growKey){growKey='';g.className='tvgrow';g.style.height=''}return}
 if(growKey===''+n)return;growKey=''+n;
 var k=(10-n)/10,h=9+57*Math.pow(k,1.15),a=$('tvg1'),b=$('tvg2'),c=$('tvg3'),big=h>=20;
 if(n===0){a.textContent='Fass leer!';a.style.fontSize='15em';b.textContent='Bitte Fass wechseln';b.style.fontSize='5.4em';c.textContent=''}
@@ -820,7 +956,7 @@ else if(!j.sensor)tvm('Wägezelle nicht verbunden',false,true);
 else if(j.empty)tvm('Kein Fass auf der Waage',false,false);
 else if(!$('warn').hidden&&Math.floor((j.liters+.02)/glass)>10)tvm('Fass fast leer – Nachschub bestellen!',true,false);
 else tvm('',false,false);
-stats()}
+stats();GAME.tick(j,LASTS)}
 function load(){if(document.hidden)return;if(demo){got(demoStatus());return}if(!cfg)return;dget('status').then(function(j){if(cfg)got(j)}).catch(fail)}
 // Abfrage-Takt: zuegig, solange ein Dialog offen ist, eine Antwort aussteht oder ein Produkt gewogen wird
 function fastUI(){return !$('ov').hidden||!!waiting||!!(S&&S.mode)}
@@ -832,12 +968,12 @@ for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',i===k);state('Stelle um
 dput('cmd',{id:'k'+Date.now().toString(36),c:'keg',v:k,keg:k,lvl:1}).catch(function(e){pend=-1;fail(e)})}
 function lockUI(){var ro=!can(2),i,ids=['k0','k1','k2','zpill','gt1','gt2','itare'];for(i=0;i<ids.length;i++)$(ids[i]).disabled=ro;$('gback').hidden=$('iback').hidden=ro}
 function foot(){var m=SIM||ME,w=$('who');
-if(demo||!m){w.hidden=true;$('pers').hidden=true;return}
+if(demo||!m){w.hidden=true;$('pers').hidden=true;$('games').hidden=!demo;return}
 w.hidden=false;
 w.innerHTML=SIM?'Vorschau als <b>'+esc(SIM.name)+'</b> ('+RN[SIM.role]+', '+VN[SIM.view]+') <button type="button" id="simoff">Beenden</button>'
 :(ME.owner?'Du bist <b>Admin</b>':'Angemeldet als <b>'+esc(ME.name)+'</b> · '+RN[ME.role]);
 if(SIM)$('simoff').onclick=simEnd;
-$('pers').hidden=!!SIM||ME.role<3}
+$('pers').hidden=$('games').hidden=!!SIM||ME.role<3}
 function simEnd(){SIM=null;regate()}
 function regate(){foot();lockUI();if(S)modeView(S);tvApply()}
 function view(){var on=!!cfg||demo;$('gate').hidden=on||!gateKind;$('app').hidden=!on;foot();lockUI();tvApply();
@@ -881,10 +1017,10 @@ if(r.gate==='pair'){if(r.note)pairNote=r.note;else r.note=pairNote}
 if(r.me){var was=!!cfg;pairNote='';ME=r.me;cfg=1;gateShow(null);try{localStorage.setItem(DKEY,THEMES[ME.design]?ME.design:'')}catch(e){}
 if(fixedDesign()&&fixedDesign()!=='verein')$('splash').hidden=true;
 if(waitFirst){waitEnd();if(themeWant(tvWanted())==='verein')splash()}
-if(!was){view();if(tvOn()&&pickOK&&!fixedDesign()){pickOK=false;openPick(true)}}else regate()}
+if(!was){view();if(tvOn()&&pickOK&&!fixedDesign()){pickOK=false;openPick(true)}else adminTvStart()}else regate()}
 else{ME=null;SIM=null;if(cfg)stopApp();gateShow(r);view()}}
 // Zugang pruefen: beim Start, danach jede Minute; ohne Zugang alle paar Sekunden (damit es nach dem Freischalten gleich losgeht)
-function recheck(){if(demo||whoBusy||!konfOk())return;whoT=Date.now();whoBusy=true;
+function recheck(){if(demo||tipMode||whoBusy||!konfOk())return;whoT=Date.now();whoBusy=true;
 whoami(!firstDone).then(function(r){whoBusy=false;access(r)},function(e){whoBusy=false;var s=(e&&e.message)||'';
 if(/^auth:/.test(s)){ME=null;SIM=null;if(cfg)stopApp();gateShow({gate:'auth',err:s.slice(5)});view()}
 else if(!cfg){gateShow({gate:'net'});view()}})}
@@ -1199,7 +1335,7 @@ return '<svg viewBox="0 0 '+(n+8)+' '+(n+8)+'" role="img" aria-label="QR-Code"><
 // selben Abschnitt passiert: e = Fass war abgenommen, p = letzter Stand davor, a = bis dahin in diesem Abschnitt
 // gezapfte Liter, h = erster ruhiger Stand eines neuen Fasses (oder beim Start der Aufzeichnung).
 // Die Eintraege liegen in der Datenbank unter .../hist/b<Nummer>, damit die Statistik ein Neuladen uebersteht.
-var BUCKET=600000,NB=18,hist={},dirty={},med=[],eFlag=false,hMode=0,lastKeg=-1,lastM=null,lastTotal=-1;
+var BUCKET=600000,NB=18,hist={},dirty={},med=[],eFlag=false,hMode=0,lastKeg=-1,lastM=null,lastTotal=-1,histOK=false,LASTS=null;
 function bk(t){return Math.floor(t/BUCKET)}
 function sample(j,t){if(j.keg<0)return;
 if(j.keg!==lastKeg){med=[];if(lastKeg>=0)hMode=2;lastKeg=j.keg}
@@ -1214,25 +1350,28 @@ lastM=m}
 function lifted(t){if(!eFlag&&lastM!==null&&lastKeg>=0){var k=bk(t),r=hist[k]||(hist[k]={l:lastM,k:lastKeg});
 r.a=Math.round(calc(t).bars[NB-1]*100)/100;r.p=lastM;r.h=null;dirty[k]=1}
 eFlag=true;med=[]}
-function calc(t){var kn=bk(t),ks=[],x,i,r,min=null,pk=null,tap={},tot=0,first=0,bars=[],h=0;
+function calc(t){var kn=bk(t),ks=[],x,i,r,min=null,pk=null,tap={},tot=0,first=0,bars=[],h=0,sess=0,sessL=0,real=false,gap=false;
 for(x in hist)if(+x>kn-72&&+x<=kn)ks.push(+x);
 ks.sort(function(a,b){return a-b});
 for(i=0;i<ks.length;i++){r=hist[ks[i]];if(!first)first=ks[i];
 x=0;if(r.a>0){x=r.a;if(min!==null&&r.p<min)min=r.p}
 else if(min!==null&&r.k===pk&&r.p!=null&&r.p<min){x=min-r.p;min=r.p}
+// sess: in welchem Abschnitt das jetzige Fass auf die Waage kam (real = wirklich gewechselt, nicht nur aeltester Eintrag).
+// Ein Fass, das nur kurz angehoben und wieder abgestellt wird (gleicher Stand wie vorher), ist kein neues Fass.
+if(min===null||r.l>min+5||(r.e&&r.l>min+1.5)){real=min!==null;sess=ks[i];sessL=r.h>r.l?r.h:r.l}
 if(min===null||r.k!==pk||r.e||r.l>min+1.5)min=r.h>r.l?r.h:r.l;
 if(r.l<min){x+=min-r.l;min=r.l}
-if(x>0){tap[ks[i]]=x;tot+=x}
+if(x>0){tap[ks[i]]=x;tot+=x;if(i>0&&ks[i]>kn-6&&ks[i]-ks[i-1]>1)gap=true}   // gap: in der letzten Stunde fehlt ein Stueck Aufzeichnung
 pk=r.k}
 for(i=0;i<NB;i++)bars.push(tap[kn-NB+1+i]||0);
 for(i=0;i<6;i++)h+=tap[kn-i]||0;
-return{bars:bars,total:tot,first:first?first*BUCKET:0,hour:h,win:t-Math.max((kn-5)*BUCKET,first?first*BUCKET:t),kn:kn}}
+return{bars:bars,total:tot,first:first?first*BUCKET:0,hour:h,win:t-Math.max((kn-5)*BUCKET,first?first*BUCKET:t),kn:kn,sess:sess,sessL:sessL,real:real,gap:gap}}
 var cnt={};
 function count(id,to){var c=cnt[id]||(cnt[id]={v:0,t:-1,r:0});if(c.t===to)return;c.t=to;
 function st(){var d=c.t-c.v;if(Math.abs(d)<.5){c.v=c.t;c.r=0}else{c.v+=d*.14;c.r=requestAnimationFrame(st)}$(id).textContent=Math.round(c.v)}
 if(document.hidden){c.v=to;$(id).textContent=to}else if(!c.r)c.r=requestAnimationFrame(st)}
 (function(){var h='',i;for(i=0;i<NB;i++)h+='<div class="bar" style="left:'+(i*100/NB).toFixed(4)+'%"><i></i><b></b><span></span></div>';$('tvbars').innerHTML=h})();
-function stats(){var t=now(),s=calc(t),g=glass||.5,i,mx=0,v=[],im=-1,st=[4,6,8,10,12,16,20,24,30,40,50,60,80,100,150,200],ym=200,bars=$('tvbars').children;
+function stats(){var t=now(),s=LASTS=calc(t),g=glass||.5,i,mx=0,v=[],im=-1,st=[4,6,8,10,12,16,20,24,30,40,50,60,80,100,150,200],ym=200,bars=$('tvbars').children;
 for(i=0;i<NB;i++){v[i]=s.bars[i]/g;if(v[i]>mx)mx=v[i];if(Math.round(v[i])>0&&(im<0||v[i]>=v[im]))im=i}
 for(i=0;i<st.length;i++)if(st[i]>=mx){ym=st[i];break}
 $('tvy2').textContent=ym;$('tvy1').textContent=ym/2;
@@ -1244,9 +1383,9 @@ $('tvcempty').hidden=mx>0;
 var total=Math.round(s.total/g);count('tvtot',total);count('tvhour',Math.round(s.hour/g));
 $('tvsince').textContent=s.first?'seit '+hhmm(s.first)+' Uhr':'';
 if(lastTotal>=0&&total>lastTotal){var e=$('tvt2');e.className='tvtile t2';void e.offsetWidth;e.className='tvtile t2 pop'}
-lastTotal=total;
-var eta='';if(warnOK&&s.win>=900000&&s.hour>.3&&target>.2){var ms=target/(s.hour/s.win);if(ms<864e5)eta='Fass leer ca. '+hhmm(t+ms)+' Uhr'}
-$('tveta').textContent=eta;fitNums()}
+lastTotal=total;GAME.total(total,s);
+var eta='';ETA_T=0;if(warnOK&&s.win>=900000&&s.hour>.3&&target>.2){var ms=target/(s.hour/s.win);if(ms<864e5){eta='Fass leer ca. '+hhmm(t+ms)+' Uhr';ETA_T=demo?0:t+ms}}
+$('tveta').textContent=G.hints.eta?eta:'';fitNums()}
 function flush(){if(demo||!cfg)return;for(var x in dirty)(function(k){var r=hist[k];delete dirty[k];if(!r)return;
 dbf('hist/b'+k,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(r)})
 .then(function(q){if(!q.ok)throw 0}).catch(function(){dirty[k]=1})})(x)}
@@ -1255,7 +1394,7 @@ dbf('hist',null,'orderBy=%22%24key%22&startAt=%22b'+(bk(Date.now())-72)+'%22')
 .then(function(r){return r.ok?r.json():null}).then(function(o){if(!o||typeof o!=='object')return;
 for(var key in o){var k=+String(key).slice(1),r=o[key];if(!k||!r||typeof r.l!=='number')continue;
 if(!hist[k])hist[k]={l:r.l,k:r.k};if(r.e)hist[k].e=1;if(typeof r.h==='number'&&hist[k].h==null)hist[k].h=r.h;if(typeof r.p==='number'&&hist[k].p==null)hist[k].p=r.p;if(r.a>0&&!(hist[k].a>=r.a))hist[k].a=r.a}
-stats()}).catch(function(){})}
+stats()}).catch(function(){}).then(function(){if(!histOK){histOK=true;stats()}})}
 // Eintraege, die aelter als zwei Tage sind, aus der Datenbank entfernen
 function tidy(){if(demo||!cfg)return;var cut='b'+(bk(Date.now())-288);
 dbf('hist',null,'shallow=true').then(function(r){return r.ok?r.json():null}).then(function(o){var p={},n=0;
@@ -1265,7 +1404,7 @@ setInterval(flush,20000);setInterval(loadHist,600000);setTimeout(tidy,30000);
 
 // ---------- Vorfuehrung ohne Waage: Adresse mit ?demo=1 ----------
 var DM={l:12,ph:0,n:0};
-function demoHist(){var kn=bk(now()),L=DM.l,old=false,i,r;
+function demoHist(){histOK=true;var kn=bk(now()),L=DM.l,old=false,i,r;
 for(i=1;i<=NB+3;i++){r={l:Math.round(L*10)/10,k:1};hist[kn-i]=r;L+=.5*Math.round(1+Math.random()*6);
 if(!old&&L>=30){r.e=1;old=true;L=1.5}}}
 var DS={mode:0,gt:5,gc:11,it:0,vol:6,beep:true,bright:10,glass:.5,t:[7,9.6,12.5],zk:.6,pin:'1923',coupler:true,n:0};
@@ -1323,7 +1462,7 @@ var waitFirst=false;
 function waitEnd(){waitFirst=false;var e=document.documentElement;e.className=e.className.split(' wait').join('')}
 function fixedDesign(){var m=SIM||ME;return m&&THEMES[m.design]?m.design:''}
 function themeWant(tv){return fixedDesign()||(tv?tvTheme:'verein')}
-function openPick(auto){var saved=null,ps=document.querySelectorAll('.pk'),i,cur=null,left=8;
+function openPick(auto){var saved=null,ps=$('dsgn').querySelectorAll('.pk'),i,cur=null,left=8;
 try{saved=localStorage.getItem(TKEY)}catch(e){}
 for(i=0;i<ps.length;i++){ps[i].className='pk';ps[i].lastChild.style.width='0';if(ps[i].getAttribute('data-t')===saved)cur=ps[i]}
 $('dsgn').hidden=false;dsFit();clearInterval(pickT);
@@ -1334,14 +1473,15 @@ var say=function(){$('dsgnp').textContent='Startet in '+left+' Sekunden mit dem 
 setTimeout(say,30);pickT=setInterval(function(){if(--left<=0){choose(saved)}else say()},1000)}}
 function choose(t){clearInterval(pickT);try{localStorage.setItem(TKEY,t)}catch(e){}
 var first=!$('dsgn').hidden;tvTheme=THEMES[t]?t:'verein';setTheme(themeWant(tvOn()));$('dsgn').hidden=true;tvPoke();
-if(theme==='verein'&&first)splash()}
-function splash(){var s=$('splash');s.className='splash';s.hidden=false;setTimeout(function(){s.className='splash out'},3600);setTimeout(function(){s.hidden=true},4300)}
-(function(){var ps=document.querySelectorAll('.pk'),i;for(i=0;i<ps.length;i++)ps[i].onclick=function(){choose(this.getAttribute('data-t'))};
+if(theme==='verein'&&first)splash();adminTvStart()}
+var spT1=0,spT2=0;
+function splash(){var s=$('splash');clearTimeout(spT1);clearTimeout(spT2);s.className='splash';s.hidden=false;spT1=setTimeout(function(){s.className='splash out'},3600);spT2=setTimeout(function(){s.hidden=true},4300)}
+(function(){var ps=$('dsgn').querySelectorAll('.pk'),i;for(i=0;i<ps.length;i++)ps[i].onclick=function(){choose(this.getAttribute('data-t'))};
 $('dsgn').addEventListener('keydown',function(e){var k=e.keyCode,a=document.activeElement,n=-1,j;
 for(j=0;j<ps.length;j++)if(ps[j]===a)n=j;
 if(k===37||k===38)n=(n<=0?ps.length:n)-1;else if(k===39||k===40)n=(n+1)%ps.length;else return;
 e.preventDefault();ps[n].focus()})})();
-function dsFit(){$('dsgn').style.fontSize=Math.max(15,Math.min(window.innerWidth/70,window.innerHeight/36))+'px'}
+function dsFit(){$('dsgn').style.fontSize=$('gsel').style.fontSize=Math.max(15,Math.min(window.innerWidth/70,window.innerHeight/36))+'px'}
 $('tvdsg').onclick=function(){openPick(false)};
 
 // ---------- TV-Ansicht ----------
@@ -1364,6 +1504,7 @@ function tvClock(){$('tvtime').textContent=hhmm(now())}
 function tvWake(){try{if(navigator.wakeLock&&tvOn()&&!document.hidden)navigator.wakeLock.request('screen').catch(function(){})}catch(e){}}
 // Das Handy bleibt immer im Vereins-Design; die drei Designs gibt es nur in der TV-Ansicht
 function tvApply(){var on=tvWanted(),want=themeWant(on);document.body.className=on?'tv':'';$('tvdsg').hidden=!!fixedDesign();if(fixedDesign())$('dsgn').hidden=true;
+$('tvgam').hidden=!can(3)||!!SIM;if(!on||!can(3)||SIM)closeGsel();
 $('tvoff').hidden=viewOf()===2&&!SIM;$('tvoff').textContent=SIM?'Vorschau beenden':'Handy-Ansicht';$('tvon').hidden=window.innerWidth<900||viewOf()===1;if(theme!==want)setTheme(want);if(on)closeSheet();tvFit();tvClock();tvWake();tvPoke()}
 function tvSet(m){vmode=m;try{localStorage.setItem(VKEY,m)}catch(e){}
 if(m==='normal'){try{if(/[?&]tv=1(&|$)/.test(location.search))history.replaceState(null,'',location.pathname+location.search.replace(/([?&])tv=1(&|$)/,'$1').replace(/[?&]$/,'')+location.hash)}catch(e){}tvFull(false)}
@@ -1374,9 +1515,9 @@ else if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.web
 // Die Knoepfe der TV-Ansicht erscheinen bei Maus, Beruehrung oder Tastendruck und verschwinden nach 7 Sekunden
 function tvPoke(e){if(!tvOn())return;var w=$('tvbtnw'),was=w.className!=='tvbtn';w.className='tvbtn show';clearTimeout(btnT);
 btnT=setTimeout(function(){w.className='tvbtn';try{if(w.contains(document.activeElement))document.activeElement.blur()}catch(x){}},7000);
-if(e&&e.type==='keydown'&&!was&&$('dsgn').hidden){try{$('tvfull').hidden?$('tvdsg').focus():$('tvfull').focus()}catch(x){}}}
+if(e&&e.type==='keydown'&&!was&&$('dsgn').hidden&&$('gsel').hidden){try{$('tvfull').hidden?$('tvdsg').focus():$('tvfull').focus()}catch(x){}}}
 ['mousemove','mousedown','touchstart','keydown'].forEach(function(n){document.addEventListener(n,tvPoke)});
-$('tvon').onclick=function(){tvSet('tv');if(tvOn()&&!fixedDesign())openPick(true)};
+$('tvon').onclick=function(){tvSet('tv');gselDue=true;if(tvOn()&&!fixedDesign())openPick(true);else adminTvStart()};
 $('tvoff').onclick=function(){if(SIM)simEnd();else tvSet('normal')};
 $('tvfull').onclick=function(){tvFull(!(document.fullscreenElement||document.webkitFullscreenElement))};
 if(!(document.documentElement.requestFullscreen||document.documentElement.webkitRequestFullscreen))$('tvfull').hidden=true;
@@ -1387,14 +1528,318 @@ setInterval(function(){var o=[[0,0],[.5,.3],[0,.6],[-.5,.3],[0,0],[.5,-.3],[0,-.
 document.addEventListener('visibilitychange',function(){if(!document.hidden){loop();tvWake()}else flush()});
 try{if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){fitKey='';fitNums()})}catch(e){}
 
+// ---------- Spiele: Einstellungen und Vorlagen ----------
+// Die Einstellungen liegen in der Datenbank (games). Nur Admins aendern sie, alle Geraete lesen sie.
+// Gezaehlt wird mit der Zapf-Statistik: jedes Mal, wenn "Bier gezapft" hochgeht, ist das ein Bier.
+function mmss(ms){var s=Math.max(0,Math.round(ms/1000)),m=Math.floor(s/60);s%=60;return m+':'+(s<10?'0':'')+s}
+function hm(ms){var m=Math.max(0,Math.round(ms/60000));return Math.floor(m/60)+':'+(m%60<10?'0':'')+m%60}
+var TPL={stat:{name:'Nur Statistik',on:[]},
+fest:{name:'Vereinsfest',on:['ziel','ticker','jub','rekord','tipp','flaute']},
+ruhig:{name:'Ruhiger Abend',on:['ticker','jub']},
+alles:{name:'Alles an',on:['ziel','ticker','jub','rekord','tipp','flaute','fuss']}};
+var GLIST=['ziel','ticker','jub','rekord','tipp','flaute','fuss'];
+var GNAME={ziel:'Rundenziel',ticker:'Zapf-Ticker',jub:'Jubiläumsbier',rekord:'Rekordjagd',tipp:'Tippspiel',flaute:'Flaute-Alarm',fuss:'Fußball-Modus'};
+var GSUB={ziel:'so viele Bier in dieser Zeit, sonst blinkt es rot',ticker:'jedes Bier mit Nummer, Serien werden gefeiert',jub:'große Feier bei runden Nummern',
+rekord:'heute gegen den bisherigen Rekord',tipp:'Gäste tippen per QR-Code, wann das Fass leer ist',flaute:'die Anzeige schläft ein, wenn nichts gezapft wird',fuss:'Durst gegen Uhr, jedes Bier ein Tor'};
+function gDef(){return{tpl:'stat',hints:{last10:true,eta:true},flash:3,
+ziel:{on:false,n:12,min:10,pause:2,auto:false},ticker:{on:false,sn:5,smin:3},jub:{on:false,every:50,text:'Runde aufs Haus!'},
+rekord:{on:false,kind:'stunde'},tipp:{on:false,until:40},flaute:{on:false,min:5},fuss:{on:false,min:45,gegner:4}}}
+// Aus der Datenbank nur bekannte Felder mit passendem Typ uebernehmen
+var GRNG={ziel:{n:[1,99],min:[.05,180],pause:[0,60]},ticker:{sn:[2,50],smin:[.5,60]},jub:{every:[1,10000]},tipp:{until:[5,95]},flaute:{min:[.05,120]},fuss:{min:[.1,300],gegner:[.05,60]}};
+function gMerge(o){var d=gDef(),k,f,v,r;if(!o||typeof o!=='object')return d;
+if(typeof o.tpl==='string'&&o.tpl.length<12)d.tpl=o.tpl;if(typeof o.flash==='number'&&isFinite(o.flash))d.flash=Math.max(1,Math.min(6,Math.round(o.flash)));
+for(k in d)if(d[k]&&typeof d[k]==='object'&&o[k]&&typeof o[k]==='object')for(f in d[k]){v=o[k][f];if(typeof v!==typeof d[k][f])continue;
+if(typeof v==='string')d[k][f]=v.slice(0,30);
+else if(typeof v==='number'){r=GRNG[k]&&GRNG[k][f];if(isFinite(v))d[k][f]=r?Math.max(r[0],Math.min(r[1],v)):v}
+else d[k][f]=v}
+d.jub.every=Math.max(1,Math.round(d.jub.every));d.ziel.n=Math.round(d.ziel.n);
+if(d.rekord.kind!=='fass')d.rekord.kind='stunde';return d}
+var G=gDef(),GREC={h:0,keg:0},gDirty=false,gVer=0,gSaveT=0,gRecT=0,gRecDirty=false,dbTip=null,dbRound='',gReady=false,gErr='';
+function gLoad(){if(demo||!cfg||tipMode)return Promise.resolve();var ver=gVer;
+return Promise.all([dget('games'),dget('grec'),dget('tipinfo')]).then(function(a){
+// Geaenderte Einstellungen: nur das betroffene Spiel beginnt neu. Beim ersten Laden laeuft eine gemerkte Runde einfach weiter.
+// (Wurde hier inzwischen etwas verstellt, gilt das Eigene; die Antwort der Datenbank ist dann schon veraltet.)
+if(!gDirty&&ver===gVer){var o=G,J=JSON.stringify;G=gMerge(a[0]);
+if(gReady&&J(o.ziel)!==J(G.ziel)){GAME.z={st:'idle'};GAME.keep()}
+if(gReady&&J(o.fuss)!==J(G.fuss)){GAME.f={st:'idle'};GAME.keep()}
+if(J(o)!==J(G)&&$('gsheet'))gameSheet()}
+var r=a[1]||{};if(!gRecDirty){GREC.h=r.h>0?Math.round(r.h):0;GREC.keg=r.keg>0?r.keg:0}
+dbTip=a[2]&&typeof a[2]==='object'&&typeof a[2].r==='string'&&/^r\d{7}$/.test(a[2].r)?{r:a[2].r,o:a[2].o===true,e:+a[2].e||0,c:a[2].c===true}:null;
+dbRound=dbTip?dbTip.r:'';gReady=true;gErr=''},function(e){gErr=(e&&e.message)||'net'})}
+function gSave(){gVer++;if(demo)return;gDirty=true;clearTimeout(gSaveT);gSaveT=setTimeout(function(){
+dput('games',G).then(function(){gDirty=false},function(e){gDirty=false;if($('gsheet'))note(e&&e.message==='401'?'Dafür hast du keine Berechtigung.':'Speichern hat nicht geklappt. Bitte das Internet prüfen.','')})},500)}
+function recSave(){if(demo||!cfg)return;gRecDirty=true;clearTimeout(gRecT);gRecT=setTimeout(function(){
+dget('grec').then(function(r){r=r||{};if(r.h>GREC.h)GREC.h=Math.round(r.h);if(r.keg>0&&(!GREC.keg||r.keg<GREC.keg))GREC.keg=r.keg;
+return dput('grec',{h:GREC.h,keg:GREC.keg})}).then(function(){gRecDirty=false},function(){gRecDirty=false})},4000)}
+function setTpl(k){var i;G.tpl=k;for(i=0;i<GLIST.length;i++)G[GLIST[i]].on=TPL[k].on.indexOf(GLIST[i])>=0;GAME.reset();gSave()}
+function anyWidget(){return G.ziel.on||G.fuss.on||G.rekord.on||G.tipp.on}
+
+// ---------- Spiele: Ablauf (laeuft auf jedem Geraet, sichtbar in der TV-Ansicht) ----------
+var ETA_T=0,SKEY='bierwaage.spiel';
+var GAME={count:-1,seq:0,maxL:null,kn:0,times:[],lastBeer:0,q:[],busy:false,z:{st:'idle'},f:{st:'idle'},hour:0,recT:0,win:null,started:false,lowN:0,closeN:0,closed:'',jubMax:0,
+tips:[],tipOpen:false,tipT:0,infoT:0,round:'',wi:0,wt:0,serT:0,kegT0:0,kegL0:0,sess:0,emptied:0,lastL:null,wasEmpty:false,
+reset:function(){this.z={st:'idle'};this.f={st:'idle'};this.wi=0;this.keep()},
+// Stand auf diesem Geraet merken, damit ein Neuladen die laufende Runde nicht verliert
+keep:function(){if(demo)return;try{localStorage.setItem(SKEY,JSON.stringify({t:Date.now(),z:this.z,f:this.f,seq:this.seq,lastBeer:this.lastBeer,serT:this.serT,kegT0:this.kegT0,kegL0:this.kegL0,sess:this.sess,emptied:this.emptied,recT:this.recT,win:this.win,closed:this.closed,jubMax:this.jubMax}))}catch(e){}},
+restore:function(){try{var o=JSON.parse(localStorage.getItem(SKEY)||'null');if(!o||!(Date.now()-o.t<3*3600000))return;
+if(o.z&&o.z.st)this.z=o.z;if(o.f&&o.f.st)this.f=o.f;this.seq=+o.seq||0;this.lastBeer=+o.lastBeer||0;this.serT=+o.serT||0;this.kegT0=+o.kegT0||0;this.kegL0=+o.kegL0||0;
+this.sess=+o.sess||0;this.emptied=+o.emptied||0;this.recT=+o.recT||0;if(o.win&&typeof o.win.n==='string')this.win={n:o.win.n.slice(0,18),t:+o.win.t||0};if(typeof o.closed==='string')this.closed=o.closed.slice(0,12);this.jubMax=+o.jubMax||0}catch(e){}},
+ok:function(){return warnOK&&target>.01},
+// neuer Gesamtstand "Bier gezapft" aus der Statistik (s = Ergebnis von calc)
+total:function(n,s){var t=now(),g=glass||.5,i,j,k,b0,L=s.total;
+if(!histOK)return;                                           // der Verlauf ist noch nicht geladen
+// Die gezapften Liter des laufenden Abschnitts schwanken mit der Waage um 0,1 bis 0,2 Liter. Gezaehlt wird deshalb mit dem
+// hoechsten Stand. Nur wenn ein neuer Abschnitt beginnt und die Summe deutlich kleiner ist, ist das 12-Stunden-Fenster weitergewandert.
+if(this.maxL===null||L>this.maxL||(s.kn!==this.kn&&L<this.maxL-.3))this.maxL=L;
+this.kn=s.kn;n=Math.round(this.maxL/g);
+if(this.count<0){
+this.count=n;this.times=[];                                  // erster Stand: ohne Feier uebernehmen, Zeiten aus dem Diagramm schaetzen
+for(i=0;i<NB;i++){k=Math.round(s.bars[i]/g);b0=(s.kn-NB+1+i)*BUCKET;for(j=0;j<k;j++)if(b0+(j+.5)/k*BUCKET<t)this.times.push(b0+(j+.5)/k*BUCKET)}
+if(!this.lastBeer||this.lastBeer>t)this.lastBeer=t;return}
+if(n>this.count){k=n-this.count;
+if(k>6){this.count=n;this.seq+=k;for(i=0;i<k;i++)this.times.push(t);this.lastBeer=t}   // grosser Sprung (z. B. nach einer Pause der Verbindung): nicht einzeln feiern
+else for(i=0;i<k;i++){this.count++;this.beer(t)}
+if(this.times.length>400)this.times.splice(0,this.times.length-400);this.keep()}
+else if(n<this.count)this.count=n},                         // das 12-Stunden-Fenster der Statistik ist weitergewandert
+beer:function(t){var z=this.z,i,c=0,tv=tvOn();this.times.push(t);this.lastBeer=t;this.seq++;
+if(tv){fxClass('ev-beat',350);$('tvfl').hidden=true}
+if(G.ticker.on){if(tv)pop('Nr. '+this.count);
+for(i=this.times.length-1;i>=0&&t-this.times[i]<=G.ticker.smin*60000;i--)c++;
+if(c>=G.ticker.sn&&t-this.serT>G.ticker.smin*60000){this.serT=t;this.ev('info','Lauf!',c+' Bier in '+G.ticker.smin+' Minuten','',2600)}}
+if(this.count<5||this.count<this.jubMax-2*G.jub.every)this.jubMax=0;
+if(G.jub.on&&this.count>0&&this.count%G.jub.every===0&&this.count>this.jubMax){this.jubMax=this.count;this.ev('jub',this.count+'.','Bier des Abends',G.jub.text,6000,true)}
+if(G.ziel.on&&z.st==='run'){z.got++;if(z.got>=z.n){this.ev('win','Geschafft!',z.n+' Bier in '+mmss(Math.min(t,z.t1)-z.t0)+' Minuten','',4200,true);z.st='pause';z.t1=t+G.ziel.pause*60000}}},
+kegEmpty:function(){var t=now(),d=t-this.kegT0,w=null,i,x,p;
+if(G.tipp.on){for(i=0;i<this.tips.length;i++){p=this.tips[i];x=Math.abs(p.t-t);if(!w||x<w.x)w={x:x,p:p}}
+this.win=w?{n:w.p.n,t:w.p.t}:null;
+if(w)this.ev('jub','Tippspiel',w.p.n+' gewinnt mit '+hhmm(w.p.t)+' Uhr',Math.round(w.x/60000)+' Minuten daneben, das Fass war um '+hhmm(t)+' Uhr leer',7000,true)}
+if(G.rekord.on&&G.rekord.kind==='fass'&&this.kegT0&&this.kegL0>=cap*.9&&d>600000){
+if(GREC.keg&&d<GREC.keg)this.ev('win','Neuer Rekord!','Fass in '+hm(d)+' Stunden geleert','',5000,true);
+if(!GREC.keg||d<GREC.keg){GREC.keg=d;recSave()}}
+this.z={st:'idle'};this.keep()},
+// grosses Ereignis: nacheinander, nie zwei gleichzeitig; nur in der TV-Ansicht
+ev:function(type,a,b,c,ms,burst){if(!tvOn())return;this.q.push({type:type,a:a,b:b,c:c,ms:ms,burst:burst});if(this.q.length>4)this.q.splice(1,this.q.length-4);this.next()},
+next:function(){var self=this,e,h='',i,col=['#ff2d95','#22e0ff','#ffd60a','#9dff3c','#fff'];if(this.busy||!this.q.length)return;e=this.q.shift();this.busy=true;
+function showIt(){$('tvflash').hidden=true;$('ev1').textContent=e.a;$('ev2').textContent=e.b;$('ev3').textContent=e.c;$('ev3').hidden=!e.c;
+if(e.burst)for(i=0;i<36;i++)h+='<i class="cfb" style="left:'+(2+i*2.7)+'%;background:'+col[i%5]+';animation-duration:'+(1.6+(i*7%10)/8)+'s;animation-delay:'+((i*5%9)/10)+'s"></i>';
+$('evcf').innerHTML=h;$('tvev').className='tvev '+e.type;$('tvev').hidden=false;
+if(e.type==='win'||e.type==='jub')fxClass('ev-win',e.ms);
+setTimeout(function(){$('tvev').hidden=true;self.busy=false;self.next()},e.ms)}
+if(e.type==='fail'){$('tvflash').hidden=false;fxClass('ev-fail',G.flash*1000+e.ms);setTimeout(showIt,G.flash*1000)}else showIt()},
+// laeuft mit jedem neuen Stand der Waage (j) und dem Ergebnis der Statistik (s)
+tick:function(j,s){var t=now(),z=this.z,f=this.f,ok=this.ok(),g=glass||.5,i,c=0,el,min,uhr,du,left;
+if(!gReady||!s)return;
+// Erster Durchlauf nach dem Laden: was inzwischen abgelaufen ist, endet still (keine verspaeteten Meldungen)
+if(!this.started){this.started=true;
+if(z.st==='run'&&!(t<z.t1))z=this.z={st:'idle'};
+if(f.st==='run'){el=(t-f.t0)/(G.fuss.min*60000)*90;if(!(el<90))f=this.f={st:'idle'};else if(el>=45)f.half=true}}
+// Fass: neues Fass erkennen (die Statistik beginnt einen neuen Abschnitt), leeres Fass melden
+// s.real: das Fass wurde wirklich gewechselt. Sonst ist es nur der aelteste bekannte Eintrag; der wandert nach 12 Stunden weiter
+// und darf keine neue Runde ausloesen.
+// Ausnahme: Der aelteste Eintrag ist juenger als das Fenster, davor gibt es also eine Luecke. Dann ist es ein neuer Anfang.
+if(s.sess&&s.sess!==this.sess&&(s.real||!this.sess||s.sess<this.sess||s.sess>s.kn-69)){var fresh=!!this.sess&&s.sess>this.sess&&s.sess>=s.kn-1;
+this.sess=s.sess;this.tips=[];this.tipT=0;this.emptied=0;this.win=null;
+if(fresh&&ok){this.kegT0=t;this.kegL0=Math.max(j.liters,s.sessL||0);this.lastBeer=t}else{this.kegT0=s.sess*BUCKET;this.kegL0=s.sessL||0}
+this.keep()}
+if(ok&&t-this.kegT0<180000&&j.liters>this.kegL0)this.kegL0=j.liters;       // das Fass wird gerade erst aufgesetzt
+// Kennung der Tipp-Runde. Laeuft schon eine (von einem anderen Fernseher), die zum selben Fass gehoeren kann, gilt die.
+var rd=this.sess?'r'+this.sess:'',dbn=dbRound?+dbRound.slice(1):0;
+if(rd&&dbn>this.sess&&dbn<=s.kn+3)rd=dbRound;                                                    // ein anderes Geraet hat schon eine neuere Runde begonnen
+else if(rd&&!s.real&&this.sess<=s.kn-69&&dbn&&dbn<this.sess&&dbn>this.sess-216)rd=dbRound;     // dasselbe Fass seit ueber 12 Stunden
+if(rd!==this.round){this.round=rd;this.tips=[];this.tipT=0}
+if(demo&&!this.tips.length&&this.round)this.tips=[{n:'Udo',t:t+25*60000},{n:'Anna',t:t+40*60000},{n:'Tim',t:t+55*60000}];
+left=Math.floor((j.liters+.02)/g);
+this.lowN=liveOK&&!j.empty&&left===0?this.lowN+1:0;
+if(this.sess&&this.emptied!==this.sess&&liveOK&&(this.lowN>=3||(j.empty&&!this.wasEmpty&&this.lastL!==null&&this.lastL<=3*g))){this.emptied=this.sess;this.kegEmpty()}
+this.wasEmpty=!!j.empty;if(liveOK&&!j.empty)this.lastL=j.liters;
+// Rundenziel
+if(!G.ziel.on||!ok)z.st='idle';
+else if(z.st==='idle'){var n=G.ziel.n;if(G.ziel.auto){for(i=this.times.length-1;i>=0&&t-this.times[i]<=30*60000;i--)c++;if(c>3)n=Math.max(4,Math.min(40,Math.round(c/30*G.ziel.min*1.15)))}
+this.z={st:'run',t0:t,t1:t+G.ziel.min*60000,got:0,n:n};this.keep()}
+else if(z.st==='run'&&t>=z.t1){this.ev('fail','Nicht geschafft',z.got+' von '+z.n+' Bier in '+G.ziel.min+' Minuten','',3800);z.st='pause';z.t1=t+G.ziel.pause*60000;this.keep()}
+else if(z.st==='pause'&&t>=z.t1)z.st='idle';
+z=this.z;
+// Fussball: Durst gegen Uhr
+if(!G.fuss.on||!ok)f.st='idle';
+else if(f.st==='idle'){this.f={st:'run',t0:t,c0:this.seq,half:false};this.keep()}
+else if(f.st==='run'){el=t-f.t0;min=Math.floor(el/(G.fuss.min*60000)*90);uhr=Math.floor(el/(G.fuss.gegner*60000));du=Math.max(0,this.seq-f.c0);
+if(!f.half&&min>=45){f.half=true;this.ev('info','Halbzeit','Durst '+du+' : '+uhr+' Uhr','',3200);this.keep()}
+if(min>=90){this.ev(du>uhr?'win':(du<uhr?'fail':'info'),'Abpfiff','Durst '+du+' : '+uhr+' Uhr',du>uhr?'Sieg für den Durst!':(du<uhr?'Die Uhr gewinnt.':'Unentschieden'),4500,du>uhr);f.st='pause';f.t1=t+3*60000;this.keep()}}
+else if(f.st==='pause'&&t>=f.t1)f.st='idle';
+// Rekord: meiste Bier in einer Stunde (aus der Statistik)
+c=Math.round(s.hour/g);this.hour=c;
+if(c>GREC.h&&ok&&this.count>=0&&!s.gap){if(G.rekord.on&&G.rekord.kind==='stunde'&&GREC.h>=10&&t-this.recT>30*60000){this.recT=t;this.ev('win','Neuer Rekord!',c+' Bier in einer Stunde','',5000,true);this.keep()}
+GREC.h=c;recSave()}
+// Tippspiel: Annahme endet, wenn das Fass weit genug geleert ist
+// Einmal geschlossen bleibt die Runde zu, auch wenn der Fuellstand um die Grenze schwankt.
+this.closeN=G.tipp.on&&ok&&this.round&&j.percent<=G.tipp.until&&t-this.kegT0>180000?this.closeN+1:0;
+if(this.round&&this.closed!==this.round&&(this.closeN>=3||(dbTip&&dbTip.c&&dbTip.r===this.round))){this.closed=this.round;this.keep()}
+var shut=!!this.round&&this.closed===this.round,open=G.tipp.on&&ok&&!!this.round&&j.percent>G.tipp.until&&!shut,want=null;this.tipOpen=open;
+// Welche Runde laeuft und ob getippt werden darf, steht in der Datenbank (tipinfo). Die TV-Ansicht fuehrt den Eintrag;
+// schliessen darf ihn jedes Geraet eines Mitglieds (auch wenn gerade kein Fernseher laeuft oder das Tippspiel abgeschaltet wurde).
+if(!demo&&cfg&&this.round&&Date.now()-this.infoT>5000){
+if(G.tipp.on&&tvOn()){if(ok&&(!dbTip||dbTip.r!==this.round||dbTip.o!==open||(shut&&!dbTip.c)||(open&&Math.abs(dbTip.e-ETA_T)>900000&&Date.now()-this.infoT>60000))){want={r:this.round,o:open,e:open?Math.round(ETA_T)||0:0};if(shut)want.c=true}}
+else if(dbTip&&dbTip.o&&(!G.tipp.on||(dbTip.r===this.round&&shut))){want={r:dbTip.r,o:false,e:0};if(G.tipp.on)want.c=true}
+if(want){this.infoT=Date.now();dbTip=want;dbRound=want.r;dput('tipinfo',want).catch(function(){dbTip=null})}}
+if(G.tipp.on&&tvOn()&&!demo&&cfg&&this.round&&Date.now()-this.tipT>10000){this.tipT=Date.now();tipFetch(this.round).then(function(a){if(a.r===GAME.round)GAME.tips=a},function(){})}
+// Flaute
+var fl=G.flaute.on&&ok&&tvOn()&&this.count>=0&&left>10&&t-this.lastBeer>G.flaute.min*60000&&t-this.lastBeer<90*60000;
+if(fl)$('tvflt').textContent='Seit '+Math.round((t-this.lastBeer)/60000)+' Minuten kein Bier. Wer holt das nächste?';
+$('tvfl').hidden=!fl||this.busy;
+this.widget(t,j)},
+// Spielfeld rechts neben dem Diagramm: zeigt reihum die laufenden Spiele
+widget:function(t,j){var w=[],h='',z=this.z,f=this.f,k,i,d='';
+if(G.ziel.on)w.push('ziel');if(G.fuss.on)w.push('fuss');if(G.rekord.on)w.push('rekord');if(G.tipp.on)w.push('tipp');
+$('tvgame').hidden=!w.length;$('tvchart').className=w.length?'tvchart narrow':'tvchart';
+$('tvct').textContent=w.length?'Biere je 10 Minuten':'Gezapfte Biere je 10 Minuten';
+if(!w.length||!tvOn())return;
+k=w[this.wi%w.length];
+if(w.length>1&&Date.now()-this.wt>(k==='tipp'&&this.tipOpen?20000:9000)){this.wt=Date.now();this.wi++;k=w[this.wi%w.length]}
+if(k==='ziel'){var fr=z.st==='run'?Math.max(0,(z.t1-t)/(z.t1-z.t0)):0;
+h='<h3><b>Rundenziel</b></h3><div class="gz"><svg viewBox="0 0 100 100"><circle class="r0" cx="50" cy="50" r="42"/><circle class="r1" cx="50" cy="50" r="42" stroke-dasharray="264" stroke-dashoffset="'+(264*(1-fr)).toFixed(1)+'"/></svg><div><b>'+(z.st==='run'?z.got:'–')+'</b><span>von '+(z.n||G.ziel.n)+'</span></div></div>';
+h+='<div class="gt">'+(z.st==='run'?'<p><b>'+mmss(z.t1-t)+'</b><span>Minuten bleiben</span></p><p><span>Ziel: '+z.n+' Bier in '+G.ziel.min+' Minuten</span></p>'
+:(z.st==='pause'?'<p><b>'+mmss(z.t1-t)+'</b><span>bis zur nächsten Runde</span></p>':'<p><span>Wartet auf ein Fass</span></p>'))+'</div>'}
+else if(k==='fuss'){var el=f.st==='run'?t-f.t0:0,mi=Math.min(90,Math.floor(el/(G.fuss.min*60000)*90));
+h='<h3><b>Durst gegen Uhr</b></h3><div class="gf"><b>'+(f.st==='run'?Math.max(0,this.seq-f.c0):0)+' : '+(f.st==='run'?Math.floor(el/(G.fuss.gegner*60000)):0)+'</b></div><div class="gfl"><span>DURST</span><span>UHR</span></div>'
++'<div class="gf2"><span>'+(f.st==='run'?mi+'. Spielminute':'Anpfiff gleich')+'</span><div><i style="width:'+(mi/90*100).toFixed(1)+'%"></i></div></div>'}
+else if(k==='rekord'){if(G.rekord.kind==='stunde'){var mx=Math.max(GREC.h,this.hour,1);
+h='<h3><b>Rekordjagd</b></h3><div class="gr"><p><span>Rekord: '+GREC.h+' Bier in einer Stunde</span></p><div class="rb"><i style="width:'+(GREC.h/mx*100)+'%"></i></div>'
++'<p><span>Letzte Stunde: '+this.hour+' Bier</span></p><div class="rb"><i class="me" style="width:'+(this.hour/mx*100).toFixed(1)+'%"></i></div>'
++'<p class="rv"><b>'+(this.hour>=GREC.h?(this.hour?'Das ist der Rekord!':'Noch kein Bier in dieser Stunde'):'Noch '+(GREC.h-this.hour+1)+' Bier bis zum Rekord')+'</b></p></div>'}
+else{var done=this.kegL0>0?1-j.liters/this.kegL0:0,pr=this.kegT0&&done>.05?(t-this.kegT0)/done:0,rk=GREC.keg,m2=Math.max(rk,pr,1);
+h='<h3><b>Rekordjagd</b></h3><div class="gr"><p><span>Schnellstes Fass: '+(rk?hm(rk)+' Std.':'noch keins')+'</span></p><div class="rb"><i style="width:'+(rk/m2*100)+'%"></i></div>'
++'<p><span>Dieses Fass: Kurs auf '+(pr?hm(pr):'–')+' Std.</span></p><div class="rb"><i class="me" style="width:'+(pr/m2*100).toFixed(1)+'%"></i></div>'
++'<p class="rv"><b>'+(!pr?'Fass gerade angestochen':(!rk?'Das erste Fass setzt den Rekord':(pr<rk?Math.round((rk-pr)/60000)+' Minuten vor dem Rekord':Math.round((pr-rk)/60000)+' Minuten hinter dem Rekord')))+'</b></p></div>'}}
+else{var tp=this.tips.slice().sort(function(a,b){return a.t-b.t});
+h='<h3><b>Wann ist das Fass leer?</b></h3><div class="gtq">'+qrSvg(tipUrl())+'</div><div class="gtl">';
+for(i=0;i<Math.min(4,tp.length);i++)h+='<p><b>'+hhmm(tp[i].t)+'</b><span>'+esc(tp[i].n)+'</span></p>';
+h+=(tp.length>4?'<p class="m"><span>und '+(tp.length-4)+' weitere</span></p>':(!tp.length?'<p class="m"><span>Noch kein Tipp</span></p>':''))+'</div><div class="gtf"><span>'
++(this.win?'Gewonnen hat '+esc(this.win.n)+' mit '+hhmm(this.win.t)+' Uhr':(this.tipOpen?'Jetzt scannen und mittippen!':(tp.length?tp.length+(tp.length===1?' Tipp':' Tipps')+', Annahme geschlossen':'Annahme geschlossen')))+'</span></div>'}
+if($('gw').getAttribute('data-h')!==h){$('gw').innerHTML=h;$('gw').setAttribute('data-h',h)}
+for(i=0;i<w.length;i++)d+='<i'+(i===this.wi%w.length?' class="on"':'')+'></i>';$('gdots').innerHTML=w.length>1?d:''}};
+function tipUrl(){return location.href.split('#')[0].split('?')[0]+'?tipp=1'+(theme!=='verein'?'&design='+theme:'')}
+function tipFetch(rd){return dget('tips/'+rd).then(function(o){var a=[],k;a.r=rd;
+for(k in o||{})if(o[k]&&typeof o[k].n==='string'&&typeof o[k].t==='number')a.push({u:k,n:o[k].n.slice(0,18),t:o[k].t});return a})}
+function pop(txt){var p=$('tvpop');p.innerHTML='<b>'+esc(txt)+'</b>';p.hidden=false;clearTimeout(pop.t);pop.t=setTimeout(function(){p.hidden=true},2400)}
+function fxClass(c,ms){var e=document.documentElement;if(e.className.indexOf(c)<0)e.className+=' '+c;setTimeout(function(){e.className=e.className.split(' '+c).join('')},ms)}
+if(!demo)GAME.restore();
+// Einstellungen regelmaessig nachladen: in der TV-Ansicht alle 10 Sekunden, sonst jede Minute
+var gLoadT=0;
+// (Kennt die Datenbank die Spiele noch nicht, weil die neuen Regeln fehlen, wird nur alle 5 Minuten nachgesehen.)
+setInterval(function(){if(demo||!cfg||document.hidden||tipMode)return;if(Date.now()-gLoadT>=(gErr==='401'?300000:(tvOn()||$('gsheet')?10000:60000))){gLoadT=Date.now();gLoad()}},2000);
+
+// ---------- Spiele einstellen (Handy, nur Admin) ----------
+function stp(label,path,min,max,step,unit){var p=path.split('.'),v=p[0]==='x'?G.flash:G[p[0]][p[1]];
+return '<div class="stp"><span>'+label+'</span><button type="button" data-k="'+path+'" data-d="'+(-step)+'" data-min="'+min+'" data-max="'+max+'" aria-label="weniger">−</button><b>'+v+(unit||'')+'</b><button type="button" data-k="'+path+'" data-d="'+step+'" data-min="'+min+'" data-max="'+max+'" aria-label="mehr">+</button></div>'}
+function tg(path,on){return '<button type="button" class="tog'+(on?' on':'')+'" data-t="'+path+'">'+(on?'An':'Aus')+'</button>'}
+function gameSheet(){var h='<p class="sp m" id="gsheet">Vorlage wählen oder jedes Spiel einzeln einstellen. Die TV-Ansicht übernimmt alles nach ein paar Sekunden.</p><div class="chips">',k,i,g,x;
+for(k in TPL)h+='<button type="button" data-tpl="'+k+'"'+(G.tpl===k?' class="on"':'')+'>'+TPL[k].name+'</button>';
+h+='</div>';
+for(i=0;i<GLIST.length;i++){k=GLIST[i];g=G[k];x='';
+if(g.on){if(k==='ziel')x=stp('Anzahl Bier','ziel.n',4,40,1)+stp('Zeit','ziel.min',2,60,1,' Min.')+stp('Pause danach','ziel.pause',0,30,1,' Min.')+'<div class="stp"><span>Ziel passt sich dem Tempo an</span>'+tg('ziel.auto',g.auto)+'</div>';
+if(k==='ticker')x=stp('Serie ab','ticker.sn',3,12,1,' Bier')+stp('innerhalb von','ticker.smin',1,10,1,' Min.');
+if(k==='jub')x=stp('Gefeiert wird jedes','jub.every',10,100,10,'. Bier')+'<label class="slab" for="jt" style="margin-top:10px">Text dazu</label><input class="sin" id="jt" type="text" maxlength="30" value="'+esc(g.text)+'" style="font-size:1rem;margin-bottom:0">';
+if(k==='rekord')x='<div class="chips" style="margin:8px 0 0"><button type="button" data-rk="stunde"'+(g.kind==='stunde'?' class="on"':'')+'>Meiste Bier in einer Stunde</button><button type="button" data-rk="fass"'+(g.kind==='fass'?' class="on"':'')+'>Schnellstes Fass</button></div>'
++'<div class="stp"><span>Bisher: '+(GREC.h?GREC.h+' Bier in einer Stunde':'noch kein Stunden-Rekord')+(GREC.keg?', schnellstes Fass '+hm(GREC.keg)+' Std.':'')+'</span><button type="button" class="tog" id="grz">Zurücksetzen</button></div>';
+if(k==='tipp')x=stp('Annahme endet bei Füllstand','tipp.until',20,80,10,' %')+(demo?'':'<div class="stp"><span>Abgegebene Tipps ansehen, einzelne entfernen</span><button type="button" class="tog" id="gtl">Tipps</button></div>');
+if(k==='flaute')x=stp('Alarm nach','flaute.min',2,30,1,' Min.');
+if(k==='fuss')x=stp('Spieldauer','fuss.min',10,120,5,' Min.')+stp('Die Uhr trifft alle','fuss.gegner',1,15,1,' Min.')}
+h+='<div class="grp"><div class="gh"><div>'+GNAME[k]+'<small>'+GSUB[k]+'</small></div>'+tg(k+'.on',g.on)+'</div>'+x+'</div>'}
+h+='<div class="grp"><div class="gh"><div>Hinweise<small>bleiben auch bei „Nur Statistik“ möglich</small></div></div>'
++'<div class="stp"><span>Warnung bei den letzten 10 Bier</span>'+tg('hints.last10',G.hints.last10)+'</div><div class="stp"><span>Schätzung „Fass leer ca. … Uhr“</span>'+tg('hints.eta',G.hints.eta)+'</div>'
++stp('Rotes Blinken dauert','x.flash',1,6,1,' Sek.')+'</div>';
+var sh=document.querySelector('.sheet'),sc=$('gsheet')?sh.scrollTop:0,er=$('gsheet')?$('overr').textContent:'';sheet('Spiele',h);sh.scrollTop=sc;
+if(gErr==='401')er='Die Datenbank kennt die Spiele noch nicht. Bitte in Firebase die neuen Regeln einfügen (Datei regeln.json aus dem Paket zu Etappe 3).';
+else if(gErr&&!gReady)er='Keine Verbindung. Bitte das Internet prüfen.';
+if(er)note(er,'');
+$('ovc').onclick=function(e){var b=e.target,p,v;if(!$('gsheet')||!b.getAttribute)return;
+if(b.getAttribute('data-tpl')){setTpl(b.getAttribute('data-tpl'));gameSheet()}
+else if(b.getAttribute('data-rk')){G.rekord.kind=b.getAttribute('data-rk');GAME.recT=0;G.tpl='';gSave();gameSheet()}
+else if(b.id==='grz'){b.disabled=true;clearTimeout(gRecT);gRecDirty=false;(demo?Promise.resolve():dput('grec',{h:0,keg:0})).then(function(){GREC.h=0;GREC.keg=0;GAME.recT=0;gameSheet();note('','Die Rekorde sind zurückgesetzt.')},function(){b.disabled=false;note('Das hat nicht geklappt. Bitte das Internet prüfen.','')})}
+else if(b.id==='gtl')tipList()
+else if(b.getAttribute('data-t')){p=b.getAttribute('data-t').split('.');G[p[0]][p[1]]=!G[p[0]][p[1]];if(p[1]==='on'){G.tpl='';GAME.reset()}gSave();gameSheet()}
+else if(b.getAttribute('data-k')){p=b.getAttribute('data-k').split('.');
+if(p[0]==='x')G.flash=Math.max(1,Math.min(6,G.flash+(+b.getAttribute('data-d'))));
+else{v=G[p[0]][p[1]]+(+b.getAttribute('data-d'));G[p[0]][p[1]]=Math.max(+b.getAttribute('data-min'),Math.min(+b.getAttribute('data-max'),v));if(p[0]==='ziel'||p[0]==='fuss')GAME.reset()}
+gSave();gameSheet()}};
+if($('jt'))$('jt').oninput=function(){G.jub.text=this.value.slice(0,30);gSave()}}
+function gameOpen(){sheet('Spiele','<p class="sp m">Lade …</p>');var g=gen;gLoad().then(function(){if(g!==gen)return;gameSheet();tipTidy()})}
+// Tipps alter Faesser aus der Datenbank entfernen (aelter als zwei Tage)
+function tipTidy(){if(demo)return;dget('tips','shallow=true').then(function(o){var d={},n=0,k,cut=bk(Date.now())-288;
+for(k in o||{})if(/^r\d+$/.test(k)&&+k.slice(1)<cut){d['tips/'+k]=null;n++}
+if(n)dput('',d,'PATCH').catch(function(){})},function(){})}
+// Abgegebene Tipps der laufenden Runde: ansehen und einzelne entfernen (falls jemand Unsinn als Namen eintraegt)
+function tipList(msg){var g;sheet('Tipps','<p class="sp m">Lade …</p>',gameSheet);g=gen;
+dget('tipinfo').then(function(i){if(!i||typeof i.r!=='string'||!/^r\d+$/.test(i.r)){var e=[];e.r='';e.o=false;return e}return tipFetch(i.r).then(function(a){a.o=i.o===true;return a})}).then(function(a){if(g!==gen)return;
+var h='<p class="sp m" id="tlist">'+(a.r?(a.o?'Die Annahme ist offen.':'Die Annahme ist geschlossen.')+' '+a.length+(a.length===1?' Tipp':' Tipps')+' für dieses Fass.':'Es läuft noch kein Tippspiel. Es beginnt, sobald die TV-Ansicht mit eingeschaltetem Tippspiel läuft und ein Fass auf der Waage steht.')+'</p>',i;
+a.sort(function(x,y){return x.t-y.t});
+for(i=0;i<a.length;i++)h+='<div class="stp"><span><b style="min-width:0">'+hhmm(a[i].t)+' Uhr</b> &nbsp;'+esc(a[i].n)+'</span><button type="button" class="tog" data-u="'+esc(a[i].u)+'">Entfernen</button></div>';
+sheet('Tipps',h,gameSheet);if(msg)note('',msg);
+$('ovc').onclick=function(e){var b=e.target,u=$('tlist')&&b.getAttribute&&b.getAttribute('data-u');if(!u||!/^[A-Za-z0-9_-]+$/.test(u))return;b.disabled=true;
+ddel('tips/'+a.r+'/'+u).then(function(){tipList('Der Tipp ist entfernt.')},function(){b.disabled=false;note('Das hat nicht geklappt.','')})}},
+function(){if(g===gen)note('Keine Verbindung. Bitte das Internet prüfen.','')})}
+$('games').onclick=gameOpen;
+
+// ---------- Auswahl der Spiele beim Start der TV-Ansicht (nur wenn dieses Geraet Admin ist) ----------
+var gselT=0;
+function openGsel(auto){var ps=$('gsel').querySelectorAll('.pk'),i,cur=null,left=8;
+if(auto&&!TPL[G.tpl])return;                                   // eigene Einstellungen: nicht nachfragen
+if(auto&&!$('splash').hidden){gselSplash=true;$('splash').hidden=true}   // das Startbild kommt nach der Auswahl
+for(i=0;i<ps.length;i++){ps[i].className='pk';ps[i].lastChild.style.width='0';if(ps[i].getAttribute('data-g')===G.tpl)cur=ps[i]}
+$('gsel').hidden=false;dsFit();clearInterval(gselT);
+$('gselp').textContent=gErr==='401'?'Die Datenbank kennt die Spiele noch nicht. Bitte in Firebase die neuen Regeln einfügen (regeln.json aus dem Paket zu Etappe 3).':'Die einzelnen Werte stellst du am Handy unter „Spiele“ ein, auch während der Feier.';
+try{(cur||ps[0]).focus()}catch(e){}
+if(auto&&cur){cur.className='pk cur';var say=function(){$('gselp').textContent='Startet in '+left+' Sekunden mit der letzten Auswahl.';cur.lastChild.style.width=((8-left+1)/8*100)+'%'};
+setTimeout(say,30);gselT=setInterval(function(){if(--left<=0)closeGsel();else say()},1000)}}
+function closeGsel(){clearInterval(gselT);if($('gsel').hidden)return;$('gsel').hidden=true;tvPoke();if(gselSplash){gselSplash=false;if(theme==='verein'&&tvOn())splash()}}
+var gselSplash=false,gselDue=true;
+(function(){var ps=$('gsel').querySelectorAll('.pk'),i;for(i=0;i<ps.length;i++)ps[i].onclick=function(){setTpl(this.getAttribute('data-g'));closeGsel()};
+$('gsel').addEventListener('keydown',function(e){var k=e.keyCode,a=document.activeElement,n=-1,j;
+for(j=0;j<ps.length;j++)if(ps[j]===a)n=j;
+if(k===37||k===38)n=(n<=0?ps.length:n)-1;else if(k===39||k===40)n=(n+1)%ps.length;else return;
+e.preventDefault();ps[n].focus()})})();
+$('tvgam').onclick=function(){gLoad().then(function(){openGsel(false)})};
+// Admin startet die TV-Ansicht: nach dem Design (falls gefragt) kommt einmal die Auswahl der Spiele
+function adminTvStart(){if(!gselDue||!tvOn()||!can(3)||SIM||!$('dsgn').hidden)return;gselDue=false;
+gLoad().then(function(){if(tvOn()&&can(3)&&!SIM&&$('dsgn').hidden&&(gReady||demo))openGsel(true)})}
+// Das Spielfeld jede Sekunde neu zeichnen (die Uhr der Runde laeuft sichtbar)
+setInterval(function(){if(tvOn()&&S&&gReady&&(cfg||demo)&&!document.hidden)GAME.widget(now(),S)},1000);
+// Vorfuehrung (?demo=1): mit der Vorlage "Vereinsfest", nichts wird gespeichert
+if(demo){gReady=true;setTpl('fest');G.ziel.n=5;GREC.h=14}
+
+// ---------- Tippspiel fuer Gaeste: Seite hinter dem QR-Code (?tipp=1), ohne Konto ----------
+var tipInfo=null;
+function tipShow(msg,okText){var i=tipInfo,open=i&&i.o===true&&typeof i.r==='string';
+$('tipc').hidden=false;$('app').hidden=true;$('gate').hidden=true;
+$('tipp').textContent=msg||(open?'Trag deinen Namen ein und die Uhrzeit, zu der das Fass leer ist. Wer am nächsten liegt, gewinnt.'+(i.e>Date.now()?' Die Waage schätzt gerade '+hhmm(i.e)+' Uhr.':''):'Gerade läuft kein Tippspiel, oder die Annahme ist schon geschlossen.');
+$('tipf').hidden=!open||!!msg;$('tipok').textContent=okText||'';$('tipok').hidden=!okText;$('tipre').hidden=open&&!msg}
+function tipBoot(){$('tipc').hidden=false;$('app').hidden=true;$('tipp').textContent='Einen Moment …';$('tipf').hidden=true;$('tipre').hidden=true;
+if(!konfOk()){tipShow('Die Seite ist noch nicht eingerichtet.');return}
+token().then(function(){return dget('tipinfo')}).then(function(i){tipInfo=i;tipShow();
+try{var n=localStorage.getItem('bierwaage.tippname');if(n)$('tipn').value=n}catch(e){}
+if(i&&i.o&&!$('tipt').value){var d=new Date(i.e>Date.now()?i.e:Date.now()+45*60000),z=function(x){return(x<10?'0':'')+x};$('tipt').value=z(d.getHours())+':'+z(d.getMinutes())}},
+function(e){var s=(e&&e.message)||'';tipShow(/^auth:/.test(s)?'Die Anmeldung hat nicht geklappt. Bitte später noch einmal versuchen.':s==='401'?'Das Tippspiel ist hier noch nicht eingerichtet.':'Keine Verbindung. Bitte das Internet prüfen und neu laden.')})}
+$('tipgo').onclick=function(){var n=$('tipn').value.replace(/\s+/g,' ').replace(/^ | $/g,'').slice(0,18),v=$('tipt').value,d,i=tipInfo;
+if(!n){$('tiperr').textContent='Bitte deinen Namen eintragen.';$('tiperr').hidden=false;return}
+if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(v)){$('tiperr').textContent='Bitte eine Uhrzeit wählen (zum Beispiel 22:30).';$('tiperr').hidden=false;return}
+// Eine Uhrzeit, die heute schon lange vorbei ist, meint morgen (um 23:40 der Tipp 00:30). Knapp vorbei ist ein Versehen.
+d=new Date();d.setHours(+v.slice(0,2),+v.slice(3),0,0);if(d.getTime()<Date.now()-6*3600000)d=new Date(d.getTime()+864e5);
+if(d.getTime()<Date.now()){$('tiperr').textContent='Diese Uhrzeit ist schon vorbei. Bitte eine spätere wählen.';$('tiperr').hidden=false;return}
+$('tiperr').hidden=true;
+$('tipgo').disabled=true;try{localStorage.setItem('bierwaage.tippname',n)}catch(e){}
+dput('tips/'+i.r+'/'+AU.uid,{n:n,t:d.getTime(),at:{'.sv':'timestamp'}}).then(function(){$('tipgo').disabled=false;
+$('tipp').textContent='Du kannst deinen Tipp ändern, solange die Annahme offen ist.';$('tipok').textContent='Danke, '+n+'! Dein Tipp '+v+' Uhr ist dabei. Der Fernseher zeigt am Ende, wer am nächsten lag.';$('tipok').hidden=false},
+function(e){$('tipgo').disabled=false;if(e&&e.message==='401'){tipInfo=null;tipShow('Die Annahme ist inzwischen geschlossen.')}else{$('tiperr').textContent='Das hat nicht geklappt. Bitte das Internet prüfen.';$('tiperr').hidden=false}})};
+$('tipre').onclick=tipBoot;
+
 // ---------- Neue Fassung der Seite von selbst laden ----------
 // Handys und Fernseher halten eine alte Seite sonst noch eine Weile im Zwischenspeicher fest. Die Seite fragt deshalb
 // beim Start (und danach alle 30 Minuten) am Zwischenspeicher vorbei nach, ob es eine neuere Fassung gibt, und laedt sie.
-var VER='e2.202610072153';
+var VER='e3.202610072329';
 function verCheck(){if(demo||!/^https?:/.test(location.protocol))return;
 fetch(location.pathname+'?frisch='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(t){
 var m=/var VER='([A-Za-z0-9._-]+)'/.exec(t);if(!m||m[1]===VER)return;
-if(!$('ov').hidden||waiting){setTimeout(verCheck,60000);return}           // nicht mitten in einer Eingabe
+if(!$('ov').hidden||waiting||(tipMode&&!$('tipf').hidden)){setTimeout(verCheck,60000);return}           // nicht mitten in einer Eingabe
 var q=(location.search||'').replace(/^\?/,'').split('&'),o=[],i,tried=false;
 for(i=0;i<q.length;i++){if(!q[i])continue;if(q[i].indexOf('v=')===0){if(q[i]==='v='+m[1])tried=true}else o.push(q[i])}
 if(tried)return;                                                          // schon versucht: nicht im Kreis laden
@@ -1408,7 +1853,8 @@ setTimeout(verCheck,2500);setInterval(verCheck,1800000);
 (function(){var m=/[?&]design=(verein|party|vtk|edel|brau)(&|$)/.exec(Q),saved=null,fest=null;
 try{saved=localStorage.getItem(TKEY);fest=localStorage.getItem(DKEY)}catch(e){fest=''}
 tvTheme=m?m[1]:(THEMES[saved]?saved:'verein');pickOK=!m;
-if(demo){setTheme('verein');view();stats();if(tvOn()){if(!m)openPick(true)}else splash();return}
+if(tipMode){setTheme(m?m[1]:'verein');tipBoot();return}
+if(demo){setTheme('verein');view();stats();if(tvOn()){if(!m)openPick(true);else adminTvStart()}else splash();return}
 setTheme(THEMES[fest]?fest:'verein');stats();
 if(fest===null&&konfOk()){waitFirst=true;document.documentElement.className+=' wait'}else if(theme==='verein')splash();
 boot()})();
