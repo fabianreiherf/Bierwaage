@@ -598,6 +598,10 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
 #tipf .btn{display:block;width:100%}
 .gate p.tipok{padding:10px 12px;border-radius:12px;background:#e6f6ec;color:#16733f;font-weight:700}
 .gate p.serr{color:#a3342a}
+/* Gesamtverbrauch */
+.tot{margin-top:8px;padding:0 4px;font-size:.8rem;font-weight:600;line-height:1.35;color:var(--muted);text-align:center}
+.tot b{color:var(--fg);font-variant-numeric:tabular-nums}
+.tot span{display:block}
 </style>
 </head>
 <body>
@@ -693,6 +697,7 @@ html.wait body::before,html.wait #fx,html.wait .wrap{visibility:hidden}
       <div class="stat"><span class="k">Noch ca.</span><b><span id="gl">0</span> Gläser</b><small>à <span id="gs">0,5</span> L</small></div>
       <div class="stat"><span class="k">Gewicht</span><b><span id="gross">0,0</span> kg</b><small>Fass leer: <span id="tare">0,0</span> kg<br><span id="zk"></span></small></div>
     </div>
+    <div class="tot" id="tot" hidden>Gesamtverbrauch <b id="totl">0,0 L</b><span id="tots"></span></div>
   </section>
   <section class="card" id="vgas" hidden>
     <div class="row"><span class="k">Gasflasche</span><span class="live"><span class="dot off" id="gdot"></span><span id="glivet">Verbinde …</span></span></div>
@@ -814,6 +819,10 @@ $('fill').style.height=$('tvfill').style.height=p.toFixed(2)+'%';$('gl').textCon
 grow()}
 function tick(){var d=target-shown;if(Math.abs(d)<.02){shown=target;paint();raf=0;return}
 shown+=d*.08;paint();raf=requestAnimationFrame(tick)}
+// Gesamtverbrauch: 1234,5 -> "1.234,5"; Datum aus Sekunden seit 1970
+function fmtT(v){var p=(Math.max(0,+v||0)).toFixed(1).split('.');return p[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.')+','+p[1]}
+function dtT(sec){var d=new Date(sec*1000),z=function(n){return(n<10?'0':'')+n};return z(d.getDate())+'.'+z(d.getMonth()+1)+'.'+d.getFullYear()+', '+z(d.getHours())+':'+z(d.getMinutes())}
+function hasTotal(j){return !!j&&typeof j.total_l==='number'}
 function show(j){cap=j.capacity_l;glass=j.glass_l||.5;target=j.liters;
 $('cap').textContent=$('tvcap').textContent=cap;$('gs').textContent=$('tvgs').textContent=fmt(glass,Math.round(glass*100)%10?2:1);
 $('gross').textContent=fmt(j.gross_kg,1);$('tare').textContent=fmt(j.tare_kg,1);$('zk').textContent=j.coupler?'+ Zapfkopf '+fmt(j.coupler_kg,2)+' kg':'ohne Zapfkopf';
@@ -821,6 +830,7 @@ if(j.keg>=0)for(var i=0;i<3;i++)$('k'+i).setAttribute('aria-pressed',j.keg==i);
 $('nocal').hidden=j.calibrated;$('gasnote').hidden=!j.gas||NEW;if(j.gas)$('gasnote').textContent='Die Waage wiegt gerade eine Gasflasche: '+fmt(j.gas_kg||0,1)+' kg Füllung. Die Fass-Anzeige gilt solange nicht.';
 $('warn').hidden=!(j.calibrated&&j.sensor&&!j.empty&&!j.gas&&j.mode!==2&&j.percent<=j.low_percent);
 modeView(j);
+$('tot').hidden=!hasTotal(j);if(hasTotal(j)){$('totl').textContent=fmtT(j.total_l)+' L';$('tots').textContent=j.total_since>0?'seit '+dtT(j.total_since)+' Uhr':''}
 state(!j.sensor?'Waage nicht verbunden':(j.empty?'Kein Fass auf der Waage':'Live'),!!j.sensor);
 if(!raf)raf=requestAnimationFrame(tick)}
 function state(t,ok){$('dot').className=$('tvdot').className=$('gdot').className=$('idot').className=ok?'dot':'dot off';$('livet').textContent=$('tvlivet').textContent=$('glivet').textContent=$('ilivet').textContent=t}
@@ -1105,12 +1115,22 @@ h+=row('s3','Zapfkopf-Gewicht',fmt(j.coupler_kg||0,2)+' kg')+row('s4','Nullpunkt
 h+=row('s6','Ton',j.beep?'an, Stufe '+j.vol:'aus')+row('s7','Glasgröße',gfmt(j.glass_l||.5)+' L')+row('s8','Helligkeit',(j.bright||10)*10+' %');
 h+=row('s9','PIN ändern','')+row('s10','Bild korrigieren','')+row('s11','Anzeige drehen','');
 if(j.fw>=7)h+=row('s12','Design am Display der Waage',DNW[j.design]||'');
+if(hasTotal(j))h+=row('s13','Gesamtverbrauch',fmtT(j.total_l)+' L');
 h+='<p class="sp m">WLAN wechseln und Touch einrichten geht nur direkt am Display der Waage.</p>';
 sheet('Einstellungen',h);if(ok)note('',ok);
 on('s0',function(){tareFlow(0)});on('s1',function(){tareFlow(1)});on('s2',function(){tareFlow(2)});on('s3',function(){zapfFlow(1)});
 on('s4',zeroFlow);on('s5',function(){calFlow(1)});on('s6',soundView);on('s7',glassView);on('s8',brightView);on('s9',pinFlow);
 on('s10',function(){run('cmode',{},true,function(){note('','Die Anzeige zeigt jetzt die nächste Bildvariante.')})});
-on('s11',function(){run('rot',{},true,function(){note('','Die Anzeige ist gedreht.')})});if($('s12'))on('s12',designView)}
+on('s11',function(){run('rot',{},true,function(){note('','Die Anzeige ist gedreht.')})});if($('s12'))on('s12',designView);if($('s13'))on('s13',function(){totalView('')})}
+// Gesamtverbrauch: Stand, Beginn, auf 0 setzen (mit Rueckfrage). Die Waage zaehlt selbst; das Handy schickt nur den Befehl.
+function totalView(ok){var j=S||{};
+sheet('Gesamtverbrauch','<div class="sbig">Bisher<b id="tvl">'+fmtT(j.total_l)+' L</b></div>'
++'<p class="sp">'+(j.total_since>0?'Gezählt seit '+dtT(j.total_since)+' Uhr.':'Seit wann gezählt wird, weiß die Waage erst, wenn sie die Uhrzeit aus dem Internet hat.')+'</p>'
++'<p class="sp m">Die Waage zählt alles, was aus dem Fass kommt, über alle Fässer hinweg. Fasswechsel, Zapfkopf, Gasflasche und Artikel zählen nicht mit.</p>'
++'<button type="button" class="sbtn sec" id="tr0">Auf 0 setzen</button>',home);if(ok)note('',ok);
+tickFn=function(j2){var e=$('tvl');if(e&&hasTotal(j2))e.textContent=fmtT(j2.total_l)+' L'};
+on('tr0',function(){ask('Auf 0 setzen?','Der Gesamtverbrauch beginnt wieder bei 0 L, gezählt ab jetzt. Der bisherige Wert ist dann weg.','Ja, auf 0 setzen',
+function(){run('totalreset',{v:Math.floor(Date.now()/1000)},true,function(){totalView('Der Gesamtverbrauch steht wieder auf 0 L.')})},function(){totalView('')})})}
 var DNW=['Sportverein','Technik Koch','Party','Edel','Brauhaus'];
 function designView(){var j=S||{},h='<p class="sp">So sieht das Display an der Waage aus. Das Handy und der Fernseher sind davon unabhängig.</p><div class="gl7 d5">',i;
 for(i=0;i<DNW.length;i++)h+='<button type="button" data-g="'+i+'"'+(j.design===i?' class="on"':'')+'>'+DNW[i]+'</button>';
@@ -1407,18 +1427,18 @@ var DM={l:12,ph:0,n:0};
 function demoHist(){histOK=true;var kn=bk(now()),L=DM.l,old=false,i,r;
 for(i=1;i<=NB+3;i++){r={l:Math.round(L*10)/10,k:1};hist[kn-i]=r;L+=.5*Math.round(1+Math.random()*6);
 if(!old&&L>=30){r.e=1;old=true;L=1.5}}}
-var DS={mode:0,gt:5,gc:11,it:0,vol:6,beep:true,bright:10,glass:.5,t:[7,9.6,12.5],zk:.6,pin:'1923',coupler:true,n:0};
+var DS={mode:0,gt:5,gc:11,it:0,vol:6,beep:true,bright:10,glass:.5,t:[7,9.6,12.5],zk:.6,pin:'1923',coupler:true,n:0,tot:1234.5,since:Math.floor(Date.now()/1000)-3*86400-5400};
 function demoW(){return DS.mode===1?DS.gt+DS.gc*.64:[0,2.35,2.35,3.15,3.15,86.5,86.5,.42][Math.floor(DS.n/3)%8]}
 function demoStatus(){var e=false,w;
 if(DS.mode){DS.n++}
-else if(DM.ph===0){DM.l=Math.max(0,DM.l-.5);if(DM.l<=0){DM.ph=1;DM.n=0}}
+else if(DM.ph===0){if(DM.l>0)DS.tot+=Math.min(.5,DM.l);DM.l=Math.max(0,DM.l-.5);if(DM.l<=0){DM.ph=1;DM.n=0}}
 else if(DM.ph===1){if(++DM.n>4){DM.ph=2;DM.n=0}}
 else{e=true;if(++DM.n>3){DM.ph=0;DM.l=30}}
 w=DS.mode?demoW():(e?0:DS.t[1]+(DS.coupler?DS.zk:0)+DM.l*1.01);
 return{keg:1,capacity_l:30,liters:e?0:DM.l,percent:Math.round((e?0:DM.l)/30*100),gross_kg:w,tare_kg:DS.t[1],glass_l:DS.glass,low_percent:15,
 coupler:DS.coupler,coupler_kg:DS.zk,calibrated:true,sensor:true,empty:e,ts:Date.now(),
 fw:5,mode:DS.mode,w:w,gas:DS.mode===1,gas_kg:DS.mode===1?Math.max(0,w-DS.gt):0,gas_tare:DS.gt,gas_cap:DS.gc,item_kg:DS.mode===2?w-DS.it:0,item_tare:DS.mode===2?DS.it:0,
-t20:DS.t[0],t30:DS.t[1],t50:DS.t[2],bright:DS.bright,beep:DS.beep,vol:DS.vol,beep_l:2.5,cal_kg:10}}
+t20:DS.t[0],t30:DS.t[1],t50:DS.t[2],bright:DS.bright,beep:DS.beep,vol:DS.vol,beep_l:2.5,cal_kg:10,total_l:Math.round(DS.tot*10)/10,total_since:DS.since}}
 // In der Vorfuehrung antwortet eine nachgebildete Waage (PIN 1923)
 function demoSend(c,o,needPin){return new Promise(function(res,rej){setTimeout(function(){
 if(needPin&&pin!==DS.pin){rej('pin');return}
@@ -1426,6 +1446,7 @@ if(c==='mode'){DS.mode=o.v;DS.it=0;DS.n=0;if(o.v===1){DS.gt=o.v2;DS.gc=o.v3}}
 else if(c==='itare')DS.it=o.v?demoW():0;
 else if(c==='coupler')DS.coupler=!!o.v;
 else if(c==='vol')DS.vol=o.v;else if(c==='beep')DS.beep=!!o.v;else if(c==='bright')DS.bright=o.v;else if(c==='glass')DS.glass=o.v;
+else if(c==='totalreset'){DS.tot=0;DS.since=o.v||Math.floor(Date.now()/1000)}
 else if(c==='tare')DS.t[o.v]=9.62;else if(c==='zapf2')DS.zk=.58;else if(c==='pin')DS.pin=o.s;
 var j=demoStatus();got(j);res(j)},600)})}
 
@@ -1835,7 +1856,7 @@ $('tipre').onclick=tipBoot;
 // ---------- Neue Fassung der Seite von selbst laden ----------
 // Handys und Fernseher halten eine alte Seite sonst noch eine Weile im Zwischenspeicher fest. Die Seite fragt deshalb
 // beim Start (und danach alle 30 Minuten) am Zwischenspeicher vorbei nach, ob es eine neuere Fassung gibt, und laedt sie.
-var VER='e3.202610072329';
+var VER='e4.202610200722';
 function verCheck(){if(demo||!/^https?:/.test(location.protocol))return;
 fetch(location.pathname+'?frisch='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():''}).then(function(t){
 var m=/var VER='([A-Za-z0-9._-]+)'/.exec(t);if(!m||m[1]===VER)return;
